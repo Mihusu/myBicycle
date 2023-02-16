@@ -3,20 +3,19 @@ import React from 'react'
 function CykelComponent(props) {
     return (
         <div className='CykelComponent container flex flex-col grid-flow-col justify-content py-2'>
-            
+
             <img className='CykelBillede py-2 border'
                 src={
-                    props.billede || "../src/assets/bicycle.png"
+                    props.billede || "../src/assets/bicycle-svgrepo.svg"
                 }
                 alt={
                     "../src/assets/bicycle.png" || "empty"
                 }/>
-                <a href="https://www.flaticon.com/free-icons/bicycle" title="bicycle icons">Bicycle icons created by Freepik - Flaticon</a>
 
-                <p>{
+            <p>{
                 props.serialNumber || "no serial number available"
             }</p>
-            
+
             <div tabIndex={0}
                 className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
 
@@ -31,7 +30,8 @@ function CykelComponent(props) {
             </div>
             <div className='flex justify-between py-2'>
                 <a className='btn' href="/login">Overfør</a>
-                <button className='btn' disabled={true}>Meld Stjålet</button>
+                <button className='btn'
+                    disabled={true}>Meld Stjålet</button>
             </div>
 
 
