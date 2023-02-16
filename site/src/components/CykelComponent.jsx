@@ -2,18 +2,18 @@ import React from 'react'
 
 function CykelComponent(props) {
     return (
-        <div className='CykelComponent container flex flex-col grid-flow-col justify-content py-2'>
+        <div className='CykelComponent container flex flex-col py-2'>
 
-            <img className='CykelBillede py-2 border'
+            <img className='CykelBillede py-2 border bg-orange-300'
                 src={
                     props.billede || "../src/assets/bicycle-svgrepo.svg"
                 }
                 alt={
-                    "../src/assets/bicycle.png" || "empty"
+                    "../src/assets/bicycle-svgrepo.svg"
                 }/>
 
-            <p>{
-                props.serialNumber || "no serial number available"
+            <p className='place-self-center'>{
+                "sn: " + props.serialNumber || "no serial number available"
             }</p>
 
             <div tabIndex={0}
