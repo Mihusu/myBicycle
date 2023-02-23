@@ -3,8 +3,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 // Non-auth pages
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import MineCykler from "./pages/MineCykler";
-import Test from "./pages/Test"
+import MyBikes from "./pages/MyBikes";
 import BikeRegistration from "./pages/RegistrationOfBikes";
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
   const router = createBrowserRouter([
     { // Homepage is left unused
       path: "/",
-      element: <Test />, /*<Navigate to={"/minecykler"}*/
+      element: <Navigate to={"/mybikes"} />,
       errorElement: <NotFound />
     },
     {
@@ -26,8 +25,8 @@ function App() {
       errorElement: <NotFound />,
     },
     {
-      path: "/minecykler",
-      element: <MineCykler />,
+      path: "/mybikes",
+      element: <MyBikes />,
       errorElement: <NotFound />,
     }])
     
