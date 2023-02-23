@@ -40,7 +40,7 @@ const BikeRegistration = () => {
 
               <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800">
                 <h2 className="mb-2">Vælg model:</h2>
-                <div className="place-items-center grid grid-cols-3 px-4 py-8">
+                <div className="place-items-center grid grid-cols-3 px-4 py-2">
                   <RadioButton
                     labelName={"Herre"}
                     name={"gender"}
@@ -61,7 +61,7 @@ const BikeRegistration = () => {
 
               <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800">
                 <h2 className="mb-2">Er det en El-cykel?</h2>
-                <div className="place-items-center grid grid-cols-2 px-4 py-8">
+                <div className="whitespace-nowrap place-items-center grid grid-cols-2 px-4 py-2">
                   <RadioButton
                     labelName={"El-cykel"}
                     name={"electric"}
@@ -76,7 +76,7 @@ const BikeRegistration = () => {
               </div>
               <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
                 <h2 className="mb-2">Vælg cykel type:</h2>
-                <div className="place-items-center grid grid-cols-2 px-4 py-8">
+                <div className="place-items-center grid grid-cols-2 px-4 py-2">
                   <RadioButton
                     labelName={"City"}
                     name={"bike-type"}
