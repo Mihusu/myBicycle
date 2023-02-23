@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import MineCykler from "./pages/MineCykler";
 import Test from "./pages/Test"
+import BikeRegistration from "./pages/RegistrationOfBikes";
 
 function App() {
   // router
@@ -20,10 +21,19 @@ function App() {
       errorElement: <NotFound />,
     },
     {
+      path: "/bicycleregistration",
+      element: <BikeRegistration />,
+      errorElement: <NotFound />,
+    },
+    {
       path: "/minecykler",
       element: <MineCykler />,
       errorElement: <NotFound />,
     }])
+    
+
+
+
 
   return <RouterProvider router={router} />
     
