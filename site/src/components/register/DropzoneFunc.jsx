@@ -12,6 +12,7 @@ function DropZoneComponent({}) {
   }, []);
 
   const handleFileUpload = async (file) => {
+    console.log(file);
     if (!file) {
       alert("Please select a file");
       return;
@@ -23,7 +24,8 @@ function DropZoneComponent({}) {
       onDrop,
       multiple: false,
       accept: {
-        "video/mp4": [],
+        "image/png": [],
+        "image/jpeg": ['.jpeg','.jpg'],
       },
     });
 
@@ -68,7 +70,7 @@ function DropZoneComponent({}) {
           ) : (
             <div className="flex flex-col items-center space-y-2">
               <h2 className="text-lg text-blue-500">
-                Drag and drop Files Here to Upload
+                Klik eller træk et billede hertil
               </h2>
               <p className="text-base text-gray-500">
                 {File ? File.name : "Please select a file"}

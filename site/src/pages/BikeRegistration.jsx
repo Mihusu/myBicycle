@@ -23,7 +23,7 @@ const BikeRegistration = () => {
                   <input
                     type="text"
                     id="Stelnummer"
-                    class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     placeholder="Indtast stelnummer"
                   />
                 </div>
@@ -65,12 +65,12 @@ const BikeRegistration = () => {
                   <RadioButton
                     labelName={"El-cykel"}
                     name={"electric"}
-                    color={"radio radio-secondary"}
+                    color={"radio border-green-500 bg-green-500 bg-green-500"}
                   />
                   <RadioButton
                     labelName={"Ikke El-cykel"}
                     name={"electric"}
-                    color={"radio  border border-blue-400 mr-2"}
+                    color={"radio border-neutral-content bg-neutral-content"}
                   />
                 </div>
               </div>
