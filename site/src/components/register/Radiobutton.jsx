@@ -8,8 +8,8 @@ const RadioButton = ({ labelName, name, color }) => {
   };
 
   return (
-    <div className="form-control place-items-end">
-      <label className="cursor-pointer label w-24 flex justify-between">
+    <div className="form-control place-items-center ">
+      <label className="cursor-pointer label w-full flex justify-between">
         <span className="label-text px-2">{labelName}</span>
         <input
           type="radio"
