@@ -4,14 +4,15 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import MyBikes from "./pages/MyBikes";
-import BikeRegistration from "./pages/RegistrationOfBikes";
+import Test from "./pages/Test"
+import BikeRegistration from "./pages/BikeRegistration";
 
 function App() {
   // router
   const router = createBrowserRouter([
     { // Homepage is left unused
       path: "/",
-      element: <Navigate to={"/mybikes"} />,
+      element: <Test />, /*<Navigate to={"/mybikes"}*/
       errorElement: <NotFound />
     },
     {
