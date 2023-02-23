@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import CykelComponent from '../components/CykelComponent';
+import BikeComponent from '../components/BikeComponent';
 
 const MineCykler = () => {
 
@@ -14,10 +14,10 @@ const MineCykler = () => {
                 [...Array(4)].map((_, key) => {
                     return (
                         <div key={key}
-                            className={`w-full bg-teal-300 shadow-xl border rounded p-2 focus:py-48`}>
+                            className={`w-full bg-content shadow-xl border rounded p-2 focus:py-48`}>
                             <div>Hvor er mine cykler? {key + 1}</div>
                             
-                            <CykelComponent />
+                            <BikeComponent />
                         </div>
                     )
                 })

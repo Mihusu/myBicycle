@@ -4,13 +4,14 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import MineCykler from "./pages/MineCykler";
+import Test from "./pages/Test"
 
 function App() {
   // router
   const router = createBrowserRouter([
     { // Homepage is left unused
       path: "/",
-      element: <Navigate to={"/minecykler"} />,
+      element: <Test />, /*<Navigate to={"/minecykler"}*/
       errorElement: <NotFound />
     },
     {
