@@ -6,6 +6,9 @@ import NotFound from "./pages/NotFound";
 import MyBikes from "./pages/MyBikes";
 import BikeRegistration from "./pages/RegistrationOfBikes";
 
+// Auth pages
+import ClaimBikePage from "./pages/ClaimBike";
+
 function App() {
   // router
   const router = createBrowserRouter([
@@ -27,6 +30,11 @@ function App() {
     {
       path: "/mybikes",
       element: <MyBikes />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: "/claim",
+      element: <ClaimBikePage />,
       errorElement: <NotFound />,
     }])
     
