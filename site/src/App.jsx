@@ -9,6 +9,7 @@ import BikeRegistration from "./pages/BikeRegistration";
 
 // Auth pages
 import ClaimBikePage from "./pages/ClaimBike";
+import ChoosePassword from "./pages/ChoosePassword";
 
 function App() {
   // router
@@ -36,6 +37,11 @@ function App() {
     {
       path: "/claim",
       element: <ClaimBikePage />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: "/choosepassword",
+      element: <ChoosePassword />,
       errorElement: <NotFound />,
     }])
     
