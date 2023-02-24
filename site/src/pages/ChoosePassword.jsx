@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export const ChoosePassword = () => {
+const ChoosePassword = () => {
 
     const [password, setPassword] = useState("")
     const [verify, setVerify] = useState("")
@@ -56,3 +56,5 @@ export const ChoosePassword = () => {
         </div>
     )
 }
+
+export default ChoosePassword

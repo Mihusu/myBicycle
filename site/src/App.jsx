@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import MyBikes from "./pages/MyBikes";
 import Test from "./pages/Test"
 import BikeRegistration from "./pages/BikeRegistration";
+import PhoneRegistration from "./pages/PhoneRegistration";
 
 // Auth pages
 import ClaimBikePage from "./pages/ClaimBike";
@@ -43,14 +44,15 @@ function App() {
       path: "/choosepassword",
       element: <ChoosePassword />,
       errorElement: <NotFound />,
+    },
+    {
+      path: "/registration",
+      element: <PhoneRegistration />,
+      errorElement: <NotFound />,
     }])
-    
-
-
-
 
   return <RouterProvider router={router} />
-    
+
 }
 
 export default App
