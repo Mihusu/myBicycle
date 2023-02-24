@@ -15,7 +15,7 @@ const BikeRegistration = () => {
           <form action="#">
             <div className="space-y-2">
               <div>
-                <label className="mb-2">
+                <label className="px-4 mb-2">
                   Stelnummer:
                   <span className="text-red-500 required-dot">*</span>
                 </label>
