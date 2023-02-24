@@ -44,17 +44,17 @@ const BikeRegistration = () => {
                   <RadioButton
                     labelName={"Herre"}
                     name={"gender"}
-                    color={" radio radio-primary"}
+                    color={" radio border-blue-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Dame"}
                     name={"gender"}
-                    color={"radio radio-primary"}
+                    color={"radio border-pink-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Unisex"}
                     name={"gender"}
-                    color={"radio radio-primary"}
+                    color={"radio border-purple-500 bg-content"}
                   />
                 </div>
               </div>
@@ -65,12 +65,12 @@ const BikeRegistration = () => {
                   <RadioButton
                     labelName={"El-cykel"}
                     name={"electric"}
-                    color={"radio border-green-500 bg-green-500 bg-green-500"}
+                    color={"radio border-green-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Ikke El-cykel"}
                     name={"electric"}
-                    color={"radio border-neutral-content bg-neutral-content"}
+                    color={"radio border-yellow-900 bg-content"}
                   />
                 </div>
               </div>
@@ -80,22 +80,22 @@ const BikeRegistration = () => {
                   <RadioButton
                     labelName={"City"}
                     name={"bike-type"}
-                    color={"radio radio-primary"}
+                    color={"radio border-teal-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Gravel"}
                     name={"bike-type"}
-                    color={"radio radio-primary"}
+                    color={"radio border-indigo-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Lad"}
                     name={"bike-type"}
-                    color={"radio radio-primary"}
+                    color={"radio border-yellow-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Racer"}
                     name={"bike-type"}
-                    color={"radio radio-primary"}
+                    color={"radio border-red-500 bg-content"}
                   />
                 </div>
               </div>
@@ -106,47 +106,47 @@ const BikeRegistration = () => {
                   <RadioButton
                     labelName={"Sort"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-neutral-900 bg-content"}
                   />
                   <RadioButton
                     labelName={"Hvid"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-neutral-50 bg-content"}
                   />
                   <RadioButton
                     labelName={"Grå"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-gray-400 bg-content"}
                   />
                   <RadioButton
                     labelName={"Rød"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-red-500 bg-content"}
                   />
                   <RadioButton
                     labelName={"Blå"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-blue-700 bg-content"}
                   />
                   <RadioButton
                     labelName={"Grøn"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-green-700 bg-content"}
                   />
                   <RadioButton
                     labelName={"Gul"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-yellow-400 bg-content"}
                   />
                   <RadioButton
                     labelName={"Orange"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-orange-500 bg-content"}
                   />
                   <RadioButton
-                    labelName={"Lilla"}
+                    labelName={"Pink"}
                     name={"bike-color"}
-                    color={"radio radio-primary"}
+                    color={"radio border-pink-400 bg-content"}
                   />
                   <RadioButton
                     labelName={"Andet"}
