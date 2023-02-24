@@ -1,7 +1,7 @@
 
 import { MdPedalBike } from 'react-icons/md';
 import { TbActivityHeartbeat } from 'react-icons/tb'
-import BikeComponent from '../components/BikeComponent';
+import { BikeComponent } from '../components/BikeComponent';
 import { IconContext } from 'react-icons';
 import { motion } from "framer-motion";
 import { useState } from 'react';

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 
-function BikeComponent(props) {
+export function BikeComponent(props) {
 
     const [bikeInfo, setBikeInfo] = useState(0);
 
@@ -49,5 +49,3 @@ function BikeComponent(props) {
         </div>
     )
 }
-
-export default BikeComponent
