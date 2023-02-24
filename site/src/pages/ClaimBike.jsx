@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 
 // Contexts
 import { ApiContext } from '../contexts/apiContext';
-//import { RefreshContext } from '../contexts/refreshContext';
+import { RefreshContext } from '../contexts/refreshContext';
 
-import { SuccessToast, ErrorToast } from '../components/Global/PushToast';
+// Components
+import { SuccessToast, ErrorToast } from '../components/global/PushToast';
 
 const ClaimBikePage = () => {
 
@@ -13,6 +14,8 @@ const ClaimBikePage = () => {
     const API_BASE = useContext(ApiContext);
     const [updated, setUpdated] = useState(false);
     const [apiLink] = useState(`${API_BASE}/claim/${params.id}`);
+    const [claim, setClaim] = useState([]);
+    const [cancel, setCancel] = useState(false);
     const [loading, setLoading] = useState(true);
 
     // Fetch data from API
@@ -25,6 +28,7 @@ const ClaimBikePage = () => {
             const responseJson = await response.json();
 
             if (isComponentMounted) {
+                setClaim(responseJson)
                 setLoading(false);
             }
         };
@@ -41,14 +45,40 @@ const ClaimBikePage = () => {
         }).then(response => {
             if (response.ok) {
                 SuccessToast("Redeemed bike")
-                
                 setUpdated(true);
             } else { ErrorToast("Bike couldn't be redeemed") }
         })
     }
 
+    const handleCancelClick = () => {
+
+        fetch(apiLink + "/cancel", {
+            method: "post"
+        }).then(response => {
+            if (response.ok) {
+                SuccessToast("Redeem cancelled")
+                setUpdated(true);
+                setCancel(true);
+            } else { ErrorToast("Redeem couldn't be cancelled") }
+        })
+
+    }
+
+    if (cancel) {
+        return <Navigate to="/claim" />
+    }
+
+    //if (loading) {
+    //    return (
+    //        <StyledContainer>
+    //          <p>Loading...</p>
+    //    </StyledContainer>
+    //)
+    //} else {
     return (
-        <div className="flex flex-col items-center justify-center my-8 ">
+        //<RefreshContext.Provider value={setUpdated}>
+        //{claim.state === "UNCLAIMED" &&
+        <div className="flex flex-col items-center justify-center my-32">
             <div className=" px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 md:w-auto">
                 <div className="self-center text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
                     Indløs cykel
@@ -68,14 +98,17 @@ const ClaimBikePage = () => {
                         />
                     </div>
                     <button type="button" className="mt-8 py-2 px-4 flex justify-center items-center bg-blue-600 hover:bg-orange-700 
-                    focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center 
-                    text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg " onClick={() => handleRedeemClick()}>
+                                    focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center 
+                                    text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg " onClick={() => handleRedeemClick()}>
                         Indløs
                     </button>
                 </form>
             </div>
         </div>
+        //}
+        //</RefreshContext.Provider>
     )
+    //}
 }
 
 export default ClaimBikePage;
