@@ -1,27 +1,28 @@
 import React, {useState} from 'react'
 
-export const ChoosePassword = () => {
+const ChoosePassword = () => {
 
     const [password, setPassword] = useState("")
     const [verify, setVerify] = useState("")
 
     // checks whether password matches verification
     function matchPassword(password, verify) {
-       
+
         if (password.length == 0 || verify.length == 0) {
             return false
         }
 
         if (password == verify) {
             return true
-        }
-        else return false
-  
+        } else 
+            return false
+            
     }
 
     return (
         <div className="flex flex-col items-center py-2 h-full ">
             <h1>Vælg adgangskode</h1>
+            {/* password */}
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">Vælg kode</span>
@@ -36,6 +37,7 @@ export const ChoosePassword = () => {
                     className="input input-bordered w-full max-w-xs"/>
 
             </div>
+            {/* verify */}
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">Indtast kode igen</span>
@@ -50,9 +52,16 @@ export const ChoosePassword = () => {
                     className="input input-bordered w-full max-w-xs"/>
 
             </div>
-            <button type="submit" disabled={!matchPassword(password, verify)} className={`btn text-green-300 my-2 w-full max-w-xs bg-green-500`} >
+            {/* submit */}
+            <button type="submit"
+                disabled={
+                    ! matchPassword(password, verify)
+                }
+                className={`btn text-green-300 my-2 w-full max-w-xs bg-green-500`}>
                 Next
             </button>
         </div>
     )
 }
+
+export default ChoosePassword
