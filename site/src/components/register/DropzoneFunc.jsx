@@ -22,10 +22,10 @@ function DropZoneComponent({}) {
   const { getRootProps, getInputProps, isDragReject, isDragAccept } =
     useDropzone({
       onDrop,
-      multiple: false,
+      multiple: true,
       accept: {
         "image/png": [],
-        "image/jpeg": ['.jpeg','.jpg'],
+        "image/jpeg": [".jpeg", ".jpg"],
       },
     });
 
