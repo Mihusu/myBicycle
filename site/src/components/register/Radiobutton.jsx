@@ -1,6 +1,6 @@
 import React from "react";
 
-const RadioButton = ({ labelName, name, color }) => {
+const RadioButton = ({ labelName, name, color, value }) => {
   const [isChecked, setIsChecked] = React.useState(false);
 
   const handleOnChange = (e) => {
@@ -16,8 +16,9 @@ const RadioButton = ({ labelName, name, color }) => {
           name={name}
           defaultChecked={isChecked}
           className={color}
-          value=""
+          value={value}
           onChange={handleOnChange}
+          required
         />
       </label>
     </div>

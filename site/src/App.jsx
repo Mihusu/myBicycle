@@ -29,7 +29,7 @@ function App() {
       errorElement: <NotFound />,
     },
     {
-      path: "/bicycleregistration",
+      path: "/bikeregistration",
       element: <BikeRegistration />,
       errorElement: <NotFound />,
     },

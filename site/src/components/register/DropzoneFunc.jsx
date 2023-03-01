@@ -76,7 +76,7 @@ function DropZoneComponent({}) {
                 {File ? File.name : "Please select a file"}
               </p>
               <p className="text-sm text-gray-300">
-                Only video files supported
+                Only Image files supported
               </p>
             </div>
           )}

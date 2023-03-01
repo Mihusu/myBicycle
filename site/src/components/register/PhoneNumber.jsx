@@ -18,11 +18,13 @@ const PhoneNumber = () => {
     // Example: "+12133734253".
 
     <PhoneInput
-      placeholder="Enter phone number"
+      name="phone_number"
+      placeholder="Ex. +4512345678"
       value={value}
       onChange={setValue}
       defaultCountry="DK"
     />
   );
 };
+
 export default PhoneNumber;
