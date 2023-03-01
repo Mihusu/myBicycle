@@ -9,7 +9,7 @@ export const Footer = () => {
     return (
         <div className="flex flex-row justify-around w-full items-center mt-auto">
             <div className="btm-nav-lg py-1">
-                <button className="rounded hover:bg-orange-500 dropdown-active px-10 py-1">
+                <button className="rounded hover:bg-orange-500 dropdown-active px-8 py-1">
                     <IconContext.Provider value={{ className: "mx-auto", color: "white", size: 40 }}>
                         <>
                             <MdDirectionsBike />
@@ -17,16 +17,16 @@ export const Footer = () => {
                         </>
                     </IconContext.Provider>
                 </button>
-                <button className="rounded hover:bg-orange-500 dropdown-active px-10 py-1">
-                    <IconContext.Provider value={{ className: "mx-auto", color: "white", size: 44 }}>
+                <button className="rounded hover:bg-orange-500 dropdown-active px-8 py-1">
+                    <IconContext.Provider value={{ className: "mx-auto", color: "white", size: 40 }}>
                         <>
                             <TbActivityHeartbeat />
                             <p className="text-sky-400/100">Aktiviteter</p>
                         </>
                     </IconContext.Provider>
                 </button>
-                <button className="rounded hover:bg-orange-500 dropdown-active px-10 py-1">
-                    <IconContext.Provider value={{ className: "mx-auto", color: "white", size: 44 }}>
+                <button className="rounded hover:bg-orange-500 dropdown-active px-8 py-1">
+                    <IconContext.Provider value={{ className: "mx-auto", color: "white", size: 40 }}>
                         <>
                             <IoIosMenu />
                             <p className="text-sky-400/100">Menu</p>

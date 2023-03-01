@@ -28,7 +28,7 @@ const MineCykler = () => {
                 <div className="self-center justify-center text-l font-light text-gray-800 sm:text-3xl dark:text-white">
                     Vi kan se at du ikke har en cykel endnu
                     </div>
-                <div className= "self-center justify-center text-l font-light text-gray-800 sm:text-3xl dark:text-white">
+                <div className= "mx-auto text-l font-light text-gray-800 sm:text-3xl dark:text-white">
                     Indløs din første cykel ved at trykke på cyklen
                     </div>
                 {isOpen && (
