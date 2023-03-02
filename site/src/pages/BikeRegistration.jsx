@@ -1,6 +1,6 @@
 import React from "react";
 import RadioButton from "../components/register/Radiobutton";
-import PhoneNumber from "../components/register/Phonenumber";
+import { PhoneNumber } from "../components/register/PhoneNumber";;
 
 const BikeRegistration = () => {
   return (
@@ -14,7 +14,7 @@ const BikeRegistration = () => {
           <form
             method="post"
             action="http://127.0.0.1:8000/bikes"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
           >
             <div className="space-y-2">
               <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
