@@ -5,7 +5,7 @@ import { useState } from "react";
 import { parsePhoneNumber } from "react-phone-number-input";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 
-export const PhoneNumber = () => {
+export const PhoneNumber = React.forwardRef(() => {
   const [value, setValue] = useState();
 
   formatPhoneNumberIntl("+4512345678") === "+45 12 34 56 78";
@@ -25,4 +25,4 @@ export const PhoneNumber = () => {
       defaultCountry="DK"
     />
   );
-};
+});
