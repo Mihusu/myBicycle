@@ -8,7 +8,7 @@ import {
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import MyBikes from "./pages/MyBikes";
-import Test from "./pages/Test";
+import SmsVerification from "./pages/SmsVerification";
 import BikeRegistration from "./pages/BikeRegistration";
 import PhoneRegistration from "./pages/PhoneRegistration";
 import ChoosePassword from "./pages/ChoosePassword";
@@ -22,7 +22,7 @@ function App() {
     {
       // Homepage is left unused
       path: "/",
-      element: <Test /> /*<Navigate to={"/mybikes"}*/,
+      element: <NotFound /> /*<Navigate to={"/mybikes"}*/,
       errorElement: <NotFound />,
     },
     {
@@ -46,6 +46,11 @@ function App() {
       errorElement: <NotFound />,
     },
     {
+      path: "/smsverification/:session_id",
+      element: <SmsVerification />,
+      errorElement: <NotFound />,
+    },
+    {
       path: "/claim",
       element: <ClaimBikePage />,
       errorElement: <NotFound />,
@@ -54,7 +59,7 @@ function App() {
       path: "/choosepassword",
       element: <ChoosePassword />,
       errorElement: <NotFound />,
-    }
+    },
   ]);
 
   return <RouterProvider router={router} />;
