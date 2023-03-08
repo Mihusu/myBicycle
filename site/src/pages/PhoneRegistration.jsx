@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 
 const URL = "http://127.0.0.1:8000/auth/register/me";
 
@@ -22,6 +23,8 @@ const PhoneRegistration = () => {
 
   const watchPassword = watch(["password", "verify"]);
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log(data);
     const URI = "http://127.0.0.1:8000/auth/register/me";
@@ -32,7 +35,7 @@ const PhoneRegistration = () => {
     };
     fetch(URI, requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => navigate(`/smsverification/${data.session_id}`))
       .catch((error) => setError(error.message));
   };
 
