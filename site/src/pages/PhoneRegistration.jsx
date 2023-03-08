@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const URL = "http://127.0.0.1:8000/auth/register/me";
 
@@ -12,7 +12,7 @@ const PhoneRegistration = () => {
     watch,
     handleSubmit,
     setError,
-    formState: { errors, isDirty, dirtyFields, touchedFields },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       phone_number: "",
@@ -27,13 +27,12 @@ const PhoneRegistration = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const URI = "http://127.0.0.1:8000/auth/register/me";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch(URI, requestOptions)
+    fetch(URL, requestOptions)
       .then((response) => response.json())
       .then((data) => navigate(`/smsverification/${data.session_id}`))
       .catch((error) => setError(error.message));
