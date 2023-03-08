@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom'
 
 // Contexts
 import { ApiContext } from '../contexts/apiContext';
-import { RefreshContext } from '../contexts/refreshContext';
+//import { RefreshContext } from '../contexts/refreshContext';
 
 // Components
 import { SuccessToast, ErrorToast } from '../components/global/PushToast';
@@ -14,14 +14,14 @@ const ClaimBikePage = () => {
     const API_BASE = useContext(ApiContext);
     const [updated, setUpdated] = useState(false);
     const [apiLink] = useState(`${API_BASE}/claim/${params.id}`);
-    const [claim, setClaim] = useState([]);
-    const [cancel, setCancel] = useState(false);
-    const [loading, setLoading] = useState(true);
+    //const [claim, setClaim] = useState([]);
+    //<     const [cancel, setCancel] = useState(false);
+    //const [loading, setLoading] = useState(true);
 
     // Fetch data from API
     useEffect(() => {
         let isComponentMounted = true;
-        setLoading(true);
+        //setLoading(true);
         const fetchData = async () => {
             const response = await fetch(apiLink);
 
@@ -29,7 +29,7 @@ const ClaimBikePage = () => {
 
             if (isComponentMounted) {
                 setClaim(responseJson)
-                setLoading(false);
+                //setLoading(false);
             }
         };
         fetchData();
@@ -50,19 +50,19 @@ const ClaimBikePage = () => {
         })
     }
 
-    const handleCancelClick = () => {
+    // const handleCancelClick = () => {
 
-        fetch(apiLink + "/cancel", {
-            method: "post"
-        }).then(response => {
-            if (response.ok) {
-                SuccessToast("Redeem cancelled")
-                setUpdated(true);
-                setCancel(true);
-            } else { ErrorToast("Redeem couldn't be cancelled") }
-        })
+    //     fetch(apiLink + "/cancel", {
+    //         method: "post"
+    //     }).then(response => {
+    //         if (response.ok) {
+    //             SuccessToast("Redeem cancelled")
+    //             setUpdated(true);
+    //             setCancel(true);
+    //         } else { ErrorToast("Redeem couldn't be cancelled") }
+    //     })
 
-    }
+    // }
 
     if (cancel) {
         return <Navigate to="/claim" />
@@ -92,7 +92,7 @@ const ClaimBikePage = () => {
                         <input
                             type="text"
                             id="required-engangskode"
-                            className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             name="FrameNumber"
                             placeholder="Indtast engangskode"
                         />
