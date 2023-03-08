@@ -1,22 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 export const SmsVerification = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       otp: "",
     },
   });
 
+  const navigate = useNavigate();
   const { session_id } = useParams();
+  const [error, setError] = useState("");
 
-  const onSubmit = ({ otp }) => {
+  const onSubmit = async ({ otp }) => {
     console.log(otp);
     const URI = `http://127.0.0.1:8000/auth/register/me/check-otp`;
     const requestOptions = {
@@ -24,15 +22,22 @@ export const SmsVerification = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ otp, session_id }),
     };
-    fetch(URI, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        secureLocalStorage.setItem('accesstoken', data.access_token)
+
+    try {
+      const response = await fetch(URI, requestOptions);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        secureLocalStorage.setItem("accesstoken", data.access_token);
         // possibly set refresh token also
-        return navigate(`/mybikes`)
-      })
-      .catch((error) => setError(error.message));
+        navigate(`/mybikes`, { replace: true });
+      } else {
+        const error = await response.json();
+        setError(error.detail);
+      }
+    } catch (error) {
+      setError(error.detail);
+    }
   };
 
   const onError = (err) => {
@@ -46,6 +51,7 @@ export const SmsVerification = () => {
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="px-30 py-30 py-30 w-ful h-full ">
+        {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
           <p className=" mt-4 text-xl font-bold text-gray-800 dark:text-gray-200">
             Bekræft inden:
           </p>
@@ -73,6 +79,5 @@ export const SmsVerification = () => {
     </div>
   );
 };
-
 
 export default SmsVerification;
