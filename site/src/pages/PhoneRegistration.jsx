@@ -109,7 +109,7 @@ const PhoneRegistration = () => {
                 {errors.verify && <span>This field is required</span>}
               </div>
 
-              {matchPassword(watchPassword[0], watchPassword[1]) ? (
+              { matchPassword(watchPassword[0], watchPassword[1]) ? (
                 <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
                   Registrer
                   <svg
