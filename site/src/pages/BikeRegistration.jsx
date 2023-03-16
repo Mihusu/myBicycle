@@ -1,50 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import RadioButton from "../components/register/Radiobutton";
-import { PhoneNumber } from "../components/register/PhoneNumber";;
-
+import { PhoneNumber } from "../components/register/PhoneNumber";
+import { useForm } from "react-hook-form";
 const BikeRegistration = () => {
+  const {
+    register,
+    control,
+    watch,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      phone_number: "",
+      frame_number: "",
+    },
+  });
+
   return (
-    <div className="flex flex-col items-center justify-center my-8 ">
-      <div className=" px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 md:w-auto">
-        <div className="self-center text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
+    <div className="my-8 flex flex-col items-center justify-center ">
+      <div className=" rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-10">
+        <div className="self-center text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
           Cykel registering
         </div>
 
-        <div className="p-2 mt-4">
+        <div className="mt-4 p-2">
           <form
             method="post"
             action="http://127.0.0.1:8000/bikes"
             encType="multipart/form-data"
           >
             <div className="space-y-2">
-              <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-                <label className="px-4 mb-2">
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+                <label className="mb-2 px-4">
                   Stelnummer:
-                  <span className="text-red-500 required-dot">*</span>
+                  <span className="required-dot text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   id="Stelnummer"
                   name="frame_number"
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                   placeholder="Indtast stelnummer"
+                  {...register(
+                    "frame_number",
+                    { required: true },
+                    { min: 8, max: 32 }
+                  )}
                 />
               </div>
 
               {/* Phonenumber */}
-              <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800 ">
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800 ">
                 <h2 className="mb-2">
                   Indtast mobiloplysninger på den nye ejer:
                 </h2>
                 <div>
-                  <PhoneNumber />
+                  <PhoneNumber
+                    name="phone_number"
+                    control={control}
+                    rules={{ required: true }}
+                  />
                 </div>
               </div>
 
               {/* Bike model */}
-              <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+              <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h2 className="mb-2">Vælg model:</h2>
-                <div className="place-items-center grid grid-cols-3 px-4 py-2">
+                <div className="grid grid-cols-3 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"Herre"}
                     name="gender"
@@ -67,9 +90,9 @@ const BikeRegistration = () => {
               </div>
 
               {/* Electic */}
-              <div className=" p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+              <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h2 className="mb-2">Er det en El-cykel?</h2>
-                <div className="place-items-center grid grid-cols-2 px-4 py-2">
+                <div className="grid grid-cols-2 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"El-cykel"}
                     name={"is_electric"}
@@ -86,9 +109,9 @@ const BikeRegistration = () => {
               </div>
 
               {/* Bike type */}
-              <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h2 className="mb-2">Vælg cykel type:</h2>
-                <div className="place-items-center grid grid-cols-2 px-4 py-2">
+                <div className="grid grid-cols-2 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"City"}
                     name={"kind"}
@@ -117,22 +140,22 @@ const BikeRegistration = () => {
               </div>
 
               {/* Brand */}
-              <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-                <label className="px-4 mb-2">Brand:</label>
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
+                <label className="mb-2 px-4">Brand:</label>
                 <input
                   type="text"
                   id="Brand"
                   name="brand"
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                   placeholder="Skriv brandet Ex. 'MBK'"
                 />
               </div>
 
               {/* Color */}
-              <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+              <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h2 className="mb-2">Vælg en farve:</h2>
 
-                <div className="place-items-center grid grid-cols-2 ">
+                <div className="grid grid-cols-2 place-items-center ">
                   <RadioButton
                     labelName={"Sort"}
                     name={"color"}
@@ -206,7 +229,7 @@ const BikeRegistration = () => {
             <button
               type="submit"
               value="submit"
-              className="  py-2 px-4 flex justify-center items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+              className="  flex w-full items-center justify-center rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2  focus:ring-offset-blue-200 "
             >
               Registrer cykel
             </button>
