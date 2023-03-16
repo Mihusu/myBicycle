@@ -12,7 +12,8 @@ import SmsVerification from "./pages/SmsVerification";
 import BikeRegistration from "./pages/BikeRegistration";
 import PhoneRegistration from "./pages/PhoneRegistration";
 import ChoosePassword from "./pages/ChoosePassword";
-
+import BikeTransfer from "./pages/BikeTransfer";
+import BikeStolen from "./pages/BikeStolen";
 // Auth pages
 import ClaimBikePage from "./pages/ClaimBike";
 
@@ -58,6 +59,16 @@ function App() {
     {
       path: "/choosepassword",
       element: <ChoosePassword />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: "/transferbike",
+      element: <BikeTransfer />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: "/stolenbike",
+      element: <BikeStolen />,
       errorElement: <NotFound />,
     },
   ]);
