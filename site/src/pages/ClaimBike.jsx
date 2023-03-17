@@ -8,12 +8,12 @@ import { ApiContext } from '../contexts/apiContext';
 // Components
 import { SuccessToast, ErrorToast } from '../components/global/PushToast';
 
-const ClaimBikePage = () => {
+const ClaimBike = () => {
 
     let params = useParams();
     const API_BASE = useContext(ApiContext);
     const [updated, setUpdated] = useState(false);
-    const [apiLink] = useState(`${API_BASE}/claim/${params.id}`);
+    const [apiLink] = useState(`${API_BASE}/claimbike/${params.id}`);
     //const [claim, setClaim] = useState([]);
     //<     const [cancel, setCancel] = useState(false);
     //const [loading, setLoading] = useState(true);
@@ -40,7 +40,7 @@ const ClaimBikePage = () => {
     }, [apiLink, updated]);
 
     const handleRedeemClick = () => {
-        fetch(apiLink + "/claim/{claim_token}", {
+        fetch(apiLink + "/claimbike/{claim_token}", {
             method: "post"
         }).then(response => {
             if (response.ok) {
@@ -65,7 +65,7 @@ const ClaimBikePage = () => {
     // }
 
     if (cancel) {
-        return <Navigate to="/claim" />
+        return <Navigate to="/claimbike" />
     }
 
     //if (loading) {
@@ -111,4 +111,4 @@ const ClaimBikePage = () => {
     //}
 }
 
-export default ClaimBikePage;
+export default ClaimBike;
