@@ -51,7 +51,10 @@ export const SmsVerification = () => {
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="px-30 py-30 py-30 w-ful h-full ">
+
+        {/* Errors */}
         {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
+
           <p className=" mt-4 text-xl font-bold text-gray-800 dark:text-gray-200">
             Bekræft inden:
           </p>
