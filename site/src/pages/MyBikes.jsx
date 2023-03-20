@@ -35,9 +35,16 @@ const MyBikes = () => {
     // render data
     return (
         <div className="max-w flex h-screen flex-col">
-            <div className="flex flex-col items-center justify-center h-full rounded-lg bg-white shadow dark:bg-gray-600 sm:px-6 md:px-8 lg:px-10">
+            <div className="flex flex-col items-center justify-center h-full rounded-lg bg-white shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
                 {/* Conditionally render the ClaimBikeComponent or BikeComponent component */}
-                { data.length > 0 ? <BikeComponent /> : <ClaimBikeComponent />}
+                { data.length > 0 ? 
+                    <>
+                        {data.map((bike_info, key) => 
+                            <BikeComponent data={bike_info} key={key} /> 
+                        )}
+                    </>
+                    : 
+                    <ClaimBikeComponent />}
             </div>
             <Footer />
         </div>
