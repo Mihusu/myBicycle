@@ -40,7 +40,7 @@ export const ClaimBikeComponent = () => {
         console.log(err);
     };
 
-    // checks whether OTP is 32 letters long.
+    // checks whether OTP is 36 letters long.
     function matchLength(claimBikeCode) {
         if (claimBikeCode.length == 36) {
             return true;
