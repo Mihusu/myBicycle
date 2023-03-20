@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { useNavigate } from "react-router-dom";
 
-const URL = "http://127.0.0.1:8000/auth/register/me";
+const URL ="http://127.0.0.1:8000/auth/register/me";
 
 const PhoneRegistration = () => {
   const {
@@ -15,7 +15,7 @@ const PhoneRegistration = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone_number: "",
+      phoneNumber: "",
       password: "",
       verify: "",
     },
@@ -66,7 +66,7 @@ const PhoneRegistration = () => {
             <label className="font-light text-gray-800 dark:text-white"></label>
             <div className="form-control w-full max-w-xs">
               <PhoneNumber
-                name="phone_number"
+                name="phoneNumber"
                 control={control}
                 rules={{ required: true }}
               />

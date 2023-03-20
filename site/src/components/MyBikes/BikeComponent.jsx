@@ -47,7 +47,7 @@ export const BikeComponent = () => {
           </div>
 
           {/* Actions */}
-          <div className="flex flex justify-between py-5 ">
+          <div className="flex justify-between py-5 ">
             <button onClick={navigateToTransferBike} className="btn-accent btn">
               Overfør
             </button>

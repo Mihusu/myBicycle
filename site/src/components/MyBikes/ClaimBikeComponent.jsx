@@ -1,10 +1,51 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { IconContext } from 'react-icons';
-import { MdPedalBike } from 'react-icons/md';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+const URL = "http://127.0.0.1:8000/bikes/me";
 
 export const ClaimBikeComponent = () => {
+
+    const {
+        register,
+        watch,
+        handleSubmit,
+        setError,
+        formState: { errors },
+    } = useForm({
+        defaultValues: {
+            claimBikeCode: ""
+        },
+    });
+
+    const watchClaimBikeCode= watch(["claimBikeCode"]);
+    const navigate = useNavigate();
+
+    const onSubmit = (data) => {
+        console.log(data);
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        };
+        fetch(URL, requestOptions)
+            .then((response) => response.json())
+            .then(() => navigate(`/mybikes`))
+            .catch((error) => setError(error.message));
+    };
+
+    const onError = (err) => {
+        console.log(err);
+    };
+
+    // checks whether OTP is 32 letters long.
+    function matchLength(claimBikeCode) {
+        if (claimBikeCode.length == 36) {
+            return true;
+        } else return false;
+    }
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -13,11 +54,6 @@ export const ClaimBikeComponent = () => {
             <motion.div
                 onClick={() => setIsOpen(!isOpen)}>
                 <button>
-                    {/* <IconContext.Provider value={{ color: "lightblue", size: '15em', className: "global-class-name" }}>
-                        <div>
-                            <MdPedalBike />
-                        </div>
-                    </IconContext.Provider> */}
                     <img
                         src="../src/assets/bicycle-svgrepo.svg"
                         alt="Bike"
@@ -32,12 +68,15 @@ export const ClaimBikeComponent = () => {
             <div className="self-center justify-center text-m font-light text-gray-800 sm:text-3xl dark:text-white">
                 Vi kan se at du ikke har en cykel endnu
             </div>
-            <div className="mx-auto text-l font-light text-gray-800 sm:text-3xl dark:text-white">
+            <div className="flex justify-center text-l font-light text-gray-800 sm:text-3xl dark:text-white">
                 Indløs din første cykel ved at trykke på cyklen
             </div>
             {isOpen && (
                 <motion.div>
-                    <form action="#" className='p-6'>
+                    <form
+                        action="#"
+                        className='p-6'
+                        onSubmit={handleSubmit(onSubmit, onError)}>
                         <div className='space-y-2'>
                             <label className="font-light text-gray-800 dark:text-white">
                                 Engangskode:
@@ -47,15 +86,55 @@ export const ClaimBikeComponent = () => {
                                 type="text"
                                 id="required-engangskode"
                                 className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                                name="FrameNumber"
-                                placeholder="Indtast engangskode"
+                                placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                {...register(
+                                    "claimBikeCode",
+                                    { required: true },
+                                    { min: 36, max: 36 },
+                                    { pattern: /^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$/i}
+                                )}
                             />
+                            {errors.claimBikeCode && <span>This field is required</span>}
                         </div>
-                        <button type="submit" className="mt-8 py-2 px-4 flex justify-center items-center bg-blue-600 hover:bg-orange-700 
-                    focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center 
-                    text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                            Indløs
-                        </button>
+                        { matchLength(watchClaimBikeCode[0]) ? (
+                            <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
+                                Indløs
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="h-8 w-8"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </button>
+                        ) : (
+                            <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+                                type="submit"
+                                disabled>
+                                Indløs
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="h-8 w-8"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </button>
+                        )}
                     </form>
                 </motion.div>
             )}
