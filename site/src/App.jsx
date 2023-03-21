@@ -4,8 +4,8 @@ import {
 } from "react-router-dom";
 
 // Non-auth pages
+import Home from "./pages/Home";
 import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
 import MyBikes from "./pages/MyBikes";
 import SmsVerification from "./pages/SmsVerification";
 import BikeRegistration from "./pages/BikeRegistration";
@@ -23,7 +23,7 @@ function App() {
   return (
 
     <Routes>
-      <Route path="/" element={<NotFound />} />
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/bikeregistration" element={<BikeRegistration />} />
       <Route path="/registration" element={<PhoneRegistration />} />

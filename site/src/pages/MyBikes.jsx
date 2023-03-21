@@ -27,7 +27,7 @@ const MyBikes = () => {
     const { data, error, isLoading } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
 
     console.log(data);
-    if (error) return <div>failed to load</div>
+    if (error) return <div>failed to load, due to error {error}</div>
     if (isLoading) return <div>loading...</div>
 
     console.log(data)
