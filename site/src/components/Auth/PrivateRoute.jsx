@@ -10,7 +10,7 @@ const isValidToken = (token) => {
 
   const decoded = jwt_decode(token)
 
-  const isExpired = decoded.exp > Date.now()
+  const isExpired = decoded.exp < (Date.now() / 1000)
   if (isExpired) {
     return false
   }

@@ -20,7 +20,7 @@ import { PrivateRoutes } from "./components/Auth/PrivateRoute";
 function App() {
 
   return (
-    <div className="bg-gray-700 w-screen h-screen">
+    <div className="bg-gray-700 min-w-screen min-h-screen">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -31,7 +31,7 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
-          <Route path="/transferbike" element={<BikeTransfer />} />
+          <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/stolenbike" element={<BikeStolen />} />
         </Route>
       </Routes>
