@@ -32,10 +32,10 @@ const BikeRegistration = () => {
           >
             <div className="space-y-2">
               <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                <label className="mb-2 px-4">
+                <h1 className="mb-2">
                   Stelnummer:
-                  <span className="required-dot text-red-500">*</span>
-                </label>
+                  <span className="required-dot text-red-500"> *</span>
+                </h1>
                 <input
                   type="text"
                   id="Stelnummer"
@@ -54,6 +54,7 @@ const BikeRegistration = () => {
               <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800 ">
                 <h2 className="mb-2">
                   Indtast mobiloplysninger på den nye ejer:
+                  <span className="required-dot text-red-500"> *</span>
                 </h2>
                 <div>
                   <PhoneNumber
@@ -141,7 +142,7 @@ const BikeRegistration = () => {
 
               {/* Brand */}
               <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                <label className="mb-2 px-4">Brand:</label>
+                <h1 className="mb-2">Brand:</h1>
                 <input
                   type="text"
                   id="Brand"
