@@ -59,6 +59,7 @@ const PhoneRegistration = () => {
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-20">
+          <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
           <div className="self-center py-2 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
             Tlf nr.
             <span className="required-dot text-red-500"> *</span>
@@ -148,7 +149,7 @@ const PhoneRegistration = () => {
                 </svg>
               </button>
             )}
-            
+
             <p>Er du allerede oprettet som bruger? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
           </div>
         </div>

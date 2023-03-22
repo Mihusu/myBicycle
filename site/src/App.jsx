@@ -15,7 +15,6 @@ import BikeTransfer from "./pages/BikeTransfer";
 import BikeStolen from "./pages/BikeStolen";
 
 // Auth pages
-import ClaimBike from "./pages/ClaimBike";
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
 
 function App() {
@@ -32,7 +31,6 @@ function App() {
       
       <Route element={<PrivateRoutes />}>
         <Route path="/mybikes" element={<MyBikes />} />
-        <Route path="/claimbike" element={<ClaimBike />} />
         <Route path="/transferbike" element={<BikeTransfer />} />
         <Route path="/stolenbike" element={<BikeStolen />} />
       </Route>

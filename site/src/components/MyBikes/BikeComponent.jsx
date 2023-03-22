@@ -1,12 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const BikeComponent = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col justify-center px-4 m-0 box-border border border-white rounded-md">
@@ -19,7 +17,7 @@ export const BikeComponent = ({ data }) => {
         <img
           src={data.image.obj_url}
           alt="Bike"
-          className="mx-auto py-4 w-[480px] h-[480px]"
+          className="mx-auto py-4 object-scale-down w-[480px] h-[480px]"
         />
       </motion.div>
 
@@ -34,9 +32,7 @@ export const BikeComponent = ({ data }) => {
           <h2 className="text-white pb-2 border-b border-white">Cykel info:</h2>
 
           <div className="flex flex-col space-y-2">
-
             <div className="flex justify-between space-x-4">
-
               <div className="flex justify-between w-full">
                 <p className="font-light text-gray-800 dark:text-white">Oprettelses dato:</p>
                 <p className="font-light text-gray-800 dark:text-white">{new Date(data.created_at).toLocaleDateString()}</p>
@@ -49,7 +45,6 @@ export const BikeComponent = ({ data }) => {
             </div>
 
             <div className="flex justify-between space-x-4">
-
               <div className="flex justify-between w-full">
                 <p className="font-light text-gray-800 dark:text-white">Køn:</p>
                 <p className="font-light text-gray-800 dark:text-white">{data.gender}</p>
@@ -91,7 +86,7 @@ export const BikeComponent = ({ data }) => {
           <div className="flex justify-between py-5 ">
 
             <Link to="/transferbike">
-              <button onClick={() => navigate()} className="btn-info btn">
+              <button className="btn-info btn">
                 Overfør
               </button>
             </Link>

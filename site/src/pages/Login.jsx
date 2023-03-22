@@ -41,8 +41,8 @@ function PageLogin() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center py-56">
-            <div className="bg-white rounded-lg shadow dark:bg-gray-800 md:w-auto p-4">
+        <div className="flex flex-col items-center justify-center my-16 p-4">
+            <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
                 {/* Errors */}
                 {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
 
@@ -52,10 +52,10 @@ function PageLogin() {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* Use input elements for phoneNumber and password */}
+                    <h1 className="flex justify-center text-3xl mb-4">Login</h1>
                     <div className="pb-2 font-light text-gray-800 dark:text-white px-8"
                         control={control}
                         rules={{ required: true }}>
-                        <h1 className="flex justify-center text-3xl mb-4">Login</h1>
                         Tlf nr:
                         <span className="required-dot text-red-500"> *</span>
                     </div>

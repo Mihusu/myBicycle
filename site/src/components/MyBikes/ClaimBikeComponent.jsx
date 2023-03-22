@@ -3,41 +3,56 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 
-const URL = "http://127.0.0.1:8000/bikes/me";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const ClaimBikeComponent = () => {
+
+    const [error, setError] = useState("");
+
+    const token = secureLocalStorage.getItem('accesstoken');
 
     const {
         register,
         watch,
         handleSubmit,
-        setError,
-        formState: { errors },
+        formState,
     } = useForm({
         defaultValues: {
             claimBikeCode: ""
         },
     });
 
-    const watchClaimBikeCode= watch(["claimBikeCode"]);
+    const watchClaimBikeCode = watch(["claimBikeCode"]);
     const navigate = useNavigate();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
         const requestOptions = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
         };
-        fetch(URL, requestOptions)
-            .then((response) => response.json())
-            .then(() => navigate(`/mybikes`))
-            .catch((error) => setError(error.message));
-    };
+        try {
+            const response = await fetch(API_URL + `/bikes/claim/${data.claimBikeCode}`, requestOptions);
 
-    const onError = (err) => {
-        console.log(err);
+            const body = await response.json();
+
+            if (!(response.ok)) { 
+                setError(body.detail);
+                return;
+            }
+            
+            //Trigger a page refresh
+            navigate(0);
+        } catch (error) {
+            // Something failed miserably
+            console.log(error);
+        }
+
     };
 
     // checks whether OTP is 36 letters long.
@@ -76,7 +91,7 @@ export const ClaimBikeComponent = () => {
                     <form
                         action="#"
                         className='p-6'
-                        onSubmit={handleSubmit(onSubmit, onError)}>
+                        onSubmit={handleSubmit(onSubmit)}>
                         <div className='space-y-2'>
                             <label className="font-light text-gray-800 dark:text-white">
                                 Engangskode:
@@ -91,12 +106,12 @@ export const ClaimBikeComponent = () => {
                                     "claimBikeCode",
                                     { required: true },
                                     { min: 36, max: 36 },
-                                    { pattern: /^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$/i}
+                                    { pattern: /^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$/i }
                                 )}
                             />
-                            {errors.claimBikeCode && <span>This field is required</span>}
+                            {error && <span className="flex justify-center text-red-500">{error}</span>}
                         </div>
-                        { matchLength(watchClaimBikeCode[0]) ? (
+                        {matchLength(watchClaimBikeCode[0]) ? (
                             <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
                                 Indløs
                                 <svg
