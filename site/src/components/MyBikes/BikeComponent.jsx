@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { StolenBike } from "./StolenBike";
 
 export const BikeComponent = ({ data }) => {
 
@@ -92,11 +93,12 @@ export const BikeComponent = ({ data }) => {
                 </button>
               </Link>
 
-              <Link to="/stolenbike">
-                <button className={`btn btn-error`}>
-                  Meld Stjålet
-                </button>
-              </Link>
+              <StolenBike id={data._id}/>
+            {/* <Link to="/stolenbike">
+              <button className="btn-error btn">
+                Meld Stjålet
+              </button>
+            </Link> */}
 
             </div>
           </div>

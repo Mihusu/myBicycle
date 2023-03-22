@@ -12,7 +12,7 @@ import BikeRegistration from "./pages/BikeRegistration";
 import PhoneRegistration from "./pages/PhoneRegistration";
 import ChoosePassword from "./pages/ChoosePassword";
 import BikeTransfer from "./pages/BikeTransfer";
-import BikeStolen from "./pages/BikeStolen";
+import { StolenBike } from "./components/MyBikes/StolenBike";
 
 // Auth pages
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
@@ -32,7 +32,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
-          <Route path="/stolenbike" element={<BikeStolen />} />
+          <Route path="/stolenbike" element={<StolenBike />} />
         </Route>
       </Routes>
     </div>
