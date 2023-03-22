@@ -17,7 +17,6 @@ export const ClaimBikeComponent = () => {
         register,
         watch,
         handleSubmit,
-        formState,
     } = useForm({
         defaultValues: {
             claimBikeCode: ""
@@ -28,7 +27,6 @@ export const ClaimBikeComponent = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        console.log(data);
         const requestOptions = {
             method: "POST",
             headers: { 
