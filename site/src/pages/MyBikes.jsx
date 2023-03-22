@@ -3,6 +3,7 @@ import { ClaimBikeComponent } from "../components/MyBikes/ClaimBikeComponent";
 import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import useSWR from 'swr'
 import secureLocalStorage from "react-secure-storage";
+import { Layout } from "../components/Layout/Layout";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -16,7 +17,7 @@ const get_my_bikes = async (url, token) => {
             'Authorization': 'Bearer ' + token
         }
     })
-    
+
     return await response.json()
 }
 
@@ -34,20 +35,22 @@ const MyBikes = () => {
 
     // render data
     return (
-        <div className="max-w flex h-screen flex-col">
-            <div className="flex flex-col items-center justify-center h-full rounded-lg bg-white shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+
+        <Layout title="Mine cykler">
+            <div className="flex-col">
+
                 {/* Conditionally render the ClaimBikeComponent or BikeComponent component */}
-                { data.length > 0 ? 
+                {data.length > 0 ?
                     <>
-                        {data.map((bike_info, key) => 
-                            <BikeComponent data={bike_info} key={key} /> 
+                        {data.map((bike_info, key) =>
+                            <BikeComponent data={bike_info} key={key} />
                         )}
                     </>
-                    : 
+                    :
                     <ClaimBikeComponent />}
             </div>
-            <Footer />
-        </div>
+
+        </Layout>
     );
 };
 

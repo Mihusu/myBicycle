@@ -41,7 +41,7 @@ function PageLogin() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center my-16 p-4">
+        <div className="grid h-screen place-items-center p-4">
             <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
                 {/* Errors */}
                 {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
