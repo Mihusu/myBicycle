@@ -10,7 +10,7 @@ export const Footer = () => {
 
     return (
 
-        <div className="fixed bottom-0 left-0 flex flex-row justify-around w-full items-center sm:px-6 md:px-8 lg:px-10 bg-gray-900 border-t border-white rounded-t-md">
+        <div className="fixed bottom-0 left-0 flex flex-row justify-around w-full items-center sm:px-6 md:px-8 lg:px-10 bg-gray-800 border-t border-white rounded-t-md">
             <div className="btm-nav-lg py-1 mt-auto sm:px-6 md:px-8 lg:px-10">
                 <Link to="/mybikes">
                     <button className="rounded hover:bg-orange-500 dropdown-active px-8 py-1">

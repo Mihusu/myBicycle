@@ -8,7 +8,7 @@ export const BikeComponent = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full border rounded-lg bg-white shadow-lg hover:shadow-xl dark:bg-gray-900 sm:px-6 md:px-8 lg:px-10 mb-4">
+    <div className="flex flex-col items-center justify-center h-full border rounded-lg bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4">
       <div className="flex flex-col justify-center px-4 m-0 ">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}

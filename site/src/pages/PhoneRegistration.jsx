@@ -53,7 +53,7 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="my-16 flex flex-col items-center justify-center">
+    <div className="grid h-screen place-items-center p-4">
       <form
         className="flex w-full items-center justify-center self-center md:w-1/2 lg:w-1/3"
         onSubmit={handleSubmit(onSubmit, onError)}
