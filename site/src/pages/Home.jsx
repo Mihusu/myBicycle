@@ -9,29 +9,30 @@ function setColor(arg) {
 
 export const Home = () => {
   return (
-    
-      <div className="flex w-full">
-  <div className="grid h-fit max-w-fit flex-grow card bg-base-100 rounded-box place-items-center">
+    <div className="flex flex-col md:flex-row lg:flex-row justify-around items-center h-screen w-screen">
+      <div className="flex flex-col md:flex-row lg:flex-row justify-around items-center">
 
-  <div className="card w-96 bg-base-100 shadow-xl image-full">
-  <figure><img src="src\assets\redbike.svg" alt="Red" /></figure>
-  <div className="card-body">
-    
-  </div>
-</div>
+      
+      <div className="card rounded-box grid flex-grow place-items-center bg-base-100">
+        <div className="card w-2/3 image-full bg-base-100 shadow-xl">
+          <figure>
+            <img src="src\assets\redbike.svg" alt="Red" />
+          </figure>
+          <div className="card-body"></div>
+        </div>
+      </div>
+      <div className="divider md:divider-horizontal lg:divider-horizontal">OR</div>
+      <div className="card rounded-box grid flex-grow place-items-center bg-base-100">
+        <div className="card w-2/3 image-full bg-base-100 shadow-xl">
+          <figure>
+            <img src="src\assets\bluebike.svg" alt="Blue" />
+          </figure>
+          <div className="card-body"></div>
+        </div>
+      </div>
+      </div>
+    </div>
 
-  </div>
-  <div className="divider divider-horizontal">OR</div>
-  <div className="grid h-fit max-w-fit flex-grow card bg-base-100 rounded-box place-items-center">
-  <div className="card w-96 bg-base-100 shadow-xl image-full">
-  <figure><img src="src\assets\bluebike.svg" alt="Blue" /></figure>
-  <div className="card-body">
-    
-  </div>
-</div>
-  </div>
-</div>
-    
     // <div className="card glass w-96">
     //   <figure>
     //     <img
