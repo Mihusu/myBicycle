@@ -16,7 +16,7 @@ export const LayoutWithBack = ({ title = "Ukendt", children }) => {
                         <button onClick={() => navigate(-1)}>
                             <HiArrowLeft size={24} />
                         </button>
-                        <h1 className='text-3xl text-white'>{title}</h1>
+                        <h1 className='flex-grow text-3xl text-white text-center mr-4'>{title}</h1>
                     </div>
                     {/* Content */}
                     {children}
