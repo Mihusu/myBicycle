@@ -1,4 +1,3 @@
-import { Footer } from "../components/Layout/Footer";
 import { ClaimBikeComponent } from "../components/MyBikes/ClaimBikeComponent";
 import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import useSWR from 'swr'
