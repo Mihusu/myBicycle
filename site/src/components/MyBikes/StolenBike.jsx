@@ -22,28 +22,15 @@ export const StolenBike = ({ id }) => {
     ([url, token]) => get_one_bike(url, token)
     )
     
-    async function reportStolen () {
-      const stolen_url = (API_URL + `/bikes/${id}/reportstolen`)
-
-      const response = await fetch(stolen_url, {
-        method: "PUT",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-
-      const res = await response.json()
-      mutate(data)
-      
-    }
+  
 
   return (
     <div >
       {error}
       {data ?
       (data.reported_stolen ?
-        <button className="btn btn-info" onClick={() => reportStolen()}>Report Found</button> :
-        <button className="btn btn-warning" onClick={() => reportStolen()}>Report Stolen</button>
+        <button className="btn btn-info" onClick={() => reportStolen()}>Rapporter fundet</button> :
+        <button className="btn btn-warning" onClick={() => reportStolen()}>Rapporter stjålet</button>
       )
       : 
       <button className="btn bg-red-500">{"no data here"}</button>
