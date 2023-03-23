@@ -13,6 +13,7 @@ import PhoneRegistration from "./pages/PhoneRegistration";
 import ChoosePassword from "./pages/ChoosePassword";
 import BikeTransfer from "./pages/BikeTransfer";
 import { StolenBike } from "./components/MyBikes/StolenBike";
+import Activity from "./pages/Activity";
 
 // Auth pages
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/mybikes" element={<MyBikes />} />
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/stolenbike" element={<StolenBike />} />
+          <Route path="/activities" element={<Activity />} />
         </Route>
       </Routes>
     </div>
