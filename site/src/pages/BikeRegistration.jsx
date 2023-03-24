@@ -1,21 +1,75 @@
-import React, { useState } from "react";
-import RadioButton from "../components/register/Radiobutton";
+import React from "react";
+import { RadioButton } from "../components/register/Radiobutton";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { useForm } from "react-hook-form";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 const BikeRegistration = () => {
   const {
     register,
     control,
-    watch,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone_number: "",
-      frame_number: "",
+      phone_number: "+4593977912",
+      frame_number: "STEL001A",
+      gender: "male",
+      is_electric: true,
+      kind: "city",
+      brand: "RACEY",
+      color: "red",
+      image: undefined,
     },
   });
+
+  const onSubmit = async (data) => {
+    console.log("submitting");
+
+    try {
+      console.log(data);
+      const formData = new FormData();
+      for (const key in data) {
+        if (key === "image") { formData.append(key, data.image[0]) }
+        else { formData.append(key, data[key]) }
+        
+      }
+      console.log(formData);
+
+      const response = await fetch(API_URL + "/bikes", {
+        method: "POST",
+        body: formData,
+      });
+
+      const body = response;
+      console.log(response);
+      console.log("response got back");
+      if (!response.ok) {
+        setError(body.detail);
+        return;
+      }
+
+      // navigate(`/bikeregistration/${data.session_id}`);
+    } catch (error) {
+      console.error(error);
+    }
+
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    //};
+    // fetch(URL, requestOptions)
+    //   .then((response) => response.json())
+    //   .then((data) => navigate(`/bikeregistration/${data.session_id}`))
+    //   .catch((error) => setError(error.message));
+  };
+
+  const onError = (err) => {
+    console.error(err);
+  };
 
   return (
     <div className="my-8 flex flex-col items-center justify-center ">
@@ -25,11 +79,11 @@ const BikeRegistration = () => {
         </div>
 
         <div className="mt-4 p-2">
-          <form
-            method="post"
-            action="http://127.0.0.1:8000/bikes"
-            encType="multipart/form-data"
-          >
+          <form onSubmit={handleSubmit(onSubmit, onError)}>
+            {/* <>// method="post"
+            // action="http://127.0.0.1:8000/bikes"
+            // encType="multipart/form-data"
+            </> */}
             <div className="space-y-2">
               <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h1 className="mb-2">
@@ -38,8 +92,7 @@ const BikeRegistration = () => {
                 </h1>
                 <input
                   type="text"
-                  id="Stelnummer"
-                  name="frame_number"
+                  id="stelnummer"
                   className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                   placeholder="Indtast stelnummer"
                   {...register(
@@ -71,21 +124,27 @@ const BikeRegistration = () => {
                 <div className="grid grid-cols-3 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"Herre"}
-                    name="gender"
-                    color={"radio border-blue-500 bg-content"}
                     value="male"
+                    color={"radio border-blue-500 bg-content"}
+                    {...register("gender", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Dame"}
-                    name="gender"
-                    color={"radio border-pink-500 bg-content"}
                     value="female"
+                    color={"radio border-pink-500 bg-content"}
+                    {...register("gender", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Unisex"}
-                    name="gender"
-                    color={"radio border-purple-500 bg-content"}
                     value="uni_sex"
+                    color={"radio border-purple-500 bg-content"}
+                    {...register("gender", {
+                      required: true,
+                    })}
                   />
                 </div>
               </div>
@@ -96,15 +155,19 @@ const BikeRegistration = () => {
                 <div className="grid grid-cols-2 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"El-cykel"}
-                    name={"is_electric"}
                     color={"radio border-green-500 bg-content"}
                     value={true}
+                    {...register("is_electric", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Ikke El-cykel"}
-                    name={"is_electric"}
                     color={"radio border-yellow-900 bg-content"}
                     value={false}
+                    {...register("is_electric", {
+                      required: true,
+                    })}
                   />
                 </div>
               </div>
@@ -115,27 +178,35 @@ const BikeRegistration = () => {
                 <div className="grid grid-cols-2 place-items-center px-4 py-2">
                   <RadioButton
                     labelName={"City"}
-                    name={"kind"}
                     color={"radio border-teal-500 bg-content"}
                     value="city"
+                    {...register("kind", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Gravel"}
-                    name={"kind"}
                     color={"radio border-indigo-500 bg-content"}
                     value="gravel"
+                    {...register("kind", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Lad"}
-                    name={"kind"}
                     color={"radio border-yellow-500 bg-content"}
                     value="cargo"
+                    {...register("kind", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Racer"}
-                    name={"kind"}
                     color={"radio border-red-500 bg-content"}
                     value="race"
+                    {...register("kind", {
+                      required: true,
+                    })}
                   />
                 </div>
               </div>
@@ -145,10 +216,14 @@ const BikeRegistration = () => {
                 <h1 className="mb-2">Brand:</h1>
                 <input
                   type="text"
-                  id="Brand"
-                  name="brand"
+                  id="brand"
                   className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                   placeholder="Skriv brandet Ex. 'MBK'"
+                  {...register(
+                    "brand",
+                    { required: true },
+                    { min: 1, max: 32 }
+                  )}
                 />
               </div>
 
@@ -159,63 +234,83 @@ const BikeRegistration = () => {
                 <div className="grid grid-cols-2 place-items-center ">
                   <RadioButton
                     labelName={"Sort"}
-                    name={"color"}
                     color={"radio border-neutral-900 bg-content"}
                     value="black"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Hvid"}
-                    name={"color"}
                     color={"radio border-neutral-50 bg-content"}
                     value="white"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Grå"}
-                    name={"color"}
                     color={"radio border-gray-400 bg-content"}
                     value="gray"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Rød"}
-                    name={"color"}
                     color={"radio border-red-500 bg-content"}
                     value="red"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Blå"}
-                    name={"color"}
                     color={"radio border-blue-700 bg-content"}
                     value="blue"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Grøn"}
-                    name={"color"}
                     color={"radio border-green-700 bg-content"}
                     value="green"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Gul"}
-                    name={"color"}
                     color={"radio border-yellow-400 bg-content"}
                     value="yellow"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Orange"}
-                    name={"color"}
                     color={"radio border-orange-500 bg-content"}
                     value="orange"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Purple"}
-                    name={"color"}
                     color={"radio border-purple-400 bg-content"}
                     value="purple"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                   <RadioButton
                     labelName={"Andet"}
-                    name={"color"}
                     color={"radio radio-primary"}
                     value="other"
+                    {...register("color", {
+                      required: true,
+                    })}
                   />
                 </div>
               </div>
@@ -224,15 +319,18 @@ const BikeRegistration = () => {
             {/* Images */}
             <div className="py-8">
               {/* <DropZoneComponent></DropZoneComponent> */}
-              <input type="file" id="files" name="images" multiple></input>
+              <input
+                type="file"
+                id="file-image"
+                {...register("image", { required: true })}
+              />
             </div>
 
             <button
               type="submit"
-              value="submit"
-              className="  flex w-full items-center justify-center rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2  focus:ring-offset-blue-200 "
+              className="flex w-full items-center justify-center rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 "
             >
-              Registrer cykel
+              Registrer Cykel
             </button>
           </form>
         </div>
