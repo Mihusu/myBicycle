@@ -14,29 +14,27 @@ const BikeRegistration = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone_number: "+4593977912",
-      frame_number: "STEL001A",
-      gender: "male",
-      is_electric: true,
-      kind: "city",
-      brand: "RACEY",
-      color: "red",
+      phone_number: "",
+      frame_number: "",
+      gender: "",
+      is_electric: "",
+      kind: "",
+      brand: "",
+      color: "",
       image: undefined,
     },
   });
 
   const onSubmit = async (data) => {
-    console.log("submitting");
 
     try {
-      console.log(data);
+
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") { formData.append(key, data.image[0]) }
         else { formData.append(key, data[key]) }
         
       }
-      console.log(formData);
 
       const response = await fetch(API_URL + "/bikes", {
         method: "POST",
@@ -44,31 +42,19 @@ const BikeRegistration = () => {
       });
 
       const body = response;
-      console.log(response);
-      console.log("response got back");
       if (!response.ok) {
         setError(body.detail);
         return;
       }
 
-      // navigate(`/bikeregistration/${data.session_id}`);
     } catch (error) {
       console.error(error);
     }
 
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    //};
-    // fetch(URL, requestOptions)
-    //   .then((response) => response.json())
-    //   .then((data) => navigate(`/bikeregistration/${data.session_id}`))
-    //   .catch((error) => setError(error.message));
   };
 
-  const onError = (err) => {
-    console.error(err);
+  const onError = (error) => {
+    console.error(error);
   };
 
   return (
@@ -80,10 +66,6 @@ const BikeRegistration = () => {
 
         <div className="mt-4 p-2">
           <form onSubmit={handleSubmit(onSubmit, onError)}>
-            {/* <>// method="post"
-            // action="http://127.0.0.1:8000/bikes"
-            // encType="multipart/form-data"
-            </> */}
             <div className="space-y-2">
               <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
                 <h1 className="mb-2">
@@ -100,7 +82,7 @@ const BikeRegistration = () => {
                     { required: true },
                     { min: 8, max: 32 }
                   )}
-                />
+                  />
               </div>
 
               {/* Phonenumber */}
