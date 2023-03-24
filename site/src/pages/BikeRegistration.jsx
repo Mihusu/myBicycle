@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { RadioButton } from "../components/register/Radiobutton";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const BikeRegistration = () => {
+
+  const navigate = useNavigate();
+
   const {
     register,
     control,
@@ -25,6 +29,8 @@ const BikeRegistration = () => {
     },
   });
 
+  const [responseError, setResponseError ] = useState("")
+
   const onSubmit = async (data) => {
 
     try {
@@ -41,9 +47,12 @@ const BikeRegistration = () => {
         body: formData,
       });
 
-      const body = response;
+      const body = await response.json();
+
       if (!response.ok) {
-        setError(body.detail);
+        console.log(body.detail);
+        setResponseError(body.detail);
+        // navigate(`/bikeregistration`, { replace: true });
         return;
       }
 
@@ -60,6 +69,7 @@ const BikeRegistration = () => {
   return (
     <div className="my-8 flex flex-col items-center justify-center ">
       <div className=" rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-10">
+        {responseError && <div className="p-4 rounded-lg bg-error text-white">{responseError}</div>}
         <div className="self-center text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
           Cykel registering
         </div>
@@ -83,6 +93,7 @@ const BikeRegistration = () => {
                     { min: 8, max: 32 }
                   )}
                   />
+                  {errors.frame_number && <span>This field is required</span>}
               </div>
 
               {/* Phonenumber */}
