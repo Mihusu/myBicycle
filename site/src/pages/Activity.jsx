@@ -4,10 +4,12 @@ import secureLocalStorage from "react-secure-storage";
 import { Layout } from "../components/Layout/Layout";
 import { BikeSenderRequest } from "../components/MyBikes/BikeSenderRequest";
 import { OldBikeRequest } from "../components/MyBikes/OldBikeRequest";
+import { BikeReceiverRequest } from "../components/MyBikes/BikeReceiverRequest";
+
 
 const API_URL = import.meta.env.VITE_API_URL
 
-const get_bike_requests = async (url, token) => {
+const get_bike_request_detail = async (url, token) => {
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -21,7 +23,7 @@ const Activity = () => {
 
     const token = secureLocalStorage.getItem('accesstoken')
 
-    const { data, error, isLoading, mutate } = useSWR([API_URL + '/activities', token], ([url, token]) => get_bike_requests(url, token))
+    const { data, error, isLoading } = useSWR([API_URL + '/activities', token], ([url, token]) => get_bike_request_detail(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
     if (isLoading) return <div>loading...</div>
@@ -33,9 +35,12 @@ const Activity = () => {
         <Layout title="Aktiviteter">
             <>
                 { data && data.outgoing_transfer_requests.map((bike_info, key) =>
-                    <BikeSenderRequest data={bike_info} mutate={mutate} key={key} />
+                    <BikeSenderRequest data={bike_info} key={key} />
                 )}
             </>
+            { data && data.incoming_transfer_requests.map((bike_info, key) =>
+                    <BikeReceiverRequest data={bike_info} key={key} />
+                )}
             <OldBikeRequest />
         </Layout>
     )

@@ -12,8 +12,10 @@ import BikeRegistration from "./pages/BikeRegistration";
 import PhoneRegistration from "./pages/PhoneRegistration";
 import ChoosePassword from "./pages/ChoosePassword";
 import BikeTransfer from "./pages/BikeTransfer";
-import { StolenBike } from "./components/MyBikes/StolenBike";
+import ViewTransferAccept from "./pages/ViewTransferAccept";
+import ViewTransferDetail from "./pages/ViewTransferDetail";
 import Activity from "./pages/Activity";
+import { StolenBike } from "./components/MyBikes/StolenBike";
 
 // Auth pages
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
@@ -35,6 +37,8 @@ function App() {
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/stolenbike" element={<StolenBike />} />
           <Route path="/activities" element={<Activity />} />
+          <Route path="/activities/accept" element={<ViewTransferAccept />} /> 
+          <Route path="/activities/detail" element={<ViewTransferDetail />} />
         </Route>
       </Routes>
     </div>

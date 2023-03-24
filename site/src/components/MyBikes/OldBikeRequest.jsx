@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 export const OldBikeRequest = () => {
 
     return (
-        <div className="flex justify-center mt-8 bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "425px" }}>
+        <div className="flex justify-center my-8 mt-8 bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "425px" }}>
             {/* Old bike requests */}
             <div className="text-2xl">
                 Gennemførte overførelser
