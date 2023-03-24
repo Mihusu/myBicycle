@@ -1,5 +1,5 @@
 import React from 'react'
-import { Footer } from '../Footers/footer'
+import { Footer } from './Footer'
 
 export const Layout = ({ title = "Ukendt", children }) => {
     return (

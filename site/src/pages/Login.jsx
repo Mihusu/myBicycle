@@ -80,7 +80,7 @@ function PageLogin() {
                         />
                     </div>
 
-                    <div className="flex flex-col justify-center items-center space-y-2">
+                    <div className="flex flex-col justify-center items-center space-y-2 sm:px-2 md:px-4 lg:px-10">
 
                         <button className="btn my-2 mt-8 w-full max-w-xs bg-green-500 py-2 px-4 text-green-100" type="submit">
                             Login

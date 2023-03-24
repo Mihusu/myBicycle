@@ -1,4 +1,3 @@
-import { Footer } from "../components/Footers/footer";
 import { ClaimBikeComponent } from "../components/MyBikes/ClaimBikeComponent";
 import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import useSWR from 'swr'
@@ -25,9 +24,8 @@ const MyBikes = () => {
 
     const token = secureLocalStorage.getItem('accesstoken')
 
-    const { data, error, isLoading } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
+    const { data, error, isLoading, mutate } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
 
-    console.log(data);
     if (error) return <div>failed to load, due to error {error}</div>
     if (isLoading) return <div>loading...</div>
 
@@ -43,7 +41,7 @@ const MyBikes = () => {
                 {data.length > 0 ?
                     <>
                         {data.map((bike_info, key) =>
-                            <BikeComponent data={bike_info} key={key} />
+                            <BikeComponent data={bike_info} mutate={mutate} key={key} />
                         )}
                     </>
                     :
