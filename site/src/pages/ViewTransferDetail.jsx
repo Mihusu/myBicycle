@@ -7,7 +7,7 @@ import { SwipeButton } from "../components/MyBikes/SwipeButton";
 
 const API_URL = import.meta.env.VITE_API_URL
 
-const get_bike_requests = async (url, token) => {
+const get_bike_request_detail = async (url, token) => {
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -21,7 +21,7 @@ const ViewTransferDetail = () => {
 
     const token = secureLocalStorage.getItem('accesstoken')
 
-    const { data, error, isLoading } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_bike_requests(url, token))
+    const { data, error, isLoading } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_bike_request_detail(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
     if (isLoading) return <div>loading...</div>

@@ -9,7 +9,7 @@ import { BikeReceiverRequest } from "../components/MyBikes/BikeReceiverRequest";
 
 const API_URL = import.meta.env.VITE_API_URL
 
-const get_bike_request_detail = async (url, token) => {
+const get_bike_requests = async (url, token) => {
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -23,7 +23,7 @@ const Activity = () => {
 
     const token = secureLocalStorage.getItem('accesstoken')
 
-    const { data, error, isLoading } = useSWR([API_URL + '/activities', token], ([url, token]) => get_bike_request_detail(url, token))
+    const { data, error, isLoading } = useSWR([API_URL + '/activities', token], ([url, token]) => get_bike_requests(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
     if (isLoading) return <div>loading...</div>
