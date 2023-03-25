@@ -33,8 +33,8 @@ const ViewTransferDetail = () => {
             {data && data.map((bike_info, key) =>
                 <BikeComponent data={bike_info} key={key} />
             )}
-            <div className="flex justify-center my-8 bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "400px" }}>
-                <h1 className="mb-2 text-xl">
+            <div className="flex justify-center my-8 bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "425px" }}>
+                <h1 className="mb-2" style={{ maxWidth: "425px" }}>
                     Ejeren:
                     <div className="mt-2 ml-10 text-lg">Navn: Something</div>
                     <img src="image-url" alt="alt-text" className="inline-block h-4 w-4 mr-4 text-sm" />

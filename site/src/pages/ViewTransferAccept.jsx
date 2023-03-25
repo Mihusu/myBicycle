@@ -48,7 +48,7 @@ const ViewTransferAccept = () => {
             {data && data.map((bike_info, key) =>
                 <BikeComponent data={bike_info} key={key} />
             )}
-            <div className="flex justify-center bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "400px" }}>
+            <div className="flex justify-center bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "425px" }}>
                 <h1 className="mb-2 text-xl">
                     Ejeren:
                     <div className="mt-2 ml-10 text-lg">Navn: Something</div>
@@ -58,7 +58,7 @@ const ViewTransferAccept = () => {
                 </h1>
             </div>
             <div className="flex justify-center">
-                <button className="btn my-4 mt-8 flex w-full max-w-sm justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit" onClick={approveBikeRequest}>
+                <button className="btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit" onClick={approveBikeRequest} style={{ maxWidth: "425px" }}>
                     Godkend
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -27,7 +27,7 @@ export const BikeComponent = ({ data, mutate }) => {
 
   return (
     <div className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'}`}>
-      <div className="flex flex-col items-center justify-center border rounded-lg bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4">
+      <div className="flex border rounded-lg bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4 mx-auto" style={{ maxWidth: "425px" }}>
         <div className="flex flex-col justify-center px-4 m-0 ">
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}

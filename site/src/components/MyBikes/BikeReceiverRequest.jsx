@@ -38,10 +38,10 @@ export const BikeReceiverRequest = ({ data }) => {
                     </div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <button className="btn flex w-40 max-w-xs justify-center bg-red-500 text-green-100 " type="submit" onClick={() => declineBikeRequest()} style={{ marginRight: '0.2px' }}>
+                    <button className="btn flex w-40 max-w-xs justify-center bg-red-500 text-green-100 " type="submit" onClick={ () => declineBikeRequest()} style={{ marginRight: '0.2px' }}>
                         Afvis
                     </button>
-                    <Link to={'/activities/{:id}'}>
+                    <Link to={'/activities/detail'}>
                         <button className="btn flex w-40 max-w-xs justify-center bg-green-500 text-green-100" type="button" style={{ marginLeft: '0.2px' }}>
                             Åben
                         </button>

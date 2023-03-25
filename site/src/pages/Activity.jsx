@@ -33,15 +33,24 @@ const Activity = () => {
     // render data
     return (
         <Layout title="Aktiviteter">
-            <>
-                { data && data.outgoing_transfer_requests.map((bike_info, key) =>
+            <div className="">
+                {data && data.outgoing_transfer_requests.map((bike_info, key) =>
                     <BikeSenderRequest data={bike_info} key={key} />
                 )}
-            </>
-            { data && data.incoming_transfer_requests.map((bike_info, key) =>
+            </div>
+            <div className="mt-8">
+                {data && data.incoming_transfer_requests.map((bike_info, key) =>
                     <BikeReceiverRequest data={bike_info} key={key} />
                 )}
-            <OldBikeRequest />
+            </div>
+            <div className="flex justify-center text-xl text-white">
+            Gennemførte overførelser
+            </div>
+            <div className="mt-2">
+                {data && data.completed_transfers.map((bike_info, key) =>
+                    <OldBikeRequest data={bike_info} key={key} />
+                )}
+            </div>
         </Layout>
     )
 }
