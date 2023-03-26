@@ -12,7 +12,7 @@ export const BikeSenderRequest = ({ data }) => {
 
     async function retractBikeRequest() {
 
-        const retract_bike_request = (API_URL + `/transfers/${data._id}/retract`)
+        const retract_bike_request = (API_URL + `/transfers/${data.transfer_id}/retract`)
 
         const token = secureLocalStorage.getItem('accesstoken')
 

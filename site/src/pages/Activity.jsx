@@ -6,7 +6,6 @@ import { BikeSenderRequest } from "../components/MyBikes/BikeSenderRequest";
 import { OldBikeRequest } from "../components/MyBikes/OldBikeRequest";
 import { BikeReceiverRequest } from "../components/MyBikes/BikeReceiverRequest";
 
-
 const API_URL = import.meta.env.VITE_API_URL
 
 const get_bike_requests = async (url, token) => {
@@ -34,21 +33,21 @@ const Activity = () => {
     return (
         <Layout title="Aktiviteter">
             <div className="">
-                {data && data.outgoing_transfer_requests.map((bike_info, key) =>
-                    <BikeSenderRequest data={bike_info} key={key} />
+                {data && data.outgoing_transfer_requests.map((transfer_info, key) =>
+                    <BikeSenderRequest data={transfer_info} key={key} />
                 )}
             </div>
             <div className="mt-8">
-                {data && data.incoming_transfer_requests.map((bike_info, key) =>
-                    <BikeReceiverRequest data={bike_info} key={key} />
+                {data && data.incoming_transfer_requests.map((transfer_info, key) =>
+                    <BikeReceiverRequest data={transfer_info} key={key} />
                 )}
             </div>
-            <div className="flex justify-center text-xl text-white">
+            <div className="flex justify-center text-2xl text-white">
             Gennemførte overførelser
             </div>
             <div className="mt-2">
-                {data && data.completed_transfers.map((bike_info, key) =>
-                    <OldBikeRequest data={bike_info} key={key} />
+                {data && data.completed_transfers.map((transfer_info, key) =>
+                    <OldBikeRequest data={transfer_info} key={key} />
                 )}
             </div>
         </Layout>
