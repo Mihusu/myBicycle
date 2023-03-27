@@ -25,7 +25,7 @@ export const BikeComponent = ({ data, mutate }) => {
 
   return (
     <div
-      className="mx-auto mb-4 flex rounded-lg border bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
+      className="mx-auto mb-4 flex rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
       style={{ maxWidth: "425px" }}
     >
       <div className="m-0 flex flex-col justify-center px-4 ">
@@ -45,12 +45,10 @@ export const BikeComponent = ({ data, mutate }) => {
         </motion.div>
 
         <div className="flex flex-col items-center justify-center py-2 text-sm">
-          <p className="font-light text-gray-800 dark:text-white">
-            Model: {data.brand}
-          </p>
-          <p className="font-light text-gray-800 dark:text-white">
-            Stelnummer: {data.frame_number}
-          </p>
+          <p className="font-semibold text-white">Model: </p>
+          <p className="text-white">{data.brand}</p>
+          <p className="font-semibold text-white">Stelnummer:</p>
+          <p className="text-white">{data.frame_number}</p>
         </div>
 
         {isOpen && (
@@ -60,10 +58,8 @@ export const BikeComponent = ({ data, mutate }) => {
             <div className="flex flex-col items-center justify-center py-2 text-sm">
               <div className="flex justify-between space-x-4">
                 <div className="flex w-full justify-between">
-                  <p className="text-gray-800 dark:text-gray-800">
-                    Oprettelses dato:
-                  </p>
-                  <p className="font-light text-gray-800 dark:text-white">
+                  <p className="font-semibold text-white">Oprettelses dato:</p>
+                  <p className="text-white">
                     {new Date(data.created_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -71,15 +67,13 @@ export const BikeComponent = ({ data, mutate }) => {
 
               <div className=" flex flex-col items-center justify-center py-2 text-sm">
                 <div className="flex w-full justify-between">
-                  <p className="text-gray-800 dark:text-gray-800">Køn:</p>
-                  <p className="font-light text-gray-800 dark:text-white">
-                    {data.gender}
-                  </p>
+                  <p className="font-semibold text-white">Køn:</p>
+                  <p className="text-white">{data.gender}</p>
                 </div>
 
                 <div className="flex flex-col items-center justify-center py-2 text-sm">
-                  <p className="text-gray-800 dark:text-gray-800">Elektrisk:</p>
-                  <p className="font-light text-gray-800 dark:text-white">
+                  <p className="font-semibold text-white">Elektrisk:</p>
+                  <p className="font-light text-white">
                     {data.is_electric ? "Ja" : "Nej"}
                   </p>
                 </div>
@@ -87,26 +81,20 @@ export const BikeComponent = ({ data, mutate }) => {
 
               <div className="flex flex-col items-center justify-center py-2 text-sm">
                 <div className="flex w-full justify-between">
-                  <p className="text-gray-800 dark:text-gray-800">Slags:</p>
-                  <p className="font-light text-gray-800 dark:text-white">
-                    {data.kind}
-                  </p>
+                  <p className="font-semibold text-white">Slags:</p>
+                  <p className="font-light text-white">{data.kind}</p>
                 </div>
 
                 <div className="flex w-full justify-between">
-                  <p className="text-gray-800 dark:text-gray-800">Farve:</p>
-                  <p className="font-light text-gray-800 dark:text-white">
-                    {data.color}
-                  </p>
+                  <p className="font-semibold text-white">Farve:</p>
+                  <p className="font-light text-white">{data.color}</p>
                 </div>
               </div>
 
               <div className="flex flex-col items-center justify-center py-2 text-sm">
                 <div className="flex w-full justify-between">
-                  <p className="text-gray-800 dark:text-gray-800">Mærke:</p>
-                  <p className="font-light text-gray-800 dark:text-white">
-                    {data.brand}
-                  </p>
+                  <p className="font-semibold text-white">Mærke:</p>
+                  <p className="text-white">{data.brand}</p>
                 </div>
 
                 <div className="flex w-full justify-between">
