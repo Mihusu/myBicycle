@@ -1,7 +1,8 @@
 import React from 'react'
 import { Footer } from './Footer'
 
-export const Layout = ({ title = "Ukendt", children }) => {
+export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
+
     return (
         <>
             <div id='layout' className=''>
@@ -11,7 +12,13 @@ export const Layout = ({ title = "Ukendt", children }) => {
                         <h1 className='text-3xl text-white'>{title}</h1>
                     </div>
                     {/* Content */}
-                    {children}
+                    {isLoading ?
+                        <div className='flex justify-center'>
+                            <button className="btn btn-outline border-none loading"></button>
+                        </div>
+                        :
+                        children
+                    }
                 </div>
 
             </div>

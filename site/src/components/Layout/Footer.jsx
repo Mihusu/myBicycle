@@ -24,14 +24,14 @@ const get_activities = (url, token) => {
 
 export const Footer = () => {
 
-    const ACTIVITY_CHECKING_INTERVAL = 1000; //ms
+    //const ACTIVITY_CHECKING_INTERVAL = 1000; //ms
 
     const token = secureLocalStorage.getItem('accesstoken');
 
     const { data } = useSWR(
         [API_URL + '/activities', token],
         ([url, token]) => get_activities(url, token),
-        { refreshInterval: ACTIVITY_CHECKING_INTERVAL, revalidateOnMount: false }
+        //{ refreshInterval: ACTIVITY_CHECKING_INTERVAL, revalidateOnMount: false }
     )
 
     return (

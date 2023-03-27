@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import secureLocalStorage from "react-secure-storage";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { PhoneNumber } from "../components/register/PhoneNumber";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
+
 
 function PageLogin() {
 
@@ -19,7 +22,9 @@ function PageLogin() {
 
     const onSubmit = async (data) => {
 
-        const response = await fetch(API_URL + '/auth/token', {            
+        console.log(data);
+
+        const response = await fetch(API_URL + '/auth/token', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +37,7 @@ function PageLogin() {
         if (response.ok) {
             secureLocalStorage.setItem('accesstoken', result.access_token)
             navigate(`/mybikes`, { replace: true });
-            
+
         }
         else {
             setError(result.detail)
@@ -53,18 +58,15 @@ function PageLogin() {
                 >
                     {/* Use input elements for phoneNumber and password */}
                     <h1 className="flex justify-center text-3xl mb-4">Login</h1>
-                    <div className="pb-2 font-light text-gray-800 dark:text-white px-8"
-                        control={control}
-                        rules={{ required: true }}>
+                    <div className="pb-2 font-light text-gray-800 dark:text-white px-8" >
                         Tlf nr:
                         <span className="required-dot text-red-500"> *</span>
                     </div>
                     <div className="px-8">
-                        <input
-                            type="text"
-                            placeholder="Telefonnummer"
-                            className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            {...register('phone_number')}
+                        <PhoneNumber
+                            name="phone_number"
+                            control={control}
+                            rules={{ required: true }}
                         />
                     </div>
                     <div className='space-y-2 py-4 px-8'>

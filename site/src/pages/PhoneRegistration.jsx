@@ -1,11 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { Link, useNavigate } from "react-router-dom";
 
-const URL = "http://127.0.0.1:8000/auth/register/me";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const PhoneRegistration = () => {
+
+  const [resError, setResError] = useState("");
+
   const {
     register,
     control,
@@ -24,22 +29,39 @@ const PhoneRegistration = () => {
   const watchPassword = watch(["password", "verify"]);
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    fetch(URL, requestOptions)
-      .then((response) => response.json())
-      .then((data) => navigate(`/smsverification/${data.session_id}`))
-      .catch((error) => setError(error.message));
+  const onSubmit = async (data) => {
+    
+    try {
+      const response = await fetch(API_URL + '/auth/register/me', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          'phone_number' : data.phoneNumber,
+          'password' : data.password
+        }),
+      });
+      
+      const body = await response.json();
+
+      if (!response.ok) {
+        setResError(body.detail);
+        return;
+      }
+
+      navigate(`/smsverification/${body.session_id}`);
+
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   const onError = (err) => {
     console.log(err);
   };
+
+  // Required by OWASP requirement 2.1.1. See https://owasp.org/www-pdf-archive/OWASP_Application_Security_Verification_Standard_4.0-en.pdf 
+  const MIN_PASSWORD_LENGTH = 12
 
   // checks whether password matches verification
   function matchPassword(password, verify) {
@@ -47,7 +69,7 @@ const PhoneRegistration = () => {
       return false;
     }
 
-    if (password.length >= 8 && password == verify) {
+    if (password.length >= MIN_PASSWORD_LENGTH && password === verify) {
       return true;
     } else return false;
   }
@@ -60,6 +82,10 @@ const PhoneRegistration = () => {
       >
         <div className="rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-20">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
+
+          {/* Errors */}
+          {resError && <div className="p-4 rounded-lg bg-error text-white">{resError}</div>}
+
           <div className="self-center py-2 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
             Tlf nr.
             <span className="required-dot text-red-500"> *</span>
@@ -81,14 +107,13 @@ const PhoneRegistration = () => {
 
             <div className="">
               <input
-                type="text"
-                pattern="\d*"
+                type="password"
                 placeholder="Adgangskode"
                 className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                 {...register(
                   "password",
                   { required: true },
-                  { min: 8, max: 32 }
+                  { min: MIN_PASSWORD_LENGTH }
                 )}
               />
               {errors.password && <span>This field is required</span>}
@@ -102,10 +127,14 @@ const PhoneRegistration = () => {
                 </span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="Adgangskode"
                 className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-                {...register("verify", { required: true }, { min: 8, max: 32 })}
+                {...register(
+                  "verify",
+                  { required: true },
+                  { min: MIN_PASSWORD_LENGTH }
+                )}
               />
               {errors.verify && <span>This field is required</span>}
             </div>

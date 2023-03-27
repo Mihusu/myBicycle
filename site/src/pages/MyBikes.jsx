@@ -27,23 +27,21 @@ const MyBikes = () => {
     const { data, error, isLoading, mutate } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
-    if (isLoading) return <div>loading...</div>
 
-    console.log(data)
+    //console.log(data)
 
     // render data
     return (
 
-        <Layout title="Mine cykler">
+        <Layout title="Mine cykler" isLoading={isLoading}>
             <div className="flex-col">
 
                 {/* Conditionally render the ClaimBikeComponent or BikeComponent component */}
-                {data.length > 0 ?
-                    <>
-                        {data.map((bike_info, key) =>
-                            <BikeComponent data={bike_info} mutate={mutate} key={key} />
-                        )}
-                    </>
+                {data && data.length > 0 ?
+                
+                    data.map((bike_info, key) =>
+                        <BikeComponent data={bike_info} mutate={mutate} key={key} />
+                    )
                     :
                     <ClaimBikeComponent />}
             </div>
