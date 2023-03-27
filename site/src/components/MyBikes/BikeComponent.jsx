@@ -7,7 +7,6 @@ import { StolenBike } from "./StolenBike";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const BikeComponent = ({ data, mutate }) => {
-
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -18,120 +17,134 @@ export const BikeComponent = ({ data, mutate }) => {
       headers: {
         Authorization: "Bearer " + token,
       },
-    })
+    });
 
     // Trigger a mutate to refresh screen
-    mutate(data)
-
-  }
+    mutate(data);
+  };
 
   return (
-    <div className="flex border rounded-lg bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4 mx-auto" style={{ maxWidth: "425px" }}>
-      <div className="flex flex-col justify-center px-4 m-0 ">
+    <div
+      className="mx-auto mb-4 flex rounded-lg border bg-white shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
+      style={{ maxWidth: "425px" }}
+    >
+      <div className="m-0 flex flex-col justify-center px-4 ">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
-          layout
+          layout="position"
           onClick={() => setIsOpen(!isOpen)}
-          className="flex flex-col space-y-2 cursor-pointer rounded-lg bg-gradient-to-r to-blue-500"
+          className="flex cursor-pointer flex-col space-y-2 rounded-lg bg-gradient-to-r to-blue-500"
         >
           <img
             src={data.image.obj_url}
             alt="Bike"
-            className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'} "mx-auto py-10 object-scale-down w-[480px] h-[480px]" `}
+            className={`${
+              data.state === "in_transfer" ? "opacity-30" : "opacity-100"
+            }"mx-auto py-4" h-[425px] w-[425px] object-scale-down`}
           />
         </motion.div>
 
-        <div className="flex flex-col justify-center items-center py-2 text-sm">
-          <p className="font-light text-gray-800 dark:text-white">Model: {data.brand}</p>
-          <p className="font-light text-gray-800 dark:text-white">Stelnummer: {data.frame_number}</p>
+        <div className="flex flex-col items-center justify-center py-2 text-sm">
+          <p className="font-light text-gray-800 dark:text-white">
+            Model: {data.brand}
+          </p>
+          <p className="font-light text-gray-800 dark:text-white">
+            Stelnummer: {data.frame_number}
+          </p>
         </div>
 
         {isOpen && (
           <div className="flex flex-col space-y-4">
             {/* Bike info */}
 
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col items-center justify-center py-2 text-sm">
               <div className="flex justify-between space-x-4">
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Oprettelses dato:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{new Date(data.created_at).toLocaleDateString()}</p>
-                </div>
-
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Stelnummer:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.frame_number}</p>
+                <div className="flex w-full justify-between">
+                  <p className="text-gray-800 dark:text-gray-800">
+                    Oprettelses dato:
+                  </p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {new Date(data.created_at).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex justify-between space-x-4">
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Køn:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.gender}</p>
+              <div className=" flex flex-col items-center justify-center py-2 text-sm">
+                <div className="flex w-full justify-between">
+                  <p className="text-gray-800 dark:text-gray-800">Køn:</p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {data.gender}
+                  </p>
                 </div>
 
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Er elektrisk?</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.is_electric ? 'Ja' : 'Nej'}</p>
-                </div>
-              </div>
-
-              <div className="flex justify-between space-x-4">
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Slags:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.kind}</p>
-                </div>
-
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Farve:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.color}</p>
+                <div className="flex flex-col items-center justify-center py-2 text-sm">
+                  <p className="text-gray-800 dark:text-gray-800">Elektrisk:</p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {data.is_electric ? "Ja" : "Nej"}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex justify-between space-x-4">
-                <div className="flex justify-between w-full">
-                  <p className="font-light text-gray-800 dark:text-white">Brand:</p>
-                  <p className="font-light text-gray-800 dark:text-white">{data.brand}</p>
+              <div className="flex flex-col items-center justify-center py-2 text-sm">
+                <div className="flex w-full justify-between">
+                  <p className="text-gray-800 dark:text-gray-800">Slags:</p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {data.kind}
+                  </p>
                 </div>
 
-                <div className="flex justify-between w-full">
+                <div className="flex w-full justify-between">
+                  <p className="text-gray-800 dark:text-gray-800">Farve:</p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {data.color}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center py-2 text-sm">
+                <div className="flex w-full justify-between">
+                  <p className="text-gray-800 dark:text-gray-800">Mærke:</p>
+                  <p className="font-light text-gray-800 dark:text-white">
+                    {data.brand}
+                  </p>
+                </div>
+
+                <div className="flex w-full justify-between">
                   <p />
                   <p />
                 </div>
               </div>
-
             </div>
 
             {/* Actions */}
             <div className="flex justify-between py-5 ">
-
               {/* Transfer */}
               <button
                 onClick={() => navigate(`/transferbike/${data._id}`)}
                 disabled={!(data.state == "transferable")}
                 className="btn-info btn"
               >
-                Overfør
+                Overfør cykel
               </button>
 
               {/* Report stolen */}
-              {data.reported_stolen ?
+              {data.reported_stolen ? (
                 <button
                   disabled={!(data.state == "transferable")}
                   onClick={reportStolen}
-                  className="btn btn-info"
+                  className="btn-info btn"
                 >
                   Rapporter fundet
                 </button>
-                :
+              ) : (
                 <button
                   disabled={!(data.state == "transferable")}
                   onClick={reportStolen}
-                  className="btn btn-warning"
+                  className="btn-warning btn"
                 >
                   Rapporter stjålet
                 </button>
-              }
-
+              )}
             </div>
           </div>
         )}
