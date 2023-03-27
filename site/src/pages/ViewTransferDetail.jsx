@@ -32,16 +32,31 @@ const ViewTransferDetail = () => {
 
     return (
         <LayoutWithBack title="Overførsel">
-                <BikeComponent data={data.bike} />
-            
-            <div className="flex justify-center my-8 bg-white rounded-lg mx-auto shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10 py-4" style={{ maxWidth: "425px" }}>
-                <h1 className="mb-2 text-xl" style={{ maxWidth: "425px" }}>
-                    Modtager:
-                    <div className="mt-2 ml-10 text-base">Telefonummer: {data.receiver.phone_number}</div>
-                    <img src="image-url" alt="alt-text" className="inline-block h-4 w-4 mr-4 text-sm" />
-                    <span className="text-sm ml-2">Du anmoder om overførsel af en cykel</span>
-                    <div className="text-xs ml-10">Dato: {new Date(data.created_at).toLocaleDateString()} </div>
-                </h1>
+            <BikeComponent data={data.bike} />
+
+            <div className="flex max-w-[425px] mx-auto rounded-lg bg-gray-800 shadow dark:text-whites sm:px-3 md:px-8 lg:px-10 py-4 mt-8">
+                <div className="flex justify-around mt-2 w-full">
+                    <div className="flex items-center justify-center">
+                        <img
+                            src={data.bike.image.obj_url}
+                            alt="alt"
+                            className="rounded-lg w-[64px] h-[64px] text-sm"
+                        />
+                    </div>
+
+                    <div className="flex flex-col mr-7">
+                        <h1 className="text-lg text-white">
+                            Modtager: {data.receiver.phone_number}
+                        </h1>
+
+                        <span className="flex-wrap items-start text-sm">
+                            Du anmoder om overførsel af en cykel
+                        </span>
+
+                        <h4 className="text-xs">Dato: {new Date(data.created_at).toLocaleDateString()}</h4>
+
+                    </div>
+                </div>
             </div>
         </LayoutWithBack>
     )

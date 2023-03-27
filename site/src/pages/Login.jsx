@@ -8,6 +8,18 @@ import { PhoneNumber } from "../components/register/PhoneNumber";
 const API_URL = import.meta.env.VITE_API_URL;
 
 
+const get_user_details = async (url, token) => {
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+
+    return await response.json()
+}
+
 function PageLogin() {
 
     const [error, setError] = useState("")
@@ -35,7 +47,12 @@ function PageLogin() {
         const result = await response.json()
 
         if (response.ok) {
-            secureLocalStorage.setItem('accesstoken', result.access_token)
+            const { user_id, phone_number } = await get_user_details(API_URL + `/owners/me`,  result.access_token);
+
+            secureLocalStorage.setItem('accesstoken', result.access_token);
+            secureLocalStorage.setItem('user_id', user_id);
+            secureLocalStorage.setItem('phone_number', phone_number);
+
             navigate(`/mybikes`, { replace: true });
 
         }

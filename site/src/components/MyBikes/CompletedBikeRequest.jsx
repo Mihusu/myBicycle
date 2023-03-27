@@ -3,42 +3,49 @@ import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { IconContext } from "react-icons";
 
-export const CompletedBikeRequest = ({ data }) => {
-  return (
-    <div
-      className="mx-auto mb-2 flex  justify-center rounded-lg bg-gray-800 py-4 shadow dark:bg-gray-800 dark:text-white sm:px-3 md:px-8 lg:px-10"
-      style={{ maxWidth: "425px" }}
-    >
-      {/* Old bike requests */}
-      <Link to={`/transfers/detail/${data.transfer_id}`}>
-        <button className="flex flex-col">
-          <h1 className="mb-2 text-xl">
-            <div className="mr-3 text-lg text-white">
-              Mobilnummer: {data.receiver.phone_number}{" "}
+export const CompletedBikeRequest = ({ data, user_id }) => {
+
+    // console.log("S: ", data.sender.id)
+    // console.log("R: ", data.receiver)
+    // console.log("U: ", user_id)
+
+    return (
+        <Link to={`/transfers/detail/${data.transfer_id}`}>
+            <div className="flex mx-auto max-w-[425px] rounded-lg bg-gray-800 py-4 shadow dark:text-whites">
+                {/* Old bike requests */}
+                <div className="flex justify-evenly w-full">
+
+                    <div className="flex items-center justify-center">
+                        <img
+                            src={data.bike.image.obj_url}
+                            alt="alt"
+                            className="rounded-lg w-[64px] h-[64px] text-sm"
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <h1 className="text-lg text-white">
+                            {user_id === data.sender.id 
+                            ? `Modtager: ${data.receiver.phone_number}` 
+                            : `Afsender: ${data.sender.phone_number}` }
+                        </h1>
+
+                        <span className="flex-wrap items-start text-sm">
+                            {user_id === data.sender.id && data.state === "declined"   && "Modtageren har afvist din anmodning"}
+                            {user_id === data.sender.id && data.state === "accepted"   && "Du overførte din cykel"}
+                            {user_id === data.receiver.id && data.state === "declined" && "Du afviste en anmodning"}
+                            {user_id === data.receiver.id && data.state === "accepted" && "Du modtog en cykel"}
+                        </span>
+
+                        <h4 className="text-xs">Dato: {new Date(data.closed_at).toLocaleDateString()}</h4>
+                    </div>
+
+                    <div className="flex items-center">
+                        <IoIosArrowForward color="white" size={25} />
+                    </div>
+
+                </div>
             </div>
-            <div className="flex items-center justify-center">
-              <img
-                src="image-url"
-                alt="alt-text"
-                className="mr-3 inline-block h-4 w-4 text-sm"
-              />
-              <span className="ml-2 mr-5 text-sm text-white">
-                Du anmoder om overførsel af en cykel
-              </span>
-              <IconContext.Provider
-                value={{ className: "mx-auto", color: "white", size: 25 }}
-              >
-                <>
-                  <IoIosArrowForward />
-                </>
-              </IconContext.Provider>
-            </div>
-            <div className="mr-40 text-xs">
-              Dato: {new Date(data.closed_at).toLocaleDateString()}
-            </div>
-          </h1>
-        </button>
-      </Link>
-    </div>
-  );
+        </Link>
+    );
 };

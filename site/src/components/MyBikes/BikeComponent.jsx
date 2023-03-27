@@ -38,9 +38,7 @@ export const BikeComponent = ({ data, mutate }) => {
           <img
             src={data.image.obj_url}
             alt="Bike"
-            className={`${
-              data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-            }"mx-auto py-4" h-[425px] w-[425px] object-scale-down`}
+            className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'} "mx-auto py-10 object-scale-down w-[425px] h-[425px]" `}
           />
         </motion.div>
 
@@ -52,7 +50,7 @@ export const BikeComponent = ({ data, mutate }) => {
         </div>
 
         {isOpen && (
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col">
             {/* Bike info */}
 
             <div className="flex flex-col items-center justify-center py-2 text-sm">
@@ -105,33 +103,33 @@ export const BikeComponent = ({ data, mutate }) => {
             </div>
 
             {/* Actions */}
-            <div className="flex justify-between py-5 ">
+            <div className="flex justify-evenly py-3">
               {/* Transfer */}
-              <button
-                onClick={() => navigate(`/transferbike/${data._id}`)}
-                disabled={!(data.state == "transferable")}
-                className="btn-info btn"
-              >
-                Overfør cykel
-              </button>
+              {data.state === "transferable" && (
+                <div>
+                  <button
+                    onClick={() => navigate(`/transferbike/${data._id}`)}
+                    className="btn-info btn"
+                  >
+                    Overfør cykel
+                  </button>
 
-              {/* Report stolen */}
-              {data.reported_stolen ? (
-                <button
-                  disabled={!(data.state == "transferable")}
-                  onClick={reportStolen}
-                  className="btn-info btn"
-                >
-                  Rapporter fundet
-                </button>
-              ) : (
-                <button
-                  disabled={!(data.state == "transferable")}
-                  onClick={reportStolen}
-                  className="btn-warning btn"
-                >
-                  Rapporter stjålet
-                </button>
+                  {data.reported_stolen ? (
+                    <button
+                      onClick={reportStolen}
+                      className="btn-info btn"
+                    >
+                      Rapporter fundet
+                    </button>
+                  ) : (
+                    <button
+                      onClick={reportStolen}
+                      className="btn-warning btn"
+                    >
+                      Rapporter stjålet
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           </div>
