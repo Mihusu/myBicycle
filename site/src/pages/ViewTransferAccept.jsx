@@ -1,6 +1,7 @@
 import React from "react";
 import secureLocalStorage from "react-secure-storage";
 import useSWR from 'swr';
+import { Link } from "react-router-dom"; 
 import { useParams } from "react-router-dom";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack"
 import { BikeComponent } from "../components/MyBikes/BikeComponent";

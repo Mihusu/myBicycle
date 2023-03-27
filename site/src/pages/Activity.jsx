@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import secureLocalStorage from "react-secure-storage";
 import { Layout } from "../components/Layout/Layout";
 import { BikeSenderRequest } from "../components/MyBikes/BikeSenderRequest";
-import { OldBikeRequest } from "../components/MyBikes/OldBikeRequest";
+import { CompletedBikeRequest } from "../components/MyBikes/CompletedBikeRequest";
 import { BikeReceiverRequest } from "../components/MyBikes/BikeReceiverRequest";
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -43,11 +43,11 @@ const Activity = () => {
                 )}
             </div>
             <div className="flex justify-center text-2xl text-white">
-            Gennemførte overførelser
+                Gennemførte overførelser
             </div>
             <div className="mt-2">
                 {data && data.completed_transfers.map((transfer_info, key) =>
-                    <OldBikeRequest data={transfer_info} key={key} />
+                    <CompletedBikeRequest data={transfer_info} key={key} />
                 )}
             </div>
         </Layout>
