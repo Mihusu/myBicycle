@@ -37,8 +37,8 @@ function App() {
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/stolenbike" element={<StolenBike />} />
           <Route path="/activities" element={<Activity />} />
-          <Route path="/activities/accept" element={<ViewTransferAccept />} /> 
-          <Route path="/activities/detail" element={<ViewTransferDetail />} />
+          <Route path="/transfers/accept/:transfer_id" element={<ViewTransferAccept />} /> 
+          <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
         </Route>
       </Routes>
     </div>

@@ -40,7 +40,7 @@ export const BikeSenderRequest = ({ data }) => {
                         Anmodning
                         <div className="space-y-2 py-2">
                             <h1 className="mb-2">
-                                <div className="ml-10 text-lg">Mobilnummer: {data.tlf} +4512345678</div>
+                                <div className="ml-10 text-lg">Mobilnummer: {data.receiver.phone_number} </div>
                                 <img src="image-url" alt="alt-text" className="inline-block h-4 w-4 mr-4 text-sm" />
                                 <span className="text-sm ml-2">Du anmoder om overførsel af en cykel</span>
                                 <div className="text-xs ml-10">Dato: {new Date(data.created_at).toLocaleDateString()} </div>
@@ -54,7 +54,7 @@ export const BikeSenderRequest = ({ data }) => {
                         <button className="btn flex w-40 max-w-xs justify-center bg-red-500 text-green-100 " type="submit" onClick={() => retractBikeRequest()} style={{ marginRight: '0.2px' }}>
                             Fortryd
                         </button>
-                        <Link to={'/activities/accept'}>
+                        <Link to={`/transfers/detail/${data.transfer_id}`}>
                             <button className="btn flex w-40 max-w-xs justify-center bg-green-500 text-green-100" type="button" style={{ marginLeft: '0.2px' }}>
                                 Åben
                             </button>
