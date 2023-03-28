@@ -93,15 +93,15 @@ function PageLogin() {
                         </label>
                         <input
                             type="password"
-                            className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            className="rounded-lg border-transparent flex-1 border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent action-password"
                             placeholder="Adgangskode"
                             {...register('password')}
                         />
                     </div>
 
-                    <div className="flex flex-col justify-center items-center space-y-2 sm:px-2 md:px-4 lg:px-10">
+                    <div className="flex flex-col justify-center items-center space-y-2 px-8">
 
-                        <button className="btn my-2 mt-8 w-full max-w-xs bg-green-500 py-2 px-4 text-green-100" type="submit">
+                        <button className="btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100" type="submit">
                             Login
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ function PageLogin() {
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="h-8 w-10"
+                                className="h-8 w-10 login-button"
                             >
                                 <path
                                     strokeLinecap="round"

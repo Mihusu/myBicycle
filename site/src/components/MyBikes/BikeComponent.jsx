@@ -75,7 +75,7 @@ export const BikeComponent = ({ data, mutate }) => {
                   </p>
                 </div>
 
-                <div className="flex w-full justify-center py-1">
+                <div className="flex w-full justify-evenly py-1">
                   <p className="font-semibold text-white">Slags:
                     <span className="font-light text-white"> {data.kind}</span>
                   </p>
@@ -87,8 +87,8 @@ export const BikeComponent = ({ data, mutate }) => {
                 </div>
 
                 <div className="flex w-full justify-evenly py-1">
-                  <p className="font-semibold text-white">Mærke:</p>
-                  <p className="text-white">{data.brand}</p>
+                  <p className="font-semibold text-white mr-1">Mærke: </p>
+                  <span className="text-white"> {data.brand}</span>
                 </div>
               </div>
             </div>
