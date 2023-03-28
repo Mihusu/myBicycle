@@ -53,85 +53,75 @@ export const BikeComponent = ({ data, mutate }) => {
           <div className="flex flex-col">
             {/* Bike info */}
 
-            <div className="flex flex-col items-center justify-center py-2 text-sm">
+            <div className="flex flex-col items-center justify-center py-1 text-sm">
               <div className="flex justify-between space-x-4">
                 <div className="flex w-full justify-between">
-                  <p className="font-semibold text-white">Oprettelses dato:</p>
-                  <p className="text-white">
-                    {new Date(data.created_at).toLocaleDateString()}
-                  </p>
+                  <p className="font-semibold text-white mr-1">Oprettelses dato: </p>
+                  <span className="font-light text-white">{new Date(data.created_at).toLocaleDateString()}</span>
                 </div>
               </div>
 
-              <div className=" flex flex-col items-center justify-center py-2 text-sm">
-                <div className="flex w-full justify-between">
+              <div className=" flex flex-col items-center justify-center py-1 text-sm">
+                <div className="flex w-full justify-center">
                   <p className="font-semibold text-white">Køn:</p>
-                  <p className="text-white">{data.gender}</p>
+                  <span className="text-white ml-1"> {data.gender}</span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center py-2 text-sm">
-                  <p className="font-semibold text-white">Elektrisk:</p>
-                  <p className="font-light text-white">
-                    {data.is_electric ? "Ja" : "Nej"}
+                <div className="flex flex-col items-center justify-center py-1 text-sm">
+                  <p className="font-semibold text-white">Elektrisk:
+                    <span className="font-light text-white ml-1">
+                      {data.is_electric ? "Ja" : "Nej"}
+                    </span>
                   </p>
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center justify-center py-2 text-sm">
-                <div className="flex w-full justify-between">
-                  <p className="font-semibold text-white">Slags:</p>
-                  <p className="font-light text-white">{data.kind}</p>
+                <div className="flex w-full justify-center py-1">
+                  <p className="font-semibold text-white">Slags:
+                    <span className="font-light text-white"> {data.kind}</span>
+                  </p>
                 </div>
 
-                <div className="flex w-full justify-between">
+                <div className="flex w-full justify-evenly py-1">
                   <p className="font-semibold text-white">Farve:</p>
                   <p className="font-light text-white">{data.color}</p>
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center justify-center py-2 text-sm">
-                <div className="flex w-full justify-between">
+                <div className="flex w-full justify-evenly py-1">
                   <p className="font-semibold text-white">Mærke:</p>
                   <p className="text-white">{data.brand}</p>
-                </div>
-
-                <div className="flex w-full justify-between">
-                  <p />
-                  <p />
                 </div>
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex justify-evenly py-3">
-              {/* Transfer */}
-              {data.state === "transferable" && (
-                <div>
+
+            {/* Transfer */}
+            {data.state === "transferable" && (
+              <div className="flex justify-evenly py-3">
+                <button
+                  onClick={() => navigate(`/transferbike/${data._id}`)}
+                  className="btn-info btn"
+                >
+                  Overfør cykel
+                </button>
+
+                {data.reported_stolen ? (
                   <button
-                    onClick={() => navigate(`/transferbike/${data._id}`)}
+                    onClick={reportStolen}
                     className="btn-info btn"
                   >
-                    Overfør cykel
+                    Rapporter fundet
                   </button>
-
-                  {data.reported_stolen ? (
-                    <button
-                      onClick={reportStolen}
-                      className="btn-info btn"
-                    >
-                      Rapporter fundet
-                    </button>
-                  ) : (
-                    <button
-                      onClick={reportStolen}
-                      className="btn-warning btn"
-                    >
-                      Rapporter stjålet
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
+                ) : (
+                  <button
+                    onClick={reportStolen}
+                    className="btn-warning btn"
+                  >
+                    Anmeld stjålet
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
