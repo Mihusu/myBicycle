@@ -10,7 +10,8 @@ export const BikeSenderRequest = ({ data }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     async function retractBikeRequest() {
-        const retract_bike_request =
+        try {
+            const retract_bike_request =
             API_URL + `/transfers/${data.transfer_id}/retract`;
 
         const token = secureLocalStorage.getItem("accesstoken");
@@ -23,7 +24,11 @@ export const BikeSenderRequest = ({ data }) => {
         });
 
         const res = await response.json();
-        console.log(res);
+        console.log(res.message);
+        } catch (error) {
+            console.error(error);
+        }
+        
     }
 
     return (
