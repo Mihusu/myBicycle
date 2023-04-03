@@ -1,11 +1,9 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Non-auth pages
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import UserLogin from "./pages/UserLogin";
+import StoreLogin from "./BikeStore/pages/StoreLogin";
 import MyBikes from "./pages/MyBikes";
 import SmsVerification from "./pages/SmsVerification";
 import BikeRegistration from "./pages/BikeRegistration";
@@ -21,15 +19,17 @@ import { StolenBike } from "./components/MyBikes/StolenBike";
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
 
 function App() {
-
   return (
-    <div className="bg-gray-700 min-w-screen min-h-screen">
+    <div className="min-w-screen min-h-screen bg-gray-700">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/userlogin" element={<UserLogin />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-        <Route path="/smsverification/:session_id" element={<SmsVerification />} />
+        <Route
+          path="/smsverification/:session_id"
+          element={<SmsVerification />}
+        />
         <Route path="/choosepassword" element={<ChoosePassword />} />
 
         <Route element={<PrivateRoutes />}>
@@ -37,12 +37,20 @@ function App() {
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/stolenbike" element={<StolenBike />} />
           <Route path="/activities" element={<Activity />} />
-          <Route path="/transfers/accept/:transfer_id" element={<ViewTransferAccept />} /> 
-          <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
+          <Route
+            path="/transfers/accept/:transfer_id"
+            element={<ViewTransferAccept />}
+          />
+          <Route
+            path="/transfers/detail/:transfer_id"
+            element={<ViewTransferDetail />}
+          />
         </Route>
+
+        <Route path="/Storelogin" element={<StoreLogin />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
