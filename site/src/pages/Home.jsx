@@ -1,54 +1,49 @@
 import React from "react";
-import { useState } from "react";
-
-let color = "";
-function setColor(arg) {
-  color = arg;
-  console.log(color);
-}
+import StoreLogin from "../BikeStore/pages/StoreLogin";
+import UserLogin from "./UserLogin";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-  return (
-    <div className="flex flex-col md:flex-row lg:flex-row justify-around items-center h-screen w-screen">
-      <div className="flex flex-col md:flex-row lg:flex-row justify-around items-center">
+  //
 
-      
-      <div className="card rounded-box grid flex-grow place-items-center bg-base-100">
-        <div className="card w-2/3 image-full bg-base-100 shadow-xl">
-          <figure>
-            <img src="src\assets\redbike.svg" alt="Red" />
-          </figure>
-          <div className="card-body"></div>
-        </div>
+  const navigate = useNavigate();
+
+  return (
+    <div className="h-screen">
+      <div className="flex h-2/4 flex-col items-center justify-center">
+        <h1 className="py-2 text-3xl text-white">{"Velkommen til MinCykel"}</h1>
+        <h2 className="text-xl text-white">
+          {"Vælg hvordan du vil logge-ind"}
+        </h2>
       </div>
-      <div className="divider md:divider-horizontal lg:divider-horizontal">OR</div>
-      <div className="card rounded-box grid flex-grow place-items-center bg-base-100">
-        <div className="card w-2/3 image-full bg-base-100 shadow-xl">
-          <figure>
-            <img src="src\assets\bluebike.svg" alt="Blue" />
-          </figure>
-          <div className="card-body"></div>
-        </div>
-      </div>
+
+      <div className="flex h-1/4 flex-col items-center justify-center ">
+        <button
+          type="button"
+          className="mb-8 flex w-2/3 items-center justify-center rounded-lg  bg-red-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-red-200 "
+        >
+          Myndighed
+        </button>
+
+        <button
+          type="button"
+          className="mb-8 flex w-2/3 items-center justify-center rounded-lg  bg-red-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-red-200 "
+        >
+          Butik
+        </button>
+
+        <button
+          onClick={() => navigate("/login") > UserLogin}
+          type="button"
+          className="mb-8 flex w-2/3  items-center justify-center rounded-lg  bg-red-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-red-200 "
+        >
+          Brugere
+        </button>
+        {/* <StoreLogin />
+
+      <UserLogin /> */}
       </div>
     </div>
-
-    // <div className="card glass w-96">
-    //   <figure>
-    //     <img
-    //       src="src\assets\redbike.svg"
-    //       alt="red bike!"
-    //     />
-    //   </figure>
-    //   <div className="card-body text-center">
-    //     <h2 className="card-title self-center">Velkommen til MinCykel</h2>
-    //     <p>Vil du tage den røde eller den blå cykel?</p>
-    //     <div className="card-actions justify-around">
-    //       <button className="btn bg-red-500 ">Rød!</button>
-    //       <button className="btn bg-blue-500 ">Blå!</button>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

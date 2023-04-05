@@ -1,7 +1,4 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { PrivateRoutes } from "./components/Auth/PrivateRoute";
 
@@ -10,7 +7,8 @@ import BikeRegistration from "./pages/BikeRegistration";
 
 // Non-auth pages
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import LoginPage from "./pages/Login";
+import StoreLogin from "./BikeStore/pages/StoreLogin";
 import SmsVerification from "./pages/SmsVerification";
 import PhoneRegistration from "./pages/PhoneRegistration";
 
@@ -26,15 +24,14 @@ import Activity from "./pages/Activity";
 import { ClaimBikePage } from "./pages/ClaimBikePage";
 
 function App() {
-
   return (
     <div className="relative bg-gray-700 min-w-screen min-h-screen overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-        <Route path="/smsverification/:session_id" element={<SmsVerification />} />
+        <Route path="/smsverification/:session_id" element={<SmsVerification />}/>
         <Route path="/choosepassword" element={<ChoosePassword />} />
 
         <Route element={<PrivateRoutes />}>
@@ -45,9 +42,11 @@ function App() {
           <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
           <Route path="/claimbike" element={<ClaimBikePage />} />
         </Route>
+
+        <Route path="/Storelogin" element={<StoreLogin />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;

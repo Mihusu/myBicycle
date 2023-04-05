@@ -1,16 +1,24 @@
 import React from "react";
 import secureLocalStorage from "react-secure-storage";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const BikeSenderRequest = ({ data }) => {
+
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+
+    setTimeout(()=> {
+        
+     }
+     ,3000);
 
     async function retractBikeRequest() {
-        const retract_bike_request =
+        try {
+            const retract_bike_request =
             API_URL + `/transfers/${data.transfer_id}/retract`;
 
         const token = secureLocalStorage.getItem("accesstoken");
@@ -23,7 +31,22 @@ export const BikeSenderRequest = ({ data }) => {
         });
 
         const res = await response.json();
-        console.log(res);
+        console.log(res.message);
+
+        if (!response.ok) {
+            setResError(body.detail);
+            return;
+        }
+
+        setTimeout(()=> {
+            navigate(`/mybikes`);
+        }
+        ,500);
+
+        } catch (error) {
+            console.error(error);
+        }
+        
     }
 
     return (
@@ -33,7 +56,7 @@ export const BikeSenderRequest = ({ data }) => {
                 transition={{ layout: { duration: 1, type: "spring" } }}
                 layout
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex justify-evenly mt-2 ml-1 w-full"
+                className="flex justify-evenly mt-2 w-full"
             >
                 <div className="flex items-center justify-center">
                     <img
@@ -43,7 +66,7 @@ export const BikeSenderRequest = ({ data }) => {
                     />
                 </div>
 
-                <div className="flex flex-col mr-7">
+                <div className="flex flex-col mr-2">
                     <h1 className="text-lg text-white">
                         Modtager: {data.receiver.phone_number}
                     </h1>

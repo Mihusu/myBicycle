@@ -13,7 +13,6 @@ export const TransferBike = () => {
           control={control}
           rules={{ required: true }}
         />
-
         <div />
       </div>
     </div>

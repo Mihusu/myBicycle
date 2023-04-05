@@ -43,7 +43,7 @@ export const BikeReceiverRequest = ({ data }) => {
                     />
                 </div>
 
-                <div className="flex flex-col mr-7">
+                <div className="flex flex-col mr-6">
                     <h1 className="text-lg text-white">
                         Afsender: {data.sender.phone_number}
                     </h1>

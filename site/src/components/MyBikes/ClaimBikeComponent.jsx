@@ -84,6 +84,8 @@ export const ClaimBikeComponent = () => {
             <div className="flex justify-center text-l font-light text-gray-800 sm:text-3xl dark:text-white">
                 Indløs din første cykel ved at trykke på cyklen
             </div>
+
+            {/* After clicking on the bike, this will appear */}
             {isOpen && (
                 <motion.div>
                     <form
