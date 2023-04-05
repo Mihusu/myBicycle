@@ -22,7 +22,7 @@ const get_activities = (url, token) => {
         .catch((err) => console.log(err))
 }
 
-export const Footer = () => {
+export const Footer = ({ toggleSidebar }) => {
 
     //const ACTIVITY_CHECKING_INTERVAL = 1000; //ms
 
@@ -54,12 +54,13 @@ export const Footer = () => {
 
                     </button>
                 </Link>
-                <Link to="/settings">
-                    <button className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
-                        <IoIosMenu className="mx-auto" color="white" size={40} />
-                        <p className="text-sky-400/100">Menu</p>
-                    </button>
-                </Link>
+
+                {/* Toggle sidebar */}
+                <button onClick={toggleSidebar} className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
+                    <IoIosMenu className="mx-auto" color="white" size={40} />
+                    <p className="text-sky-400/100">Menu</p>
+                </button>
+
             </div>
         </div>
 
