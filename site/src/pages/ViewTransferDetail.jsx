@@ -34,7 +34,7 @@ const ViewTransferDetail = () => {
         <LayoutWithBack title="Overførsel">
             <BikeComponent data={data.bike} />
             <div className="flex max-w-[425px] mx-auto rounded-lg bg-gray-800 shadow dark:text-whites sm:px-3 md:px-8 lg:px-10 py-4 mt-8">
-                <div className="flex justify-around mt-2 w-full">
+                <div className="flex justify-evenly mt-2 w-full">
                     <div className="flex items-center justify-center">
                         <img
                             src={data.bike.image.obj_url}
@@ -43,7 +43,7 @@ const ViewTransferDetail = () => {
                         />
                     </div>
 
-                    <div className="flex flex-col mr-7">
+                    <div className="flex flex-col mr-2">
                         <h1 className="text-lg text-white">
                             Modtager: {data.receiver.phone_number}
                         </h1>
