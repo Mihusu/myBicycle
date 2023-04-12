@@ -27,7 +27,7 @@ const ChoosePassword = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           session_id: location.state.sessionId,
-          new_password: password,
+          password: password,
         }),
       });
 
