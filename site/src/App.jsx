@@ -7,14 +7,16 @@ import BikeRegistration from "./pages/BikeRegistration";
 
 // Non-auth pages
 import Home from "./pages/Home";
-import LoginPage from "./pages/Login";
+import UserLogin from "./pages/UserLogin";
 import StoreLogin from "./BikeStore/pages/StoreLogin";
 import SmsVerification from "./pages/SmsVerification";
 import PhoneRegistration from "./pages/PhoneRegistration";
+import ResetPassword from "./pages/ResetPassword";
+import PasswordResetVerification from "./pages/PasswordResetVerification";
+import ChoosePassword from "./pages/ChoosePassword";
 
 // Auth pages
 import MyBikes from "./pages/MyBikes";
-import ChoosePassword from "./pages/ChoosePassword";
 import BikeTransfer from "./pages/BikeTransfer";
 import ViewTransferAccept from "./pages/ViewTransferAccept";
 import ViewTransferDetail from "./pages/ViewTransferDetail";
@@ -28,10 +30,12 @@ function App() {
     <div className="relative bg-gray-700 min-w-screen min-h-screen overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<UserLogin />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
         <Route path="/smsverification/:session_id" element={<SmsVerification />}/>
+        <Route path="/resetpassword" element={<ResetPassword />} />        
+        <Route path="/passwordresetverification" element={<PasswordResetVerification />} />
         <Route path="/choosepassword" element={<ChoosePassword />} />
 
         <Route element={<PrivateRoutes />}>

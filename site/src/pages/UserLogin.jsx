@@ -20,7 +20,7 @@ const get_user_details = async (url, token) => {
     return await response.json()
 }
 
-function LoginPage() {
+function UserLogin() {
 
     const [error, setError] = useState("")
 
@@ -127,4 +127,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default UserLogin;

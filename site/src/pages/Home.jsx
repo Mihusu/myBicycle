@@ -1,6 +1,6 @@
 import React from "react";
 import StoreLogin from "../BikeStore/pages/StoreLogin";
-import UserLogin from "./UserLogin";
+//import UserLogin from "../UserLogin";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
@@ -13,7 +13,7 @@ export const Home = () => {
       <div className="flex h-2/4 flex-col items-center justify-center">
         <h1 className="py-2 text-3xl text-white">{"Velkommen til MinCykel"}</h1>
         <h2 className="text-xl text-white">
-          {"Vælg hvordan du vil logge-ind"}
+          {"Vælg hvordan du vil logge ind"}
         </h2>
       </div>
 
@@ -33,11 +33,11 @@ export const Home = () => {
         </button>
 
         <button
-          onClick={() => navigate("/login") > UserLogin}
+          onClick={() => navigate("/login")}
           type="button"
-          className="mb-8 flex w-2/3  items-center justify-center rounded-lg  bg-red-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-red-200 "
+          className="mb-8 flex w-2/3 items-center justify-center rounded-lg  bg-red-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  focus:ring-offset-red-200 "
         >
-          Brugere
+          Bruger
         </button>
         {/* <StoreLogin />
 
