@@ -5,11 +5,20 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const PasswordResetVerification = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
   const [passwordResetCode, setPasswordResetCode] = useState("");
-  const sessionId = location.state.sessionId;
-  const expiresIn = location.state.expiresIn;
+
+  let sessionId = 0;
+  let expiresIn = 0;
+
+  if (location.state != null) {
+    sessionId = location.state.sessionId;
+  }
+  if (location.state != null) {
+    expiresIn = location.state.expiresIn;
+  }
+
+  const readableExpiryTime = new Date(expiresIn).toLocaleTimeString();
 
   const submitPasswordResetCode = async (e) => {
     e.preventDefault(); // prevent form from refreshing page on submit
@@ -25,7 +34,7 @@ const PasswordResetVerification = () => {
       });
 
       if (response.ok) {
-        console.log(response.statusText);
+        console.log(`server said ${response.statusText}`);
         navigate("/choosepassword", { state: { sessionId: sessionId } });
       }
     } catch (error) {
@@ -35,20 +44,24 @@ const PasswordResetVerification = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-col items-center justify-center">
-        <h1>Enter verification code to reset your password</h1>
-        <div>{`session id: ${sessionId} - expires in: ${expiresIn}`}</div>
+      <div className="flex h-screen flex-col items-center justify-center text-center">
+        <h1>Angiv verifikationskode for at nulstille dit password</h1>
+        <h1>
+          {expiresIn
+            ? `Kodens gyldighed udløber ${readableExpiryTime}`
+            : "der er ugler i mosen"}
+        </h1>
         <form className="flex h-1/4 flex-col items-center justify-evenly">
           <input
             onChange={(e) => setPasswordResetCode(e.target.value)}
-            placeholder="SMS code goes here"
+            placeholder="SMS kode til nulstilling"
           />
           <button
             className="btn-error btn"
             type="submit"
             onClick={(e) => submitPasswordResetCode(e)}
           >
-            Submit
+            Indsend
           </button>
         </form>
       </div>

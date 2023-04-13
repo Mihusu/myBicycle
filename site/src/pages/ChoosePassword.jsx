@@ -41,7 +41,7 @@ const ChoosePassword = () => {
   };
 
   return (
-    <div className="flex h-full flex-col items-center py-2 ">
+    <div className="flex h-full flex-col justify-around items-center py-2 ">
       <h1>Vælg adgangskode</h1>
       {/* password */}
       <div className="form-control w-full max-w-xs">

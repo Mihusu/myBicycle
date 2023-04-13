@@ -36,8 +36,8 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-col items-center justify-center">
-        <h1>Indtast det telefonnummer, du vil nulstille kodeord for</h1>
+      <div className="flex h-screen flex-col items-center justify-center text-center">
+        <h1 className="w-3/4">Indtast det telefonnummer, du vil nulstille kodeord for</h1>
         <form className="flex h-1/4 flex-col items-center justify-evenly">
           <input
             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -48,7 +48,7 @@ const ResetPassword = () => {
             type="submit"
             onClick={(e) => submitPhonenumber(e)}
           >
-            Submit
+            Indsend
           </button>
         </form>
       </div>
