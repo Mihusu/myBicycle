@@ -114,13 +114,23 @@ function UserLogin() {
               </svg>
             </button>
 
-                        <p>Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>
-                        <p>Har du glemt dit kodeord? <Link to='/resetpassword'><span className="text-blue-500">Nulstil dit kodeord her</span></Link></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
+            <p>
+              Har du ikke registreret dig som bruger?{" "}
+              <Link to="/registration">
+                <span className="text-blue-500">Registrer her</span>
+              </Link>
+            </p>
+            <p>
+              Har du glemt dit kodeord?{" "}
+              <Link to="/resetpassword">
+                <span className="text-blue-500">Nulstil dit kodeord her</span>
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default UserLogin;
