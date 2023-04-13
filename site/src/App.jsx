@@ -34,16 +34,15 @@ function App() {
         <Route path="/login" element={<UserLogin />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-<<<<<<< Updated upstream
-        <Route path="/smsverification/:session_id" element={<SmsVerification />}/>
-        <Route path="/resetpassword" element={<ResetPassword />} />        
-        <Route path="/passwordresetverification" element={<PasswordResetVerification />} />
-=======
         <Route
           path="/smsverification/:session_id"
           element={<SmsVerification />}
         />
->>>>>>> Stashed changes
+        <Route path="/resetpassword" element={<ResetPassword />} />
+        <Route
+          path="/passwordresetverification"
+          element={<PasswordResetVerification />}
+        />
         <Route path="/choosepassword" element={<ChoosePassword />} />
 
         <Route element={<PrivateRoutes />}>
