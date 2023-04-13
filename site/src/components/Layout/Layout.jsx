@@ -1,47 +1,77 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Footer } from './Footer'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Footer } from "./Footer";
+import secureLocalStorage from "react-secure-storage";
 
 export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
+  const [showSidebar, setShowSidebar] = useState(false);
 
-    const [showSidebar, setShowSidebar] = useState(false);
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
 
-    const toggleSidebar = () => { setShowSidebar(!showSidebar) }
+  const logout = () => {
+    secureLocalStorage.clear("accesstoken", null);
+  };
 
-    return (
-        <>
-            <div id='layout'>
-                <div className='p-4 pb-20'>
-                    {/* Header */}
-                    <div className='flex justify-center mb-4 border-b-gray-400'>
-                        <h1 className='text-3xl text-white'>{title}</h1>
-                    </div>
-                    {/* Content */}
-                    {isLoading ?
-                        <div className='flex justify-center'>
-                            <button className="btn btn-outline border-none loading"></button>
-                        </div>
-                        :
-                        children
-                    }
-                </div>
-
-                {/* Sidebar */}
-                <div className={`absolute top-0 -right-64 w-3/5 h-full bg-gray-800 border-l border-white rounded-tl-lg transition ease-in-out ${showSidebar ? '-translate-x-64' : 'translate-x-0'} `}>
-                    <ul className="flex flex-col justify-center items-center p-2 space-y-4 text-white">
-                        <li onClick={toggleSidebar} className='self-end p-2 hover:bg-orange-400 rounded-sm cursor-pointer'>X</li>
-                        <Link to="/claimbike">
-                            <li className='px-16 hover:bg-orange-400 rounded-sm'>
-                                Indløs cykel
-                            </li>
-                        </Link>
-                        <li className='px-16 hover:bg-orange-400 rounded-sm'>Profil</li>
-                    </ul>
-                </div>
-
+  return (
+    <>
+      <div id="layout">
+        <div className="p-4 pb-20">
+          {/* Header */}
+          <div className="mb-4 flex justify-center border-b-gray-400">
+            <h1 className="text-3xl text-white">{title}</h1>
+          </div>
+          {/* Content */}
+          {isLoading ? (
+            <div className="flex justify-center">
+              <button className="btn-outline loading btn border-none"></button>
             </div>
+          ) : (
+            children
+          )}
+        </div>
 
-            <Footer toggleSidebar={toggleSidebar} />
-        </>
-    )
-}
+        {/* Sidebar */}
+        <div
+          className={`absolute top-0 -right-64 h-full w-3/5 rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
+            showSidebar ? "-translate-x-64" : "translate-x-0"
+          } `}
+        >
+          <ul className="flex flex-col items-center justify-center space-y-4 p-2 text-white">
+            <li
+              onClick={toggleSidebar}
+              className="cursor-pointer self-end rounded-sm p-2 hover:bg-orange-400"
+            >
+              X
+            </li>
+            <Link to="/claimbike">
+              <li className="rounded-sm px-16 hover:bg-orange-400">
+                Indløs cykel
+              </li>
+            </Link>
+
+            <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
+
+            <Link to="/reportfoundbike">
+              <li className="rounded-sm px-16 hover:bg-orange-400">
+                Reporter en cykel
+              </li>
+            </Link>
+
+            <Link to="/login">
+              <button
+                className="rounded-sm px-16 hover:bg-orange-400"
+                onClick={logout}
+              >
+                Log af
+              </button>
+            </Link>
+          </ul>
+        </div>
+      </div>
+
+      <Footer toggleSidebar={toggleSidebar} />
+    </>
+  );
+};

@@ -22,29 +22,44 @@ import ViewTransferAccept from "./pages/ViewTransferAccept";
 import ViewTransferDetail from "./pages/ViewTransferDetail";
 import Activity from "./pages/Activity";
 
-
 import { ClaimBikePage } from "./pages/ClaimBikePage";
+import { ReportFoundBike } from "./pages/ReportFoundBike";
+import { BikeReportForm } from "./pages/BikeReportForm";
 
 function App() {
   return (
-    <div className="relative bg-gray-700 min-w-screen min-h-screen overflow-x-hidden">
+    <div className="min-w-screen relative min-h-screen overflow-x-hidden bg-gray-700">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-        <Route path="/smsverification/:session_id" element={<SmsVerification />}/>
-        <Route path="/resetpassword" element={<ResetPassword />} />        
-        <Route path="/passwordresetverification" element={<PasswordResetVerification />} />
+        <Route
+          path="/smsverification/:session_id"
+          element={<SmsVerification />}
+        />
+        <Route path="/resetpassword" element={<ResetPassword />} />
+        <Route
+          path="/passwordresetverification"
+          element={<PasswordResetVerification />}
+        />
         <Route path="/choosepassword" element={<ChoosePassword />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/activities" element={<Activity />} />
-          <Route path="/transfers/accept/:transfer_id" element={<ViewTransferAccept />} />
-          <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
+          <Route
+            path="/transfers/accept/:transfer_id"
+            element={<ViewTransferAccept />}
+          />
+          <Route
+            path="/transfers/detail/:transfer_id"
+            element={<ViewTransferDetail />}
+          />
           <Route path="/claimbike" element={<ClaimBikePage />} />
+          <Route path="/reportfoundbike" element={<ReportFoundBike />} />
+          <Route path="/bikereportform" element={<BikeReportForm />} />
         </Route>
 
         <Route path="/Storelogin" element={<StoreLogin />} />

@@ -81,7 +81,7 @@ export const ClaimBikeComponent = () => {
             <div className="self-center justify-center text-m font-light text-gray-800 sm:text-3xl dark:text-white">
                 Vi kan se at du ikke har en cykel endnu
             </div>
-            <div className="flex justify-center text-l font-light text-gray-800 sm:text-3xl dark:text-white">
+            <div className="flex justify-center mb-4 text-l font-light text-gray-800 sm:text-3xl dark:text-white">
                 Indløs din første cykel ved at trykke på cyklen
             </div>
 
