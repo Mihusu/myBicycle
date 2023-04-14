@@ -57,7 +57,7 @@ const DeviceVerify = () => {
     return (
         <div className="flex items-center justify-center h-screen">
             <div className="max-w-md w-full p-6">
-                <h1 className="text-3xl mb-6 text-center font-bold text-white">Bekræft enhed</h1>
+                <h1 className="text-3xl mb-6 text-center text-white">Bekræft enhed</h1>
                 <form
                     className="flex flex-col items-center justify-center bg-gray-800 rounded-lg px-10 py-8"
                     onSubmit={handleSubmit(onSubmit)}
@@ -88,7 +88,7 @@ const DeviceVerify = () => {
                     <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2 my-4'>
                         <p className='py-2 mb-1'>
                             For nemt at genkende din enhed blandt listen over enheder, 
-                            skal du give browseren et venligt navn
+                            skal du give browseren et kaldenavn
                         </p>
                         <label className="font-light text-gray-800 dark:text-white">
                             Enheds navn:
