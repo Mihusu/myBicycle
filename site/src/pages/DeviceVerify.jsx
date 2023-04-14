@@ -1,15 +1,11 @@
 import React from 'react'
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import secureLocalStorage from "react-secure-storage";
 
-export const ClaimBikeForm = () => {
+const DeviceVerify = () => {
 
     const [error, setError] = useState("");
-
-    const token = secureLocalStorage.getItem('accesstoken');
 
     const {
         register,
@@ -17,23 +13,22 @@ export const ClaimBikeForm = () => {
         handleSubmit,
     } = useForm({
         defaultValues: {
-            claimBikeCode: ""
+            OTP: ""
         },
     });
 
-    const watchClaimBikeCode = watch(["claimBikeCode"]);
+    const watchOTP = watch(["OTP"]);
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
         const requestOptions = {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
             },
         };
         try {
-            const response = await fetch(API_URL + `/bikes/claim/${data.claimBikeCode}`, requestOptions);
+            const response = await fetch(API_URL + `/auth/device-verify`, requestOptions);
 
             const body = await response.json();
 
@@ -52,24 +47,24 @@ export const ClaimBikeForm = () => {
 
     };
 
-    // checks whether claimcode is 36 letters long.
-    function matchLength(claimBikeCode) {
-        if (claimBikeCode.length == 36) {
+    // checks whether OTP is 6 letters long.
+    function matchLength(OTP) {
+        if (OTP.length == 6) {
             return true;
         } else return false;
     }
 
     return (
-        <div className="flex justify-center h-screen">
-            <div className="max-w-md w-full p-4">
+        <div className="flex items-center justify-center h-screen">
+            <div className="max-w-md w-full p-6">
+                <h1 className="text-3xl mb-6 text-center font-bold text-white">Bekræft enhed</h1>
                 <form
                     className="flex flex-col items-center justify-center bg-gray-800 rounded-lg px-10 py-8"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <div className='space-y-2'>
-                        <p className='py-2 mb-4'>
-                            Skriv din indløsningskode du har modtaget på sms nedenfor
-                            for at indløse din cykel.
+                    <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2'>
+                        <p className='py-2 mb-1'>
+                            For at bekræfte din enhed, bedes de indtaste en engangskode for at komme på din konto
                         </p>
                         <label className="font-light text-gray-800 dark:text-white">
                             Engangskode:
@@ -79,21 +74,39 @@ export const ClaimBikeForm = () => {
                             type="text"
                             id="required-engangskode"
                             className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                            placeholder="Indtast din kode her"
                             {...register(
-                                "claimBikeCode",
+                                "OTP",
                                 { required: true },
-                                { min: 36, max: 36 },
-                                { pattern: /^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$/i }
+                                { min: 6, max: 6 },
+                                { pattern: /^[0-9]{6}$/i }
                             )}
                         />
                         {error && <span className="flex justify-center text-red-500">{error}</span>}
                     </div>
 
-                    <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 text-green-100"
+                    <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2 my-4'>
+                        <p className='py-2 mb-1'>
+                            For nemt at genkende din enhed blandt listen over enheder, 
+                            skal du give browseren et venligt navn
+                        </p>
+                        <label className="font-light text-gray-800 dark:text-white">
+                            Enheds navn:
+                            <span className="text-red-500 required-dot"> *</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="required-brugernavn"
+                            className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            placeholder="Skriv et brugernavn her"
+                        />
+                        {error && <span className="flex justify-center text-red-500">{error}</span>}
+                    </div>  
+
+                    <button className="btn my-4 mt-8 flex w-full max-w-[320px] justify-center gap-2 bg-green-500 py-2 px-8 text-green-100"
                         type="submit"
-                        disabled={!matchLength(watchClaimBikeCode[0])}>
-                        Indløs
+                        disabled={!matchLength(watchOTP[0])}>
+                        Bekræft
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -114,3 +127,5 @@ export const ClaimBikeForm = () => {
         </div>
     )
 }
+
+export default DeviceVerify;
