@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { StolenBike } from "./StolenBike";
+import secureLocalStorage from "react-secure-storage";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -12,10 +13,10 @@ export const BikeComponent = ({ data, mutate }) => {
   const navigate = useNavigate();
 
   const reportStolen = async () => {
-    await fetch(`${API_URL}/bikes/${id}/reportstolen`, {
+    await fetch(`${API_URL}/bikes/${data._id}/reportstolen`, {
       method: "PUT",
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: "Bearer " + secureLocalStorage.getItem("accesstoken")
       },
     });
 

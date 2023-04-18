@@ -53,9 +53,9 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
             <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
 
-            <Link to="/reportfoundbike">
+            <Link to="/bikelookup">
               <li className="rounded-sm px-16 hover:bg-orange-400">
-                Reporter en cykel
+                Søg efter stelnummer
               </li>
             </Link>
 

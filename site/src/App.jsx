@@ -23,8 +23,8 @@ import ViewTransferDetail from "./pages/ViewTransferDetail";
 import Activity from "./pages/Activity";
 
 import { ClaimBikePage } from "./pages/ClaimBikePage";
-import { ReportFoundBike } from "./pages/ReportFoundBike";
-import { BikeReportForm } from "./pages/BikeReportForm";
+import { BikeLookup } from "./pages/BikeLookup";
+import { BikeReportFound } from "./pages/BikeReportFound";
 
 function App() {
   return (
@@ -44,6 +44,7 @@ function App() {
           element={<PasswordResetVerification />}
         />
         <Route path="/choosepassword" element={<ChoosePassword />} />
+          <Route path="/bikelookup" element={<BikeLookup />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
@@ -58,8 +59,7 @@ function App() {
             element={<ViewTransferDetail />}
           />
           <Route path="/claimbike" element={<ClaimBikePage />} />
-          <Route path="/reportfoundbike" element={<ReportFoundBike />} />
-          <Route path="/bikereportform" element={<BikeReportForm />} />
+          <Route path="/bikereportfound" element={<BikeReportFound />} />
         </Route>
 
         <Route path="/Storelogin" element={<StoreLogin />} />
