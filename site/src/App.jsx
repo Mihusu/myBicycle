@@ -14,6 +14,7 @@ import PhoneRegistration from "./pages/PhoneRegistration";
 import ResetPassword from "./pages/ResetPassword";
 import PasswordResetVerification from "./pages/PasswordResetVerification";
 import ChoosePassword from "./pages/ChoosePassword";
+import DeviceVerify from "./pages/DeviceVerify";
 
 // Auth pages
 import MyBikes from "./pages/MyBikes";
@@ -44,6 +45,7 @@ function App() {
           element={<PasswordResetVerification />}
         />
         <Route path="/choosepassword" element={<ChoosePassword />} />
+        <Route path="/deviceverify" element={<DeviceVerify />} />
           <Route path="/bikelookup" element={<BikeLookup />} />
 
         <Route element={<PrivateRoutes />}>

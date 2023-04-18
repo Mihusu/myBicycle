@@ -65,6 +65,8 @@ export const ClaimBikeComponent = () => {
     return (
         <div className="flex flex-col h-full items-center justify-center bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
             <motion.div
+                transition={{ layout: { duration: 1, type: "spring" } }}
+                layout="position"
                 onClick={() => setIsOpen(!isOpen)}>
                 <button>
                     <img
