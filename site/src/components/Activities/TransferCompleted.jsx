@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import { IconContext } from "react-icons";
 
-export const CompletedBikeRequest = ({ data, user_id }) => {
-
-    // console.log("S: ", data.sender.id)
-    // console.log("R: ", data.receiver)
-    // console.log("U: ", user_id)
+export const TransferCompleted = ({ data, user_id }) => {
 
     return (
         <Link to={`/transfers/detail/${data.transfer_id}`}>
