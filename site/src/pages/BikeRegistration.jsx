@@ -26,10 +26,11 @@ const BikeRegistration = () => {
       brand: "",
       color: "",
       image: undefined,
+      receipt: undefined
     },
   });
 
-  const [responseError, setResponseError ] = useState("")
+  const [responseError, setResponseError] = useState("")
 
   const onSubmit = async (data) => {
 
@@ -37,9 +38,13 @@ const BikeRegistration = () => {
 
       const formData = new FormData();
       for (const key in data) {
-        if (key === "image") { formData.append(key, data.image[0]) }
-        else { formData.append(key, data[key]) }
-        
+        if (key === "image") {
+          formData.append(key, data.image[0]);
+        } else if (key === "receipt" && data.receipt) { // add a check to see if the receipt field is defined
+          formData.append(key, data.receipt[0]);
+        } else {
+          formData.append(key, data[key]);
+        }
       }
 
       const response = await fetch(API_URL + "/bikes", {
@@ -92,8 +97,8 @@ const BikeRegistration = () => {
                     { required: true },
                     { min: 8, max: 32 }
                   )}
-                  />
-                  {errors.frame_number && <span>This field is required</span>}
+                />
+                {errors.frame_number && <span>This field is required</span>}
               </div>
 
               {/* Phonenumber */}
@@ -309,13 +314,27 @@ const BikeRegistration = () => {
               </div>
             </div>
 
-            {/* Images */}
-            <div className="py-8">
-              {/* <DropZoneComponent></DropZoneComponent> */}
+            {/* Bike image */}
+            <h1 className="p-4">Billede af cykel:
+              <span className="text-red-500 required-dot"> *</span>
+            </h1>
+            <div className="mb-6 ml-8 flex items-center justify-center">
               <input
                 type="file"
                 id="file-image"
                 {...register("image", { required: true })}
+              />
+            </div>
+
+            {/* Receipt image */}
+            <h1 className="p-4">Billede af kvittering:
+              <span className="text-red-500 required-dot"> *</span>
+            </h1>
+            <div className="mb-6 ml-8 flex items-center justify-center">
+              <input
+                type="file"
+                id="file-image"
+                {...register("receipt", { required: true })}
               />
             </div>
 

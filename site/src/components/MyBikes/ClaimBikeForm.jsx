@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const ClaimBikeForm = () => {
 
     const [error, setError] = useState("");
