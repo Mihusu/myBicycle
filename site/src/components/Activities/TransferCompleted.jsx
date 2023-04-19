@@ -25,8 +25,8 @@ export const TransferCompleted = ({ data, user_id }) => {
                             : `Afsender: ${data.sender.phone_number}` }
                         </h1>
 
-                        <span className="flex-wrap items-start text-sm">
-                            {user_id === data.sender.id && data.state === "declined"   && "Modtageren har afvist din anmodning"}
+                        <span className="flex-wrap items-start text-sm break-words">
+                            {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}
                             {user_id === data.sender.id && data.state === "accepted"   && "Du overførte din cykel"}
                             {user_id === data.receiver.id && data.state === "declined" && "Du afviste en anmodning"}
                             {user_id === data.receiver.id && data.state === "accepted" && "Du modtog en cykel"}

@@ -29,16 +29,26 @@ const ViewTransferDetail = () => {
     const { data, error, isLoading } = useSWR([API_URL + `/transfers/${transfer_id}`, token], ([url, token]) => get_bike_request_detail(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
-    if (isLoading) return <div>loading...</div>
-
-    console.log(data);
-
+    
     return (
-        <LayoutWithBack title="Overførsel">
-            <div className="flex flex-col space-y-4 items-center p-4 bg-gray-800 rounded-lg">
-                <h2 className="text-lg">Du anmoder om ejerskifte</h2>
+        <LayoutWithBack title="Overførsel" isLoading={isLoading}>
+            {data && <div className="flex flex-col space-y-4 items-center p-4 bg-gray-800 rounded-lg">
+                <h2 className="text-lg">
+                    {user_id === data.sender.id && data.state === "pending"    && "Du er ved at overføre ejerskab"}
+                    {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}
+                    {user_id === data.sender.id && data.state === "accepted"   && "Du overførte din cykel"}
+                    {user_id === data.receiver.id && data.state === "declined" && "Du afviste en anmodning"}
+                    {user_id === data.receiver.id && data.state === "accepted" && "Du modtog en cykel"}
+                </h2>
                 <img src={data.bike.image.obj_url} width="360px" height="360px"/>
-            </div>
+                <p className="text-md">Modtager: {data.receiver.phone_number}</p>
+                <div className="flex justify-center">
+                    {/* Outgoing */}
+                    {!data.closed_at && <h4 className="text-md">{new Date(data.created_at).toLocaleDateString()} • {new Date(data.created_at).toLocaleTimeString().replaceAll(".",":")}</h4>}
+                    {/* Finished */}
+                    {data.closed_at && <h4 className="text-md">{new Date(data.closed_at).toLocaleDateString()} • {new Date(data.closed_at).toLocaleTimeString().replaceAll(".",":")}</h4>}
+                </div>
+            </div>}
         </LayoutWithBack>
     )
 }

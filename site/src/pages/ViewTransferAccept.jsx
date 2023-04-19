@@ -48,7 +48,7 @@ const ViewTransferAccept = () => {
     }
 
     return (
-        <LayoutWithBack title="Overførsel">
+        <LayoutWithBack title="Anmodning">
             <BikeComponent data={data.bike} />
 
             <div className="flex max-w-[425px] mx-auto rounded-lg bg-gray-800 shadow dark:text-whites sm:px-3 md:px-8 lg:px-10 py-4 mt-8">

@@ -29,55 +29,46 @@ export const TransferIncomming = ({ data }) => {
     return (
         <div className="flex flex-col mx-auto max-w-[425px] rounded-lg bg-gray-800 py-4 shadow dark:text-whites">
             <div className="flex justify-center text-white text-xl">Anmodning</div>
-            <motion.div
-                transition={{ layout: { duration: 1, type: "spring" } }}
-                layout
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex justify-evenly mt-2 w-full"
-            >
-                <div className="flex items-center justify-center">
+            <div className="flex justify-evenly mt-2 w-full">
+                <div className="flex items-start justify-center m-2">
                     <img
                         src={data.bike.image.obj_url}
                         alt="alt"
-                        className="rounded-lg w-[64px] h-[64px] text-sm"
+                        className="rounded-lg w-[56px] h-[56px] text-sm"
                     />
                 </div>
 
-                <div className="flex flex-col mr-6">
+                <div className="flex flex-col space-y-1 mr-2">
                     <h1 className="text-lg text-white">
                         Afsender: {data.sender.phone_number}
                     </h1>
 
-                    <span className="flex-wrap items-start text-sm">
-                        Du har modtaget en cykel overførsel
-                    </span>
+                    <p className="flex-wrap items-start text-sm break-words">
+                        Du har modtaget en anmodning om nyt ejerskab
+                    </p>
 
                     <h4 className="text-xs">Dato: {new Date(data.created_at).toLocaleDateString()}</h4>
-
                 </div>
+            </div>
 
-            </motion.div>
-            {isOpen && (
-                <div className="mt-4" style={{ display: "flex", justifyContent: "center" }}>
+            {/* Actions */}
+            <div className="mt-4" style={{ display: "flex", justifyContent: "center" }}>
+                <button
+                    className="btn bg-red-600 w-40 max-w-xs text-white"
+                    type="submit"
+                    onClick={() => declineBikeRequest()}
+                >
+                    Afvis
+                </button>
+                <Link to={`/transfers/accept/${data.transfer_id}`}>
                     <button
-                        className="btn flex w-40 max-w-xs justify-evenly bg-red-500 text-green-100 "
-                        type="submit"
-                        onClick={() => declineBikeRequest()}
-                        style={{ marginRight: "6px" }}
+                        className="btn bg-sky-400 w-40 max-w-xs text-white"
+                        type="button"
                     >
-                        Afvis
+                        Åbn
                     </button>
-                    <Link to={`/transfers/accept/${data.transfer_id}`}>
-                        <button
-                            className="btn flex w-40 max-w-xs justify-evenly bg-green-500 text-green-100"
-                            type="button"
-                            style={{ marginLeft: "6px" }}
-                        >
-                            Åben
-                        </button>
-                    </Link>
-                </div>
-            )}
+                </Link>
+            </div>
         </div>
     );
 };
