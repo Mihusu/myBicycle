@@ -1,13 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import { IconContext } from "react-icons";
 
-export const CompletedBikeRequest = ({ data, user_id }) => {
-
-    // console.log("S: ", data.sender.id)
-    // console.log("R: ", data.receiver)
-    // console.log("U: ", user_id)
+export const TransferCompleted = ({ data, user_id }) => {
 
     return (
         <Link to={`/transfers/detail/${data.transfer_id}`}>
@@ -30,8 +25,8 @@ export const CompletedBikeRequest = ({ data, user_id }) => {
                             : `Afsender: ${data.sender.phone_number}` }
                         </h1>
 
-                        <span className="flex-wrap items-start text-sm">
-                            {user_id === data.sender.id && data.state === "declined"   && "Modtageren har afvist din anmodning"}
+                        <span className="flex-wrap items-start text-sm break-words">
+                            {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}
                             {user_id === data.sender.id && data.state === "accepted"   && "Du overførte din cykel"}
                             {user_id === data.receiver.id && data.state === "declined" && "Du afviste en anmodning"}
                             {user_id === data.receiver.id && data.state === "accepted" && "Du modtog en cykel"}

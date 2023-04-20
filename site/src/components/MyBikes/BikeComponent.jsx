@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { StolenBike } from "./StolenBike";
 import secureLocalStorage from "react-secure-storage";
+import { IoReceiptOutline } from "react-icons/io5"
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -92,6 +93,9 @@ export const BikeComponent = ({ data, mutate }) => {
                   <span className="text-white"> {data.brand}</span>
                 </div>
               </div>
+              <button onClick={() => window.location.href = data.receipt.obj_url}>
+                <IoReceiptOutline download={data.receipt.obj_url} className="mx-auto" color="white" size={32} />
+              </button>
             </div>
 
             {/* Actions */}

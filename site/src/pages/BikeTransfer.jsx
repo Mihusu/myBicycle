@@ -65,11 +65,13 @@ const BikeTransfer = () => {
         {/* Errors */}
         {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
 
+        <p>Indtast telefonnummeret på den person du ønsker at overfører ejerskabet til</p>
+        <p>Personen kan efterfølgende afkræfte/bekræfte din anmodning</p>
         <h2 className="text-xl text-white">Send anmodning til:</h2>
 
         <PhoneInputWithCountrySelect
           name='receiver'
-          placeholder="Ex. +4512345678"
+          placeholder="Ex. +45 12 34 56 78"
           value={phoneNumber}
           onChange={setPhoneNumber}
           defaultCountry="DK"

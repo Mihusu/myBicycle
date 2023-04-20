@@ -7,7 +7,7 @@ import BikeRegistration from "./pages/BikeRegistration";
 
 // Non-auth pages
 import Home from "./pages/Home";
-import UserLogin from "./pages/UserLogin";
+import { LoginPage } from "./pages/Login";
 import StoreLogin from "./BikeStore/pages/StoreLogin";
 import SmsVerification from "./pages/SmsVerification";
 import PhoneRegistration from "./pages/PhoneRegistration";
@@ -21,8 +21,7 @@ import MyBikes from "./pages/MyBikes";
 import BikeTransfer from "./pages/BikeTransfer";
 import ViewTransferAccept from "./pages/ViewTransferAccept";
 import ViewTransferDetail from "./pages/ViewTransferDetail";
-import Activity from "./pages/Activity";
-
+import ActivityPage from "./pages/Activity";
 import { ClaimBikePage } from "./pages/ClaimBikePage";
 import { BikeLookup } from "./pages/BikeLookup";
 import { BikeReportFound } from "./pages/BikeReportFound";
@@ -32,33 +31,21 @@ function App() {
     <div className="min-w-screen relative min-h-screen overflow-x-hidden bg-gray-700">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<UserLogin />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-        <Route
-          path="/smsverification/:session_id"
-          element={<SmsVerification />}
-        />
+        <Route path="/smsverification/:session_id" element={<SmsVerification />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route
-          path="/passwordresetverification"
-          element={<PasswordResetVerification />}
-        />
+        <Route path="/passwordresetverification" element={<PasswordResetVerification />} />
         <Route path="/choosepassword" element={<ChoosePassword />} />
-        <Route path="/deviceverify" element={<DeviceVerify />} />
+        <Route path="/deviceverify/:session_id" element={<DeviceVerify />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
-          <Route path="/activities" element={<Activity />} />
-          <Route
-            path="/transfers/accept/:transfer_id"
-            element={<ViewTransferAccept />}
-          />
-          <Route
-            path="/transfers/detail/:transfer_id"
-            element={<ViewTransferDetail />}
-          />
+          <Route path="/activities" element={<ActivityPage />} />
+          <Route path="/transfers/accept/:transfer_id" element={<ViewTransferAccept />} />
+          <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
           <Route path="/claimbike" element={<ClaimBikePage />} />
           <Route path="/bikelookup" element={<BikeLookup />} />
           <Route path="/bikereportfound/:frame_number" element={<BikeReportFound />} />

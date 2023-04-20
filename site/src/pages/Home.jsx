@@ -1,6 +1,5 @@
 import React from "react";
 import StoreLogin from "../BikeStore/pages/StoreLogin";
-//import UserLogin from "../UserLogin";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
@@ -39,9 +38,6 @@ export const Home = () => {
         >
           Bruger
         </button>
-        {/* <StoreLogin />
-
-      <UserLogin /> */}
       </div>
     </div>
   );

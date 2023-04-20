@@ -1,11 +1,17 @@
 import React from 'react'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { HiArrowLeft } from 'react-icons/hi';
+import { useNavigate, useParams } from "react-router-dom";
+
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const DeviceVerify = () => {
 
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const {
         register,
@@ -13,33 +19,40 @@ const DeviceVerify = () => {
         handleSubmit,
     } = useForm({
         defaultValues: {
-            OTP: ""
+            otp: "",
+            deviceName: ""
         },
     });
 
-    const watchOTP = watch(["OTP"]);
+    const watchOtp = watch(["otp"]);
     const navigate = useNavigate();
+    const { session_id } = useParams();
 
-    const onSubmit = async () => {
-        const requestOptions = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
+    const onSubmit = async (data) => {
         try {
-            const response = await fetch(API_URL + `/auth/device-verify`, requestOptions);
+            const response = await fetch(API_URL + `/auth/trust-device`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    session_id: session_id,
+                    otp: data.otp,
+                    device_name: data.deviceName
+                })
+            });
 
             const body = await response.json();
 
             if (!(response.ok)) {
-                setError(body.detail);
+                setError("Forkert engangskode eller sessionen er udløbet");
                 return;
             }
 
-            //Trigger a page refresh and go to main page
-            navigate(0);
-            navigate("/mybikes");
+            // Response was okay. Redirect back to login page
+            setSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregere dig til login...");
+            setTimeout(() => navigate("/login"), 3000);
+
         } catch (error) {
             // Something failed miserably
             console.log(error);
@@ -48,8 +61,8 @@ const DeviceVerify = () => {
     };
 
     // checks whether OTP is 6 letters long.
-    function matchLength(OTP) {
-        if (OTP.length == 6) {
+    function matchLength(otp) {
+        if (otp.length === 6) {
             return true;
         } else return false;
     }
@@ -57,14 +70,26 @@ const DeviceVerify = () => {
     return (
         <div className="flex items-center justify-center h-screen">
             <div className="max-w-md w-full p-6">
-                <h1 className="text-3xl mb-6 text-center text-white">Bekræft enhed</h1>
+                <div className='flex items-center text-center w-full p-2'>
+                    <button className='pr-8' onClick={() => navigate(-1)}>
+                        <HiArrowLeft size={24} />
+                    </button>
+                    <h1 className="text-3xl text-white">Bekræft enhed</h1>
+                </div>
+
+                {/* Response error */}
+                {error && <p className="p-4 mb-4 rounded-lg bg-error text-white">{error}</p>}
+                {/* Response success */}
+                {success && <p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>}
+
                 <form
                     className="flex flex-col items-center justify-center bg-gray-800 rounded-lg px-10 py-8"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2'>
                         <p className='py-2 mb-1'>
-                            For at bekræfte din enhed, bedes de indtaste en engangskode for at komme på din konto
+                            Hej, det lader til at du logger ind fra en ny enhed. Som en ekstra sikkerhed beder vi dig
+                            bekræfte enheden ved at indtaste sms-koden vi har sendt til dig.
                         </p>
                         <label className="font-light text-gray-800 dark:text-white">
                             Engangskode:
@@ -76,36 +101,35 @@ const DeviceVerify = () => {
                             className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                             placeholder="Indtast din kode her"
                             {...register(
-                                "OTP",
+                                "otp",
                                 { required: true },
                                 { min: 6, max: 6 },
                                 { pattern: /^[0-9]{6}$/i }
                             )}
                         />
-                        {error && <span className="flex justify-center text-red-500">{error}</span>}
                     </div>
 
                     <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2 my-4'>
                         <p className='py-2 mb-1'>
-                            For nemt at genkende din enhed blandt listen over enheder, 
-                            skal du give browseren et kaldenavn
+                            For nemt at genkende din enhed blandt listen over enheder,
+                            bedes du give din enhed et kaldenavn
                         </p>
                         <label className="font-light text-gray-800 dark:text-white">
-                            Enheds navn:
+                            Navn på enhed:
                             <span className="text-red-500 required-dot"> *</span>
                         </label>
                         <input
                             type="text"
                             id="required-brugernavn"
                             className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            placeholder="Skriv et brugernavn her"
+                            placeholder="Ex. Peter's-PC"
+                            {...register("deviceName", { required: true })}
                         />
-                        {error && <span className="flex justify-center text-red-500">{error}</span>}
-                    </div>  
+                    </div>
 
                     <button className="btn my-4 mt-8 flex w-full max-w-[320px] justify-center gap-2 bg-green-500 py-2 px-8 text-green-100"
                         type="submit"
-                        disabled={!matchLength(watchOTP[0])}>
+                        disabled={!matchLength(watchOtp[0])}>
                         Bekræft
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

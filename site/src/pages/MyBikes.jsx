@@ -1,10 +1,13 @@
-import { ClaimBikeComponent } from "../components/MyBikes/ClaimBikeComponent";
-import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import useSWR from 'swr'
 import secureLocalStorage from "react-secure-storage";
+
+import { ClaimBikeComponent } from "../components/MyBikes/ClaimBikeComponent";
+import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import { Layout } from "../components/Layout/Layout";
 
+
 const API_URL = import.meta.env.VITE_API_URL
+
 
 const get_my_bikes = async (url, token) => {
 
