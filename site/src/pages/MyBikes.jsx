@@ -11,8 +11,6 @@ const API_URL = import.meta.env.VITE_API_URL
 
 const get_my_bikes = async (url, token) => {
 
-    console.log(url, token);
-
     const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -30,8 +28,6 @@ const MyBikes = () => {
     const { data, error, isLoading, mutate } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
 
     if (error) return <div>failed to load, due to error {error}</div>
-
-    //console.log(data)
 
     // render data
     return (
