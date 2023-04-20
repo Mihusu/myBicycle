@@ -25,6 +25,7 @@ import ActivityPage from "./pages/Activity";
 import { ClaimBikePage } from "./pages/ClaimBikePage";
 import { BikeLookup } from "./pages/BikeLookup";
 import { BikeReportFound } from "./pages/BikeReportFound";
+import DiscoveryReport from "./pages/DiscoveryReport";
 
 function App() {
   return (
@@ -34,9 +35,15 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
         <Route path="/registration" element={<PhoneRegistration />} />
-        <Route path="/smsverification/:session_id" element={<SmsVerification />} />
+        <Route
+          path="/smsverification/:session_id"
+          element={<SmsVerification />}
+        />
         <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route path="/passwordresetverification" element={<PasswordResetVerification />} />
+        <Route
+          path="/passwordresetverification"
+          element={<PasswordResetVerification />}
+        />
         <Route path="/choosepassword" element={<ChoosePassword />} />
         <Route path="/deviceverify/:session_id" element={<DeviceVerify />} />
 
@@ -44,13 +51,23 @@ function App() {
           <Route path="/mybikes" element={<MyBikes />} />
           <Route path="/transferbike/:id" element={<BikeTransfer />} />
           <Route path="/activities" element={<ActivityPage />} />
-          <Route path="/transfers/accept/:transfer_id" element={<ViewTransferAccept />} />
-          <Route path="/transfers/detail/:transfer_id" element={<ViewTransferDetail />} />
+          <Route
+            path="/transfers/accept/:transfer_id"
+            element={<ViewTransferAccept />}
+          />
+          <Route
+            path="/transfers/detail/:transfer_id"
+            element={<ViewTransferDetail />}
+          />
           <Route path="/claimbike" element={<ClaimBikePage />} />
           <Route path="/bikelookup" element={<BikeLookup />} />
-          <Route path="/bikereportfound/:frame_number" element={<BikeReportFound />} />
+          <Route
+            path="/bikereportfound/:frame_number"
+            element={<BikeReportFound />}
+          />
+          <Route path="/discoveryreport/:id" element={<DiscoveryReport />} />
         </Route>
-        
+
         <Route path="/Storelogin" element={<StoreLogin />} />
       </Routes>
     </div>
