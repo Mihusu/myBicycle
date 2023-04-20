@@ -50,8 +50,8 @@ const ActivityPage = () => {
       </div>
       <div className="">
         {data &&
-          data.discoveries.map((transfer_info, key) => (
-            <BikeDiscovery data={transfer_info} key={key} />
+          data.discoveries.map((discovery_info, key) => (
+            <BikeDiscovery data={discovery_info} key={key} />
           ))}
       </div>
 

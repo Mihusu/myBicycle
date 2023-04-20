@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -59,10 +59,10 @@ export const BikeReportFound = () => {
     const body = await response.json();
     if (response.ok) {
       navigate("/mybikes")
-      console.log(body.detail.message);
+      console.log(body.detail);
     }
     if (!response.ok) {
-      console.log(body.detail.message);
+      console.log(body.detail);
       return;
     }
 
