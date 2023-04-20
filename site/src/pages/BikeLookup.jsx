@@ -56,7 +56,7 @@ export const BikeLookup = () => {
           </div>
         )}
         {/* Search for bike input field */}
-        <form onSubmit={handleSubmit} className="flex items-center justify-center mx-2 my-2">
+        <form onSubmit={handleSubmit} className="flex items-center justify-center p-4">
           <label
             htmlFor="default-search"
             className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"

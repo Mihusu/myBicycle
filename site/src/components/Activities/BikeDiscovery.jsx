@@ -1,4 +1,5 @@
 import React from "react";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const BikeDiscovery = ({ data }) => {
   return (

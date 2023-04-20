@@ -1,7 +1,7 @@
+import secureLocalStorage from "react-secure-storage";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "./Footer";
-import secureLocalStorage from "react-secure-storage";
 
 export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
   const [showSidebar, setShowSidebar] = useState(false);

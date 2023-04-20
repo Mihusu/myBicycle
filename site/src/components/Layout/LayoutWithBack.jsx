@@ -2,11 +2,23 @@ import React from 'react'
 import { HiArrowLeft } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom'
 import { Footer } from './Footer'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children}) => {
+export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }) => {
 
     const navigate = useNavigate();
-    
+
+    const [showSidebar, setShowSidebar] = useState(false);
+
+    const toggleSidebar = () => {
+        setShowSidebar(!showSidebar);
+    };
+
+    const logout = () => {
+        secureLocalStorage.clear("accesstoken", null);
+    };
+
     return (
         <>
             <div id='layout-back' className=''>
@@ -29,7 +41,44 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children})
                 </div>
             </div>
 
-            <Footer />
+            {/* Sidebar */}
+            <div
+                className={`absolute top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${showSidebar ? "-translate-x-64" : "translate-x-0"
+                    } `}
+            >
+                <ul className="flex flex-col items-center justify-center space-y-4 p-2 text-white">
+                    <li
+                        onClick={toggleSidebar}
+                        className="cursor-pointer self-end rounded-sm p-2 hover:bg-orange-400"
+                    >
+                        X
+                    </li>
+
+                    <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
+
+                    <Link to="/claimbike">
+                        <li className="rounded-sm px-16 hover:bg-orange-400">
+                            Indløs cykel
+                        </li>
+                    </Link>
+
+                    <Link to="/bikelookup">
+                        <li className="rounded-sm hover:bg-orange-400">
+                            Søg efter stelnummer
+                        </li>
+                    </Link>
+
+                    <Link to="/login">
+                        <button
+                            className="rounded-sm px-16 hover:bg-orange-400"
+                            onClick={logout}
+                        >
+                            Log af
+                        </button>
+                    </Link>
+                </ul>
+            </div>
+            <Footer toggleSidebar={toggleSidebar} />
         </>
     )
 }
