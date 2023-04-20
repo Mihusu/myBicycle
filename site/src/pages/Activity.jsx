@@ -1,7 +1,6 @@
 import React from "react";
 import useSWR from "swr";
 import secureLocalStorage from "react-secure-storage";
-
 import { Layout } from "../components/Layout/Layout";
 import { TransferIncomming } from "../components/Activities/TransferIncomming";
 import { TransferOutgoing } from "../components/Activities/TransferOutgoing";
