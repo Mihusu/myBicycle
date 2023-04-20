@@ -1,4 +1,6 @@
-export const TransferCompleted = ({ data }) => {
+import React from "react";
+
+export const BikeDiscovery = ({ data }) => {
   return (
     <div className="dark:text-whites mx-auto flex max-w-[425px] rounded-lg bg-gray-800 py-4 shadow">
       {/* Old bike requests */}
