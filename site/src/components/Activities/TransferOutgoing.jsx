@@ -1,14 +1,11 @@
 import React from "react";
 import secureLocalStorage from "react-secure-storage";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const TransferOutgoing = ({ data }) => {
 
-    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
     async function retractBikeRequest() {
@@ -46,11 +43,11 @@ export const TransferOutgoing = ({ data }) => {
         <div className="flex flex-col mx-auto max-w-[425px] rounded-lg bg-gray-800 py-4 shadow dark:text-whites">
             <div className="flex justify-center text-white text-xl">Anmodning</div>
             <div className="flex justify-evenly mt-2 w-full">
-                <div className="flex items-start justify-center m-2">
+                <div className="flex items-start justify-center ml-2">
                     <img
                         src={data.bike.image.obj_url}
                         alt="alt"
-                        className="rounded-lg w-[56px] h-[56px] text-sm"
+                        className="rounded-lg w-[56px] h-[56px] text-sm mt-3"
                     />
                 </div>
 

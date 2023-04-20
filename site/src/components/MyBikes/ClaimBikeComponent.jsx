@@ -63,7 +63,8 @@ export const ClaimBikeComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="flex flex-col h-full items-center justify-center bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+        <div className="flex flex-col mx-auto items-center rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4"
+            style={{ maxWidth: "425px" }}>
             <motion.div
                 transition={{ layout: { duration: 1, type: "spring" } }}
                 layout="position"
@@ -72,18 +73,18 @@ export const ClaimBikeComponent = () => {
                     <img
                         src="../src/assets/bicycle-svgrepo.svg"
                         alt="Bike"
-                        className="mx-auto py-4"
+                        className="mx-auto mb-4"
                         width="300px"
                     />
                 </button>
             </motion.div>
-            <div className="self-center justify-center text-l font-light text-gray-800 sm:text-4xl dark:text-white">
+            <div className="self-center justify-center text-l font-light text-gray-800 sm:text-2xl dark:text-white">
                 Hej!
             </div>
-            <div className="self-center justify-center text-m font-light text-gray-800 sm:text-3xl dark:text-white">
+            <div className="self-center justify-center text-m font-light text-gray-800 sm:text-lg dark:text-white">
                 Vi kan se at du ikke har en cykel endnu
             </div>
-            <div className="flex justify-center mb-4 text-l font-light text-gray-800 sm:text-3xl dark:text-white">
+            <div className="self-center justify-center mb-4 text-l font-light text-gray-800 sm:text-lg dark:text-white">
                 Indløs din første cykel ved at trykke på cyklen
             </div>
 
@@ -92,7 +93,7 @@ export const ClaimBikeComponent = () => {
                 <motion.div>
                     <form
                         action="#"
-                        className='p-6'
+                        className='p-4'
                         onSubmit={handleSubmit(onSubmit)}>
                         <div className='space-y-2'>
                             <label className="font-light text-gray-800 dark:text-white">

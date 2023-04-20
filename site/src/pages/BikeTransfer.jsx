@@ -60,7 +60,7 @@ const BikeTransfer = () => {
 
   return (
     <LayoutWithBack title="Anmod om overføring">
-      <div className="flex flex-col space-y-4 p-4 bg-gray-800 rounded-md">
+      <div className="flex flex-col mx-auto space-y-4 p-4 bg-gray-800 rounded-md  max-w-[425px]">
 
         {/* Errors */}
         {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}

@@ -32,7 +32,7 @@ const ViewTransferDetail = () => {
     
     return (
         <LayoutWithBack title="Overførsel" isLoading={isLoading}>
-            {data && <div className="flex flex-col space-y-4 items-center p-4 bg-gray-800 rounded-lg">
+            {data && <div className="flex flex-col mx-auto space-y-4 items-center p-4 bg-gray-800 rounded-lg max-w-[425px]">
                 <h2 className="text-lg">
                     {user_id === data.sender.id && data.state === "pending"    && "Du er ved at overføre ejerskab"}
                     {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}
