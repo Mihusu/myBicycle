@@ -94,7 +94,7 @@ export const BikeComponent = ({ data, mutate }) => {
                 </div>
               </div>
               <button onClick={() => window.location.href = data.receipt.obj_url}>
-                <IoReceiptOutline className="mx-auto" color="white" size={32} />
+                <IoReceiptOutline download={data.receipt.obj_url} className="mx-auto" color="white" size={32} />
               </button>
             </div>
 

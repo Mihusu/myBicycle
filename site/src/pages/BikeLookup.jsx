@@ -56,14 +56,14 @@ export const BikeLookup = () => {
           </div>
         )}
         {/* Search for bike input field */}
-        <form onSubmit={handleSubmit} className="flex items-center justify-center mx-2 my-2">
+        <form onSubmit={handleSubmit} className="mx-2 my-2 w-full md:w-1/2">
           <label
             htmlFor="default-search"
             className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Søg på stelnummer om cykel er meldt stjålet
           </label>
-          <div className="relative w-96">
+          <div className="relative">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
                 aria-hidden="true"

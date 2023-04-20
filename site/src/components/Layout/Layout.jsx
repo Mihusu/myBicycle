@@ -34,7 +34,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
         {/* Sidebar */}
         <div
-          className={`absolute top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
+          className={`absolute top-0 -right-64 h-full w-3/5 rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
             showSidebar ? "-translate-x-64" : "translate-x-0"
           } `}
         >
@@ -45,16 +45,16 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
             >
               X
             </li>
-
-            <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
             <Link to="/claimbike">
               <li className="rounded-sm px-16 hover:bg-orange-400">
                 Indløs cykel
               </li>
             </Link>
 
+            <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
+
             <Link to="/bikelookup">
-              <li className="rounded-sm hover:bg-orange-400">
+              <li className="rounded-sm px-16 hover:bg-orange-400">
                 Søg efter stelnummer
               </li>
             </Link>
