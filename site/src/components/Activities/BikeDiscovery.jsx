@@ -8,7 +8,7 @@ export const BikeDiscovery = ({ data }) => {
       <div className="flex w-full justify-evenly">
         <div className="flex items-center justify-center">
           <img
-            src={data.bike.image.obj_url}
+            src={data.image.obj_url}
             alt="alt"
             className="h-[64px] w-[64px] rounded-lg text-sm"
           />
@@ -20,7 +20,7 @@ export const BikeDiscovery = ({ data }) => {
           </h1>
 
           <h4 className="text-xs">
-            Dato: {new Date(data.closed_at).toLocaleDateString()}
+            Dato: {new Date(data.created_at).toLocaleDateString()}
           </h4>
         </div>
 

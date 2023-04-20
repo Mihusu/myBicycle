@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 import { useLocation, useParams } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 
 const API_URL = import.meta.env.VITE_API_URL;
+const token = secureLocalStorage.getItem("accesstoken")
 
 export const BikeReportFound = () => {
   const { frame_number: frameNumber } = useParams();
   const location = useLocation()
+  const navigate = useNavigate();
+  
   let userId = "";
 
   if (location.state != null) {
@@ -40,21 +44,25 @@ export const BikeReportFound = () => {
       }
     }
     formData.append("frame_number", frameNumber);
-    formData.append("bike_owner_id", userId);
+    formData.append("bike_owner", userId);
 
     console.log(`formData object: `, (Object.fromEntries(formData.entries())));
 
-    const response = await fetch(API_URL + "/discoveries", {
+    const response = await fetch(API_URL + "/bikes/discoveries", {
       method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
       body: formData,
     });
 
     const body = await response.json();
     if (response.ok) {
-      console.log(body.detail);
+      navigate("/mybikes")
+      console.log(body.detail.message);
     }
     if (!response.ok) {
-      console.log(body.detail);
+      console.log(body.detail.message);
       return;
     }
 

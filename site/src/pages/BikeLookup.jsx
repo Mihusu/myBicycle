@@ -107,7 +107,7 @@ export const BikeLookup = () => {
           <div className="flex justify-center w-full">
           <button
             type="button"
-            onClick={() => navigate(`/bikereportfound/${bikeData.frameNumber}`, {
+            onClick={() => navigate(`/bikereportfound/${bikeData.frame_number}`, {
               state: { userId: bikeData.owner },
             })}
             className="flex w-fit mx-2 my-2 py-2 px-4 rounded-lg bg-blue-600 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200  disabled:opacity-25"
