@@ -46,7 +46,6 @@ function App() {
         />
         <Route path="/choosepassword" element={<ChoosePassword />} />
         <Route path="/deviceverify" element={<DeviceVerify />} />
-          <Route path="/bikelookup" element={<BikeLookup />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/mybikes" element={<MyBikes />} />
@@ -61,9 +60,10 @@ function App() {
             element={<ViewTransferDetail />}
           />
           <Route path="/claimbike" element={<ClaimBikePage />} />
-          <Route path="/bikereportfound" element={<BikeReportFound />} />
+          <Route path="/bikelookup" element={<BikeLookup />} />
+          <Route path="/bikereportfound/:frame_number" element={<BikeReportFound />} />
         </Route>
-
+        
         <Route path="/Storelogin" element={<StoreLogin />} />
       </Routes>
     </div>
