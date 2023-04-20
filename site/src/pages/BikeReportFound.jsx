@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
-import { useNavigate } from "react-router-dom";
+
 const API_URL = import.meta.env.VITE_API_URL;
 const token = secureLocalStorage.getItem("accesstoken");
 
