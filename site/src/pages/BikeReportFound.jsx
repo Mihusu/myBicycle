@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const BikeReportFound = () => {
   const { frame_number: frameNumber } = useParams();
+  const location = useLocation()
+  let userId = "";
+
+  if (location.state != null) {
+    userId = location.state.userId;
+  }
+
   // const [location, setLocation] = useState(null);
   const { register, handleSubmit, setValue, setError, formState: {errors} } = useForm({
     defaultValues: {
@@ -33,6 +40,8 @@ export const BikeReportFound = () => {
       }
     }
     formData.append("frame_number", frameNumber);
+    formData.append("bike_owner_id", userId);
+
     console.log(`formData object: `, (Object.fromEntries(formData.entries())));
 
     const response = await fetch(API_URL + "/discoveries", {
