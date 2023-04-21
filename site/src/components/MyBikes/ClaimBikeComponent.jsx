@@ -63,8 +63,7 @@ export const ClaimBikeComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="flex flex-col mx-auto items-center rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4"
-            style={{ maxWidth: "425px" }}>
+        <div className="flex flex-col mx-auto max-w-[425px] items-center rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4">
             <motion.div
                 transition={{ layout: { duration: 1, type: "spring" } }}
                 layout="position"

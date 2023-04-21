@@ -27,9 +27,7 @@ export const BikeComponent = ({ data, mutate }) => {
 
   return (
     <div
-      className="mx-auto mb-4 flex rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10"
-      style={{ maxWidth: "425px" }}
-    >
+      className="mx-auto mb-4 max-w-[425px] flex rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
       <div className="m-0 flex flex-col justify-center px-4 ">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
@@ -40,11 +38,11 @@ export const BikeComponent = ({ data, mutate }) => {
           <img
             src={data.image.obj_url}
             alt="Bike"
-            className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'} "mx-auto py-10 object-scale-down w-[425px] h-[425px]" `}
+            className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'} "mx-auto mt-8 mb-2 object-scale-down w-[425px] h-[425px]" `}
           />
         </motion.div>
 
-        <div className="flex flex-col items-center justify-center py-2 text-sm">
+        <div className="flex flex-col items-center justify-center mt-2 mb-1 text-sm">
           <p className="font-semibold text-white">Model: </p>
           <p className="text-white">{data.brand}</p>
           <p className="font-semibold text-white">Stelnummer:</p>
@@ -52,10 +50,10 @@ export const BikeComponent = ({ data, mutate }) => {
         </div>
 
         {isOpen && (
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-4">
             {/* Bike info */}
 
-            <div className="flex flex-col items-center justify-center py-1 text-sm">
+            <div className="flex flex-col items-center justify-center text-sm">
               <div className="flex justify-between space-x-4">
                 <div className="flex w-full justify-between">
                   <p className="font-semibold text-white mr-1">Oprettelses dato: </p>
@@ -77,20 +75,20 @@ export const BikeComponent = ({ data, mutate }) => {
                   </p>
                 </div>
 
-                <div className="flex w-full justify-evenly py-1">
+                <div className="flex w-full justify-evenly mb-1">
                   <p className="font-semibold text-white">Slags:
                     <span className="font-light text-white"> {data.kind}</span>
                   </p>
                 </div>
 
-                <div className="flex w-full justify-evenly py-1">
-                  <p className="font-semibold text-white">Farve:</p>
+                <div className="flex w-full justify-center mb-1">
+                  <p className="font-semibold text-white mr-1">Farve:</p>
                   <p className="font-light text-white">{data.color}</p>
                 </div>
 
-                <div className="flex w-full justify-evenly py-1">
+                <div className="flex w-full justify-evenly mb-1">
                   <p className="font-semibold text-white mr-1">Mærke: </p>
-                  <span className="text-white"> {data.brand}</span>
+                  <p className="text-white"> {data.brand}</p>
                 </div>
               </div>
               <button onClick={() => window.location.href = data.receipt.obj_url}>
@@ -102,7 +100,7 @@ export const BikeComponent = ({ data, mutate }) => {
 
             {/* Transfer */}
             {data.state === "transferable" && (
-              <div className="flex justify-evenly py-3">
+              <div className="flex justify-evenly mt-3">
                 <button
                   onClick={() => navigate(`/transferbike/${data._id}`)}
                   className="btn-info btn"
