@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 export const BikeDiscovery = ({ data }) => {
   return (
-    <Link to="/discoveryreport/${data.id" state={{ info: data }}>
+    <Link to={`/discoveryreport/${data.id}`} state={{ info: data }}>
       <div className="dark:text-whites mx-auto flex max-w-[425px] rounded-lg bg-gray-800 py-4 shadow">
         {/* Old bike requests */}
         <div className="flex w-full justify-evenly">
