@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Footer } from "../components/Layout/Footer";
 import { BikeInfo } from "../components/MyBikes/BikeInfo";
 import secureLocalStorage from "react-secure-storage";
 import { Layout } from "../components/Layout/Layout";
@@ -56,7 +55,7 @@ export const BikeLookup = () => {
           </div>
         )}
         {/* Search for bike input field */}
-        <form onSubmit={handleSubmit} className="flex items-center justify-center p-4">
+        <form onSubmit={handleSubmit} className="flex items-center justify-center p-2">
           <label
             htmlFor="default-search"
             className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -99,7 +98,7 @@ export const BikeLookup = () => {
         </form>
 
         {/* Bike information */}
-        {bikeData && <BikeInfo data={bikeData} />}
+        {bikeData && <div className="flex justify-center items-center mb-2"> <BikeInfo data={bikeData} /> </div>}
 
         {/* Report found button */}
         {/* Can also be redered conditionally on isStolen instead of bikeFound */}

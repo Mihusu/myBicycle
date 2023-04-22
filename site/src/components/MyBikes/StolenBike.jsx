@@ -15,6 +15,7 @@ const get_one_bike = async (url, token) => {
   return await response.json();
 }
 
+// Is this entire component deprecated?
 export const StolenBike = ({ id }) => {
 
   const { data, mutate, error } = useSWR(
