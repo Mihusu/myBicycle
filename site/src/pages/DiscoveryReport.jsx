@@ -7,17 +7,19 @@ export const DiscoveryReport = ({}) => {
   const { state } = useLocation();
 
   return (
-    <div className="">
-      <h1>Rapport af fundet cykel: {state.info.frame_number}</h1>
-      <img src={state.info.image.obj_url} alt="alt" />
-
+    <Layout title="Aktiviteter" isLoading={isLoading}>
       <div className="">
-        <h2>Fundet ved følgende adresse:</h2>
-        <span>{state.info.address}</span>
-        <h2>Beskrivelse:</h2>
-        <span>{state.info.comment}</span>
+        <h1>Rapport af fundet cykel: {state.info.frame_number}</h1>
+        <img src={state.info.image.obj_url} alt="alt" />
+
+        <div className="">
+          <h2>Fundet ved følgende adresse:</h2>
+          <span>{state.info.address}</span>
+          <h2>Beskrivelse:</h2>
+          <span>{state.info.comment}</span>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
