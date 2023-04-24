@@ -34,7 +34,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
         {/* Sidebar */}
         <div
-          className={`absolute top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
+          className={`fixed top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
             showSidebar ? "-translate-x-64" : "translate-x-0"
           } `}
         >
