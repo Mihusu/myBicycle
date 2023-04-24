@@ -93,6 +93,19 @@ export const LoginPage = () => {
 
     };
 
+    const tooEarlySmsRequest = (error) => {
+        const { cooldown_expires_at } = error.detail;
+
+        setError("Du har for nyligt forsøgt at logge ind på en ukendt enhed");
+
+        const timeDeltaSeconds = Math.floor((new Date(cooldown_expires_at).getTime() - Date.now()) / 1000);
+
+        if (!cooldownStarted) {
+            setCdSeconds(timeDeltaSeconds);
+            setCooldownStarted(true);
+        }
+    }
+
     const onSubmit = async (data) => {
         setIsSubmitting(true);
 
@@ -112,6 +125,7 @@ export const LoginPage = () => {
             case 401: onInvalidCredentials(result); break;
             case 404: onUserNotFound(result); break;
             case 423: onBlacklisted(result); break;
+            case 425: tooEarlySmsRequest(result); break;
             case 429: onCooldownPenalty(result); break;
         }
 
@@ -126,9 +140,22 @@ export const LoginPage = () => {
                     <div className="p-4 rounded-lg bg-error text-white">
                         {error}
                         {/* Cooldown */}
-                        {cdSeconds > 0 && <p>Prøv igen om: {Number.parseInt(cdSeconds / 60)}:{cdSeconds % 60}</p>}
-
-                    </div>}
+                        {cdSeconds > 0 && (
+                            <p>
+                                Prøv igen om:{" "}
+                                {cdSeconds === 1
+                                    ? `${cdSeconds} sekund`
+                                    : cdSeconds < 60
+                                        ? `${cdSeconds} sekunder`
+                                        : cdSeconds == 61
+                                            ? `1 minut og 1 sekund`
+                                            : cdSeconds < 120
+                                                ? `1 minut og ${cdSeconds % 60} sekunder`
+                                                : `${Number.parseInt(cdSeconds / 60)} minut${cdSeconds >= 120 && cdSeconds % 60 === 0 ? "ter" : "ter"} og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                            </p>
+                        )}
+                    </div>
+                }
 
                 {/* Use a form element to wrap the inputs and button */}
                 <form
@@ -167,24 +194,24 @@ export const LoginPage = () => {
                     <div className="flex flex-col justify-center items-center space-y-2 px-8">
 
                         <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
-                            {!isSubmitting && 
-                            <>
-                                Login
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="h-8 w-10 login-button"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                                    />
-                                </svg>
-                            </>}
+                            {!isSubmitting &&
+                                <>
+                                    Login
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="h-8 w-10 login-button"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                        />
+                                    </svg>
+                                </>}
                         </button>
 
                         <p>Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>
