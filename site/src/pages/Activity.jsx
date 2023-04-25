@@ -30,8 +30,6 @@ const ActivityPage = () => {
 
   if (error) return <div>failed to load, due to error {error}</div>;
 
-  console.log(data);
-
   // render data
   return (
     <Layout title="Aktiviteter" isLoading={isLoading}>

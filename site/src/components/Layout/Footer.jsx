@@ -37,13 +37,13 @@ export const Footer = ({ toggleSidebar }) => {
     return (
         <div className="fixed bottom-0 left-0 flex flex-row justify-around w-full items-center sm:px-6 md:px-8 lg:px-10 bg-gray-800 border-t border-white rounded-t-md">
             <div className="flex btm-nav-lg py-1 mt-auto sm:px-6 md:px-8 lg:px-10">
-                <Link to="/mybikes">
+                <Link to="/mybikes" reloadDocument="true">
                     <button className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
                         <MdDirectionsBike className="mx-auto" color="white" size={40} />
                         <p className="text-sky-400/100">Hjem</p>
                     </button>
                 </Link>
-                <Link to="/activities">
+                <Link to="/activities" reloadDocument="true">
                     <button className="flex rounded hover:bg-orange-500 dropdown-active px-8 py-1">
                         <div className="relative flex flex-col space-y-1">
                             <TbActivityHeartbeat className="mx-auto" color="white" size={40} />

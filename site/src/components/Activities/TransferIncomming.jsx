@@ -1,11 +1,12 @@
 import React from "react";
 import secureLocalStorage from "react-secure-storage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const TransferIncomming = ({ data }) => {
-
+    
+    const navigate = useNavigate()
     async function declineBikeRequest() {
         const decline_bike_request =
             API_URL + `/transfers/${data.transfer_id}/reject`;
@@ -21,6 +22,7 @@ export const TransferIncomming = ({ data }) => {
 
         const res = await response.json();
         console.log(res);
+        navigate(0)
     }
 
     return (

@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { Layout } from "../components/Layout/Layout";
 
 // This page will handle the info of a missing/stolen bike that has been found.
 export const DiscoveryReport = ({}) => {
@@ -7,7 +8,7 @@ export const DiscoveryReport = ({}) => {
   const { state } = useLocation();
 
   return (
-    <Layout title="Aktiviteter" isLoading={isLoading}>
+    <Layout title="Aktiviteter">
       <div className="">
         <h1>Rapport af fundet cykel: {state.info.frame_number}</h1>
         <img src={state.info.image.obj_url} alt="alt" />

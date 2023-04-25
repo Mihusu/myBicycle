@@ -36,7 +36,7 @@ export const BikeComponent = ({ data, mutate }) => {
           className="flex cursor-pointer flex-col space-y-2 rounded-lg bg-gradient-to-r to-blue-500"
         >
           <img
-            src={data.image.obj_url}
+            src={data ? data.image.obj_url : "no url"}
             alt="Bike"
             className={`${data.state === "in_transfer" ? 'opacity-30' : 'opacity-100'} "mx-auto mt-8 mb-2 object-scale-down w-[425px] h-[425px]" `}
           />
@@ -103,7 +103,7 @@ export const BikeComponent = ({ data, mutate }) => {
               <div className="flex justify-evenly mt-3">
                 <button
                   onClick={() => navigate(`/transferbike/${data._id}`)}
-                  className="btn-info btn"
+                  className="btn btn-info hover:bg-blue-300"
                 >
                   Overfør cykel
                 </button>
@@ -111,14 +111,14 @@ export const BikeComponent = ({ data, mutate }) => {
                 {data.reported_stolen ? (
                   <button
                     onClick={reportStolen}
-                    className="btn-info btn"
+                    className="btn bg-orange-500 hover:bg-orange-300 text-black"
                   >
                     Rapporter fundet
                   </button>
                 ) : (
                   <button
                     onClick={reportStolen}
-                    className="btn-warning btn"
+                    className="btn btn-warning hover:bg-yellow-300"
                   >
                     Anmeld stjålet
                   </button>

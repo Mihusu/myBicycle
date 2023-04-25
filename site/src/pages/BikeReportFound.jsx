@@ -39,7 +39,7 @@ export const BikeReportFound = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("submitting data: ", data);
+      // console.log("submitting data: ", data);
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -51,7 +51,7 @@ export const BikeReportFound = () => {
       formData.append("frame_number", frameNumber);
       formData.append("bike_owner", userId);
 
-      console.log(`formData object: `, Object.fromEntries(formData.entries()));
+      // console.log(`formData object: `, Object.fromEntries(formData.entries()));
 
       const response = await fetch(API_URL + "/bikes/discoveries", {
         method: "POST",
@@ -64,7 +64,7 @@ export const BikeReportFound = () => {
       const body = await response.json();
       if (response.ok) {
         navigate("/mybikes");
-        console.log(body.detail);
+        // console.log(body.detail);
       }
       if (!response.ok) {
         console.log(body.detail);
@@ -110,7 +110,7 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center bg-white">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] bg-white">
           {/* Find my location button */}
           <button className="btn-info btn" onClick={() => findLocation()}>
             Find min lokation
@@ -162,6 +162,7 @@ export const BikeReportFound = () => {
               {/* Images */}
               <div className="py-8">
                 {/* <DropZoneComponent></DropZoneComponent> */}
+                <h1 className="mb-2">Upload billede af lokation</h1>
                 <input
                   type="file"
                   id="file-image"
@@ -169,7 +170,7 @@ export const BikeReportFound = () => {
                 />
               </div>
 
-              <div className="my-4 flex w-full">
+              <div className="my-4 flex justify-center w-full">
                 <button
                   type="submit"
                   className="w-full rounded-lg bg-purple-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 "

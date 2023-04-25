@@ -44,7 +44,7 @@ export const BikeLookup = () => {
   };
 
   useEffect(() => {
-    console.log("hello from useEffect()");
+    // console.log("hello from useEffect()");
   }, [bikeFound, bikeData]);
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 
+// find out if this is unused and deprecated
 export const TransferBike = () => {
   return (
     <div className="m-0 box-border flex flex-col justify-center px-4 ">

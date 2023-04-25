@@ -42,8 +42,6 @@ const BikeTransfer = () => {
 
       const body = await response.json();
 
-      console.log(body);
-
       if (!(response).ok) {
         setError(body.detail);
         return

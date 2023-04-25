@@ -18,7 +18,7 @@ export const BikeInfo = ({ data }) => {
   }
 
   return (
-    <div className="flex w-full rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 md:w-1/2">
+    <div className="flex w-full mx-auto rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 md:w-1/2">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
           layout="position"
@@ -29,9 +29,8 @@ export const BikeInfo = ({ data }) => {
           <img
             src={data.image.obj_url}
             alt="Bike"
-            className={`${
-              data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-            } "mx-auto sm:px-2 md:px-4 lg:px-6 h-[425px]" w-[425px] object-scale-down py-4 `}
+            className={
+            "mx-auto sm:px-2 md:px-4 lg:px-6 h-[425px] w-[425px] py-4 "}
           />
         
 
