@@ -103,7 +103,7 @@ export const BikeComponent = ({ data, mutate }) => {
               <div className="flex justify-evenly mt-3">
                 <button
                   onClick={() => navigate(`/transferbike/${data._id}`)}
-                  className="btn btn-info hover:bg-blue-300"
+                  className="btn btn-info hover:bg-blue-300 ml-2"
                 >
                   Overfør cykel
                 </button>
@@ -111,14 +111,14 @@ export const BikeComponent = ({ data, mutate }) => {
                 {data.reported_stolen ? (
                   <button
                     onClick={reportStolen}
-                    className="btn bg-orange-500 hover:bg-orange-300 text-black"
+                    className="btn bg-orange-500 hover:bg-orange-300 text-black ml-3"
                   >
                     Rapporter fundet
                   </button>
                 ) : (
                   <button
                     onClick={reportStolen}
-                    className="btn btn-warning hover:bg-yellow-300"
+                    className="btn btn-warning hover:bg-yellow-300 ml-3" 
                   >
                     Anmeld stjålet
                   </button>

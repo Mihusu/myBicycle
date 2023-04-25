@@ -110,20 +110,20 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] bg-white">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
           {/* Find my location button */}
-          <button className="btn-info btn" onClick={() => findLocation()}>
+          <button className="btn-info btn mt-8" onClick={() => findLocation()}>
             Find min lokation
           </button>
 
           {/* Address form */}
-          <div className="mt-8 p-6">
+          <div className="p-6">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-2 flex flex-col">
+              <div className="mb-6 flex flex-col">
                 <div className="relative">
-                  <h1 className="text-purple-300">
+                  <h1 className="text-white mb-2">
                     Angiv adressen hvor cyklen er fundet eller tryk på "Find min
-                    lokation"
+                    lokation":
                     <span className="required-dot text-red-500"> *</span>
                   </h1>
                   <input
@@ -133,7 +133,7 @@ export const BikeReportFound = () => {
                     {...register("address", { required: true })}
                   />
                   {errors.address && (
-                    <span className="text-red-300">This field is required</span>
+                    <span className="text-red-400">This field is required</span>
                   )}
                   {/* <input
                   type="text"
@@ -145,11 +145,11 @@ export const BikeReportFound = () => {
                 </div>
               </div>
 
-              <label className="text-purple-300" htmlFor="name">
+              <label className="text-white">
                 Eventuel kommentar
               </label>
               <textarea
-                className="w-full flex-1 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="w-full flex-1 mt-2 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                 id="comment"
                 placeholder="Fx dine kontaktoplysninger eller andre noter angående cykelfundet"
                 name="comment"
@@ -160,9 +160,11 @@ export const BikeReportFound = () => {
               ></textarea>
 
               {/* Images */}
-              <div className="py-8">
+              <div className="py-4">
                 {/* <DropZoneComponent></DropZoneComponent> */}
-                <h1 className="mb-2">Upload billede af lokation</h1>
+                <h1 className="text-white mb-2">Upload billede af lokation:
+                  <span className="required-dot text-red-500"> *</span>
+                </h1>
                 <input
                   type="file"
                   id="file-image"
