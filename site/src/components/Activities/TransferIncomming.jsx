@@ -41,7 +41,7 @@ export const TransferIncomming = ({ data }) => {
                     </h1>
 
                     <p className="flex-wrap items-start text-sm break-words">
-                        Du har modtaget en anmodning om nyt ejerskab
+                        Du har modtaget et tilbud om at overtage ejerskab
                     </p>
 
                     <h4 className="text-xs">Dato: {new Date(data.created_at).toLocaleDateString()}</h4>
@@ -49,9 +49,9 @@ export const TransferIncomming = ({ data }) => {
             </div>
 
             {/* Actions */}
-            <div className="mt-4" style={{ display: "flex", justifyContent: "center" }}>
+            <div className="flex justify-center mt-4">
                 <button
-                    className="btn bg-red-600 w-40 max-w-xs text-white"
+                    className="btn bg-red-600 w-40 max-w-xs text-white mr-2"
                     type="submit"
                     onClick={() => declineBikeRequest()}
                 >
@@ -59,7 +59,7 @@ export const TransferIncomming = ({ data }) => {
                 </button>
                 <Link to={`/transfers/accept/${data.transfer_id}`}>
                     <button
-                        className="btn bg-sky-400 w-40 max-w-xs text-white"
+                        className="btn bg-sky-400 w-40 max-w-xs text-white ml-2"
                         type="button"
                     >
                         Åbn
