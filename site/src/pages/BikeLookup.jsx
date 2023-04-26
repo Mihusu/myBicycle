@@ -8,7 +8,7 @@ export const BikeLookup = () => {
   const navigate = useNavigate();
   const [bikeFound, setBikeFound] = useState(false);
   const [frameNumber, setFrameNumber] = useState("");
-  const [error, setError] = useState("Cykel ikke fundet");
+  const [error, setError] = useState(null);
   const [bikeData, setBikeData] = useState(null);
   const [isStolen, setIsStolen] = useState(false);
 
