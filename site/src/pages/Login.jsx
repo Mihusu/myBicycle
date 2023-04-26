@@ -20,7 +20,6 @@ const get_user_details = async (url, token) => {
     return await response.json()
 }
 
-
 export const LoginPage = () => {
 
     const [error, setError] = useState("");
@@ -56,7 +55,7 @@ export const LoginPage = () => {
         navigate(`/mybikes`, { replace: true });
     };
 
-    const onUnkownDevice = (error) => {
+    const onUnknownDevice = (error) => {
         // Navigate to device verification page
         navigate('/deviceverify/' + error.detail.session_id);
     };
@@ -121,7 +120,7 @@ export const LoginPage = () => {
 
         switch (response.status) {
             case 200: await onAuthOkay(result); break;
-            case 307: onUnkownDevice(result); break;
+            case 307: onUnknownDevice(result); break;
             case 401: onInvalidCredentials(result); break;
             case 404: onUserNotFound(result); break;
             case 423: onBlacklisted(result); break;
@@ -151,7 +150,7 @@ export const LoginPage = () => {
                                             ? `1 minut og 1 sekund`
                                             : cdSeconds < 120
                                                 ? `1 minut og ${cdSeconds % 60} sekunder`
-                                                : `${Number.parseInt(cdSeconds / 60)} minut${cdSeconds >= 120 && cdSeconds % 60 === 0 ? "ter" : "ter"} og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                                                : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
                             </p>
                         )}
                     </div>
@@ -211,7 +210,8 @@ export const LoginPage = () => {
                                             d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                                         />
                                     </svg>
-                                </>}
+                                </>
+                            }
                         </button>
 
                         <p>Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>

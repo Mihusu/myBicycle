@@ -42,13 +42,14 @@ const PhoneRegistration = () => {
       });
       
       const body = await response.json();
+      console.log(body)
 
       if (!response.ok) {
         setResError(body.detail);
         return;
       }
 
-      navigate(`/smsverification/${body.session_id}`);
+      navigate(`/smsverification/${body.session_id}`, {state: { otp_expires_at: body.expires_at }});
 
     } catch (error) {
       console.log(error);
