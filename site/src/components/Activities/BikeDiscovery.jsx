@@ -17,7 +17,8 @@ export const BikeDiscovery = ({ data }) => {
 
           <div className="flex flex-col">
             <h1 className="text-lg text-white">
-              Fundet cykel med følgende stelnummer:{data.frame_number}
+              Fundet cykel med følgende stelnummer:
+              <span className="text-gray-300">{data.frame_number}</span>
             </h1>
 
             <h4 className="text-xs">
