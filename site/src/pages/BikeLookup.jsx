@@ -8,7 +8,7 @@ export const BikeLookup = () => {
   const navigate = useNavigate();
   const [bikeFound, setBikeFound] = useState(false);
   const [frameNumber, setFrameNumber] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("Cykel ikke fundet");
   const [bikeData, setBikeData] = useState(null);
   const [isStolen, setIsStolen] = useState(false);
 
@@ -35,7 +35,7 @@ export const BikeLookup = () => {
       } else {
         setBikeFound(false);
         setBikeData(null);
-        setError(response.statusText);
+        setError("Cykel ikke fundet");
         console.error(response.statusText);
       }
     } catch (e) {
@@ -49,67 +49,78 @@ export const BikeLookup = () => {
 
   return (
     <Layout title="Søg efter cykel">
-        {error && (
-          <div className="mb-2 rounded-lg bg-red-500 px-2 py-2 text-black">
-            {error}
-          </div>
-        )}
-        {/* Search for bike input field */}
-        <form onSubmit={handleSubmit} className="flex items-center justify-center p-2">
-          <label
-            htmlFor="default-search"
-            className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Søg på stelnummer om cykel er meldt stjålet
-          </label>
-          <div className="relative w-96">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg
-                aria-hidden="true"
-                className="h-5 w-5 text-gray-500 dark:text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </div>
-            <input
-              type="search"
-              id="default-search"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder="Søg på stelnummer"
-              onChange={(e) => setFrameNumber(e.target.value)}
-              required
-            />
-            <button
-              type="submit"
-              className="absolute right-2.5 bottom-2.5 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      {error && (
+        <div className="mx-auto mb-2 max-w-[425px] rounded-lg bg-red-500 px-2 py-2 text-black">
+          {error}
+        </div>
+      )}
+      {/* Search for bike input field */}
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center justify-center p-2"
+      >
+        <label
+          htmlFor="default-search"
+          className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Søg på stelnummer om cykel er meldt stjålet
+        </label>
+        <div className="relative w-96">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg
+              aria-hidden="true"
+              className="h-5 w-5 text-gray-500 dark:text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              Søg
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
           </div>
-        </form>
 
-        {/* Bike information */}
-        {bikeData && <div className="flex justify-center items-center mb-2"> <BikeInfo data={bikeData} /> </div>}
+          <input
+            type="search"
+            id="default-search"
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            placeholder="Søg på stelnummer"
+            onChange={(e) => setFrameNumber(e.target.value)}
+            required
+          />
+          <button
+            type="submit"
+            className="absolute right-2.5 bottom-2.5 rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Søg
+          </button>
+        </div>
+      </form>
 
-        {/* Report found button */}
-        {/* Can also be redered conditionally on isStolen instead of bikeFound */}
-        {bikeFound && (
-          <div className="flex justify-center w-full">
+      {/* Bike information */}
+      {bikeData && (
+        <div className="mb-2 flex items-center justify-center">
+          {" "}
+          <BikeInfo data={bikeData} />{" "}
+        </div>
+      )}
+
+      {/* Report found button */}
+      {/* Can also be redered conditionally on isStolen instead of bikeFound */}
+      {bikeFound && (
+        <div className="flex w-full justify-center">
           <button
             type="button"
-            onClick={() => navigate(`/bikereportfound/${bikeData.frame_number}`, {
-              state: { userId: bikeData.owner },
-            })}
-            className="flex w-fit mx-2 my-2 py-2 px-4 rounded-lg bg-blue-600 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200  disabled:opacity-25"
+            onClick={() =>
+              navigate(`/bikereportfound/${bikeData.frame_number}`, {
+                state: { userId: bikeData.owner },
+              })
+            }
+            className="mx-2 my-2 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200  disabled:opacity-25"
             disabled={!isStolen}
           >
             Indrapporter
@@ -128,8 +139,8 @@ export const BikeLookup = () => {
               />
             </svg>
           </button>
-          </div>
-        )}
+        </div>
+      )}
     </Layout>
   );
 };
