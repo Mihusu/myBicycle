@@ -67,7 +67,7 @@ export const SmsVerification = () => {
 
   const onOtpIsNoLongerValid = (error) => {
     setError("Engangskoden er udløbet. Prøv at registrer dig igen.");
-};
+  };
 
   const onSubmit = async ({ otp }) => {
     setIsSubmitting(true);

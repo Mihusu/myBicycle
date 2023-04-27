@@ -75,23 +75,23 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="grid h-screen place-items-center p-4">
+    <div className="grid h-screen place-items-center   max-w-[425px] mx-auto">
       <form
-        className="flex w-full items-center justify-center self-center md:w-1/2 lg:w-1/3"
+        className="rounded-lg bg-white shadow dark:bg-gray-800"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <div className="rounded-lg bg-white px-8 py-8 shadow dark:bg-gray-800 sm:px-10 md:px-14 lg:px-20">
+        <div className="rounded-lg bg-white px-8 py-8 shadow dark:bg-gray-800">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
 
           {/* Errors */}
           {resError && <div className="p-4 rounded-lg bg-error text-white max-w-xs">{resError}</div>}
 
-          <div className="self-center py-2 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
+          <div className="self-center px-4 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
             Tlf nr.
             <span className="required-dot text-red-500"> *</span>
           </div>
           <label className="font-light text-gray-800 dark:text-white"></label>
-          <div className="form-control w-full max-w-xs">
+          <div className="form-control px-4 py-2 w-full max-w-xs">
             <PhoneNumber
               name="phoneNumber"
               control={control}
@@ -100,7 +100,7 @@ const PhoneRegistration = () => {
             <div />
 
             {/* password */}
-            <div className="pt-4 pb-2 font-light text-gray-800 dark:text-white">
+            <div className="pt-4 pb-2 font-light text-gray-400 dark:text-white">
               Vælg adgangskode
               <span className="required-dot text-red-500"> *</span>
             </div>
@@ -122,7 +122,7 @@ const PhoneRegistration = () => {
             {/* verify */}
             <div className="pt-4 pb-2">
               <label className="label">
-                <span className="font-light text-gray-800 dark:text-white">
+                <span className="font-light text-gray-400 dark:text-white">
                   Bekræft kode
                 </span>
               </label>
