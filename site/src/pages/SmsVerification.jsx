@@ -4,6 +4,8 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { HiArrowLeft } from "react-icons/hi";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const SmsVerification = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -13,7 +15,7 @@ export const SmsVerification = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { sessionId } = useParams();
+  const { session_id } = useParams();
   const [error, setError] = useState("");
   const [cdSeconds, setCdSeconds] = useState(0);
   const [timeRemainStarted, setTimeRemainStarted] = useState(false);
@@ -70,11 +72,11 @@ export const SmsVerification = () => {
   const onSubmit = async ({ otp }) => {
     setIsSubmitting(true);
 
-    const URI = `http://127.0.0.1:8000/auth/register/me/check-otp`;
+    const URI =  API_URL + `/auth/register/me/check-otp`;
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ otp, sessionId }),
+      body: JSON.stringify({ otp, session_id }),
     };
 
     try {
