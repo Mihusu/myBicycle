@@ -50,7 +50,7 @@ export const BikeLookup = () => {
   return (
     <Layout title="Søg efter cykel">
       {error && (
-        <div className="mx-auto mb-2 max-w-[425px] rounded-lg bg-red-500 px-2 py-2 text-black">
+        <div className="mx-auto mb-2 max-w-[385px] rounded-lg bg-red-500 px-2 py-2 text-black">
           {error}
         </div>
       )}

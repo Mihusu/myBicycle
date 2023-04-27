@@ -42,14 +42,13 @@ const PhoneRegistration = () => {
       });
       
       const body = await response.json();
-      console.log(body)
 
       if (!response.ok) {
-        setResError(body.detail);
+        setResError(`Der findes allerede en cykelejer med det opgivet telefonnummer: ${data.phoneNumber}`);
         return;
       }
 
-      navigate(`/smsverification/${body.session_id}`, {state: { otp_expires_at: body.expires_at }});
+      navigate(`/smsverification/${body.session_id}`, { state: { otp_expires_at: body.expires_at }});
 
     } catch (error) {
       console.log(error);
@@ -81,11 +80,11 @@ const PhoneRegistration = () => {
         className="flex w-full items-center justify-center self-center md:w-1/2 lg:w-1/3"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <div className="rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-20">
+        <div className="rounded-lg bg-white px-8 py-8 shadow dark:bg-gray-800 sm:px-10 md:px-14 lg:px-20">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
 
           {/* Errors */}
-          {resError && <div className="p-4 rounded-lg bg-error text-white">{resError}</div>}
+          {resError && <div className="p-4 rounded-lg bg-error text-white max-w-xs">{resError}</div>}
 
           <div className="self-center py-2 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
             Tlf nr.
@@ -109,7 +108,7 @@ const PhoneRegistration = () => {
             <div className="">
               <input
                 type="password"
-                placeholder="Adgangskode"
+                placeholder="Skal indeholde 12 tegn eller derover"
                 className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                 {...register(
                   "password",
