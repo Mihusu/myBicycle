@@ -25,7 +25,8 @@ const ActivityPage = () => {
 
   const { data, error, isLoading } = useSWR(
     [API_URL + "/activities", token],
-    ([url, token]) => get_bike_requests(url, token)
+    ([url, token]) => get_bike_requests(url, token), 
+    { refreshInterval: 5000 }
   );
 
   if (error) return <div>failed to load, due to error {error}</div>;

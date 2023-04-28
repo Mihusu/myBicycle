@@ -31,7 +31,8 @@ const ViewTransferAccept = () => {
 
   const { data, error, isLoading } = useSWR(
     [API_URL + `/transfers/${transfer_id}`, token],
-    ([url, token]) => get_bike_request(url, token)
+    ([url, token]) => get_bike_request(url, token),
+    { refreshInterval: 5000 }
   );
 
   if (error && error.message === "404") {

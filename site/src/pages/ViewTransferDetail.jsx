@@ -25,7 +25,11 @@ const ViewTransferDetail = () => {
     const token = secureLocalStorage.getItem('accesstoken');
     const user_id = secureLocalStorage.getItem('user_id');
 
-    const { data, error, isLoading } = useSWR([API_URL + `/transfers/${transfer_id}`, token], ([url, token]) => get_bike_request_detail(url, token))
+    const { data, error, isLoading } = useSWR(
+        [API_URL + `/transfers/${transfer_id}`, token], 
+        ([url, token]) => get_bike_request_detail(url, token),
+        { refreshInterval: 5000 }
+        );
 
     if (error) return <div>failed to load, due to error {error}</div>
     
