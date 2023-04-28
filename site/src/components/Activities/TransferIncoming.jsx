@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const TransferIncomming = ({ data }) => {
+export const TransferIncoming = ({ data }) => {
     
     const navigate = useNavigate()
     async function declineBikeRequest() {
@@ -21,7 +21,6 @@ export const TransferIncomming = ({ data }) => {
         });
 
         const res = await response.json();
-        console.log(res);
         navigate(0)
     }
 
@@ -56,7 +55,7 @@ export const TransferIncomming = ({ data }) => {
                     className="btn bg-red-600 w-40 max-w-xs text-white mr-2"
                     type="submit"
                     onClick={() => declineBikeRequest()}
-                >
+                    reloadDocument="true">
                     Afvis
                 </button>
                 <Link to={`/transfers/accept/${data.transfer_id}`}>

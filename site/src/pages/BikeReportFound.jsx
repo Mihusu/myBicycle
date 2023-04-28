@@ -175,9 +175,23 @@ export const BikeReportFound = () => {
               <div className="my-4 flex justify-center w-full">
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-purple-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 "
+                  className="flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600"
                 >
-                  Send
+                  <span className="mr-4">Send</span> 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
                 </button>
               </div>
             </form>

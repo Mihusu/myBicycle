@@ -61,7 +61,7 @@ const ViewTransferAccept = () => {
       {data && data.bike && (
         <>
           <BikeInfo data={data.bike} />
-          <div className="dark:text-whites mx-auto mt-8 flex max-w-[425px] rounded-lg bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
+          <div className="dark:text-whites mx-auto mt-8 flex max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
             <div className="mt-2 flex w-full justify-evenly">
               <div className="flex items-center justify-center">
                 <img

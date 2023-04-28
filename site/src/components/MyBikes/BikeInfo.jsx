@@ -30,7 +30,7 @@ export const BikeInfo = ({ data }) => {
             src={data.image.obj_url}
             alt="Bike"
             className={
-            "mx-auto sm:px-2 md:px-4 lg:px-6 h-[425px] w-[425px] py-4 "}
+            "mx-auto sm:px-2 md:px-4 lg:px-6 max-h-[425px] max-w-[370px] py-4 "}
           />
         
 
