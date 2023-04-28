@@ -15,8 +15,9 @@ const get_bike_request = async (url, token) => {
       Authorization: "Bearer " + token,
     },
   });
+
   const result = await response.json();
-//   console.log("status", response.status)
+
   if (!response.ok) {
     throw new Error(response.status)
   }
@@ -54,7 +55,7 @@ const ViewTransferAccept = () => {
     });
 
     const res = await response.json();
-    // console.log(res);
+
   }
 
   return (

@@ -42,7 +42,6 @@ export const SmsVerification = () => {
 
     const timeDeltaSeconds = Math.floor((new Date(otp_expires_at).getTime() - Date.now()) / 1000);
 
-    //console.log("time delta seconds ", timeDeltaSeconds);
     if (!timeRemainStarted) {
       setCdSeconds(timeDeltaSeconds);
       setTimeRemainStarted(true);

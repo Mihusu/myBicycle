@@ -39,7 +39,7 @@ export const BikeReportFound = () => {
 
   const onSubmit = async (data) => {
     try {
-      // console.log("submitting data: ", data);
+      
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -64,11 +64,12 @@ export const BikeReportFound = () => {
       const body = await response.json();
       if (response.ok) {
         navigate("/mybikes");
-        // console.log(body.detail);
+
       }
       if (!response.ok) {
         console.log(body.detail);
         return;
+        
       }
     } catch (error) {
       console.error(error);
