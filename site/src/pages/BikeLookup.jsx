@@ -61,7 +61,7 @@ export const BikeLookup = () => {
       >
         <label
           htmlFor="default-search"
-          className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="sr-only mb-2 text-sm font-medium border bg-gray-800 hover:shadow-xl dark:bg-gray-800 dark:text-white"
         >
           Søg på stelnummer om cykel er meldt stjålet
         </label>

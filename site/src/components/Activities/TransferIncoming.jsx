@@ -25,7 +25,7 @@ export const TransferIncoming = ({ data }) => {
     }
 
     return (
-        <div className="flex flex-col mx-auto max-w-[425px] rounded-lg bg-gray-800 py-4 shadow dark:text-whites">
+        <div className="flex flex-col mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow dark:text-whites">
             <div className="flex justify-center text-white text-xl">Anmodning</div>
             <div className="flex justify-evenly mt-2 w-full">
                 <div className="flex items-start justify-center ml-2">

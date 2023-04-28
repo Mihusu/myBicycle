@@ -110,7 +110,7 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
           {/* Find my location button */}
           <button className="btn-info btn mt-8" onClick={() => findLocation()}>
             Find min lokation
@@ -146,7 +146,7 @@ export const BikeReportFound = () => {
               </div>
 
               <label className="text-white">
-                Eventuel kommentar
+                Eventuel kommentar:
               </label>
               <textarea
                 className="w-full flex-1 mt-2 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
