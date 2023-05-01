@@ -134,49 +134,47 @@ export const LoginPage = () => {
     return (
         <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
             <div className="bg-white rounded-lg shadow dark:bg-gray-800">
-                {/* Errors */}
-                {error &&
-                    <div className="p-4 rounded-lg bg-error text-white">
-                        {error}
-                        {/* Cooldown */}
-                        {cdSeconds > 0 && (
-                            <p>
-                                Prøv igen om:{" "}
-                                {cdSeconds === 1
-                                    ? `${cdSeconds} sekund`
-                                    : cdSeconds < 60
-                                        ? `${cdSeconds} sekunder`
-                                        : cdSeconds == 61
-                                            ? `1 minut og 1 sekund`
-                                            : cdSeconds < 120
-                                                ? `1 minut og ${cdSeconds % 60} sekunder`
-                                                : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
-                            </p>
-                        )}
-                    </div>
-                }
-
                 {/* Use a form element to wrap the inputs and button */}
                 <form
-                    className="rounded-lg bg-white p-6 shadow dark:bg-gray-800"
+                    className="rounded-lg bg-white py-6 px-10 dark:bg-gray-800"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* Use input elements for phoneNumber and password */}
                     <h1 className="flex justify-center text-3xl mb-4">Login</h1>
-                    <div className="pb-2 font-light text-gray-800 dark:text-white px-6" >
-                        Tlf nr:
+                    {/* Errors */}
+                    {error &&
+                        <div className="p-4 my-4 rounded-lg bg-error text-white">
+                            {error}
+                            {/* Cooldown */}
+                            {cdSeconds > 0 && (
+                                <p>
+                                    Prøv igen om:{" "}
+                                    {cdSeconds === 1
+                                        ? `${cdSeconds} sekund`
+                                        : cdSeconds < 60
+                                            ? `${cdSeconds} sekunder`
+                                            : cdSeconds === 61
+                                                ? `1 minut og 1 sekund`
+                                                : cdSeconds < 120
+                                                    ? `1 minut og ${cdSeconds % 60} sekunder`
+                                                    : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                                </p>
+                            )}
+                        </div>
+                    }
+                    <div className="pb-2 font-light text-xl text-gray-800 dark:text-white" >
+                        Tlf nr.
                         <span className="required-dot text-red-500"> *</span>
                     </div>
 
                     <div className="flex flex-col space-y-2">
-                        <div className="px-6">
-                            <PhoneNumber
-                                name="phone_number"
-                                control={control}
-                                rules={{ required: true }}
-                            />
-                        </div>
-                        <div className='space-y-2 py-4 px-6'>
+                        <PhoneNumber
+                            name="phone_number"
+                            control={control}
+                            rules={{ required: true }}
+                        />
+
+                        <div className='space-y-2 py-4'>
                             <label className="font-light text-gray-800 dark:text-white">
                                 Adgangskode:
                                 <span className="text-red-500 required-dot"> *</span>
@@ -190,7 +188,7 @@ export const LoginPage = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-center items-center space-y-2 px-6">
+                    <div className="flex flex-col justify-center items-center space-y-2">
 
                         <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
                             {!isSubmitting &&

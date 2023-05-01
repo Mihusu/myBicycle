@@ -65,13 +65,13 @@ export const SmsVerification = () => {
   };
 
   const onOtpIsNoLongerValid = (error) => {
-    setError("Engangskoden er udløbet. Prøv at registrer dig igen.");
+    setError("Engangskoden er udløbet. Prøv at registrere dig igen.");
   };
 
   const onSubmit = async ({ otp }) => {
     setIsSubmitting(true);
 
-    const URI =  API_URL + `/auth/register/me/check-otp`;
+    const URI = API_URL + `/auth/register/me/check-otp`;
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -85,7 +85,7 @@ export const SmsVerification = () => {
         const data = await response.json();
         onAuthOkay(data);
 
-      } else if(response.status == 410) {
+      } else if (response.status == 410) {
         onOtpIsNoLongerValid();
         setIsSubmitting(false);
 
@@ -94,7 +94,7 @@ export const SmsVerification = () => {
         onInvalidCredentials(error)
         setIsSubmitting(false);
       }
-    
+
     } catch (error) {
       setError(error.detail);
     }
@@ -107,8 +107,6 @@ export const SmsVerification = () => {
   return (
     <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
       <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-8">
-        {/* Response success */}
-        {success && <p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>}
         <div className="flex items-center mb-4">
           <button onClick={() => navigate(-1)}>
             <HiArrowLeft size={24} />
@@ -118,8 +116,10 @@ export const SmsVerification = () => {
         <form className="w-full"
           onSubmit={handleSubmit(onSubmit, onError)}
         >
+          {/* Response success */}
+          {success && (<p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>)}
           {/* Errors */}
-          {error && <div className="p-4 my-4 rounded-lg bg-error text-white">{error}</div>}
+          {error && (<div className="p-4 my-4 rounded-lg bg-error text-white">{error}</div>)}
 
           <p>Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
 

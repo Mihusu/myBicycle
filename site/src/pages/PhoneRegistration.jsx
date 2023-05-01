@@ -16,7 +16,6 @@ const PhoneRegistration = () => {
     control,
     watch,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -75,23 +74,23 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="grid h-screen place-items-center   max-w-[425px] mx-auto">
+    <div className="grid h-screen place-items-center max-w-[425px] mx-auto">
       <form
         className="rounded-lg bg-white shadow dark:bg-gray-800"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <div className="rounded-lg bg-white px-8 py-8 shadow dark:bg-gray-800">
+        <div className="rounded-lg bg-white px-12 py-8 shadow dark:bg-gray-800">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
 
           {/* Errors */}
-          {resError && <div className="p-4 rounded-lg bg-error text-white max-w-xs">{resError}</div>}
+          {resError && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{resError}</div>}
 
-          <div className="self-center px-4 text-xl font-light text-gray-800 dark:text-white sm:text-2xl">
+          <div className="self-center text-xl font-light text-gray-800 dark:text-white">
             Tlf nr.
             <span className="required-dot text-red-500"> *</span>
           </div>
           <label className="font-light text-gray-800 dark:text-white"></label>
-          <div className="form-control px-4 py-2 w-full max-w-xs">
+          <div className="form-control py-2 w-full max-w-xs">
             <PhoneNumber
               name="phoneNumber"
               control={control}
@@ -108,8 +107,8 @@ const PhoneRegistration = () => {
             <div className="">
               <input
                 type="password"
-                placeholder="Skal indeholde 12 tegn eller derover"
-                className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+                placeholder="12 tegn eller derover"
+                className="w-full max-w-xs rounded-lg border border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                 {...register(
                   "password",
                   { required: true },
@@ -129,7 +128,7 @@ const PhoneRegistration = () => {
               <input
                 type="password"
                 placeholder="Adgangskode"
-                className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="w-full max-w-xs rounded-lg border border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                 {...register(
                   "verify",
                   { required: true },
@@ -140,7 +139,7 @@ const PhoneRegistration = () => {
             </div>
 
             {matchPassword(watchPassword[0], watchPassword[1]) ? (
-              <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
+              <button className="btn my-2 mt-6 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
                 Registrer
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
