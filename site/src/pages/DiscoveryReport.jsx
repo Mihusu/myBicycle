@@ -12,15 +12,15 @@ export const DiscoveryReport = ({ }) => {
       <div className="h-50 mx-auto mb-4 flex max-w-[425px] py-4 rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
         <div className="text-center font-semibold ">
           <h1 className="text-white">Rapport af fundet cykel:</h1>
-          <span className="text-gray-400">{state.info.frame_number}</span>
+          <span className="text-gray-400 text-sm">{state.info.frame_number}</span>
 
           <img className="my-2" src={state.info.image.obj_url} alt="alt" />
 
           <h2 className="text-white">Fundet ved følgende adresse:</h2>
-            <p className="py-2 mb-2 text-gray-400">{state.info.address}</p>
+            <p className="py-2 mb-2 text-gray-400 text-sm">{state.info.address}</p>
 
-          <h2 className="text-white">Beskrivelse:</h2>
-          <span className="text-gray-400">{state.info.comment}</span>
+          <h2 className="text-white">Note:</h2>
+          <span className="text-gray-400 text-sm">{state.info.comment}</span>
 
         </div>
       </div>

@@ -20,7 +20,7 @@ export const BikeDiscovery = ({ data }) => {
             <h1 className="text-md text-white">
               Fundet cykel med følgende 
             </h1>
-            <p className="text-md text-white">følgende stelnummer: {data.frame_number}</p>
+            <p className="text-md text-white">stelnummer: {data.frame_number}</p>
 
             <h4 className="py-1 text-xs">Dato: {new Date(data.created_at).toLocaleDateString()}</h4>
           </div>

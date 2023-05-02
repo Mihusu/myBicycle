@@ -64,8 +64,8 @@ const BikeRegistration = () => {
       else {
         setResponseError(null); // Clear any previous error message
         // Response was okay
-        setResponseSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregerer dig til login...");
-        setTimeout(() => navigate("/login"), 3000);
+        setResponseSuccess("Den nye cykel er registreret i systemet. Omdirigerer dig til login...");
+        setTimeout(() => navigate("/login"), 5000);
         
       }
 
@@ -104,7 +104,7 @@ const BikeRegistration = () => {
                   { min: 8, max: 32 }
                 )}
               />
-              {errors.frame_number && <span>This field is required</span>}
+              {errors.frame_number && <span className="text-red-300">Stelnummer er påkrævet</span>}
             </div>
 
             {/* Phonenumber */}
@@ -119,12 +119,14 @@ const BikeRegistration = () => {
                   control={control}
                   rules={{ required: true }}
                 />
+                {errors.phone_number && <span className="text-red-300">Telefon nr. er påkrævet</span>}
               </div>
             </div>
 
             {/* Bike model */}
             <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg model:</h2>
+                {errors.gender && <span className="text-red-300">Model er påkrævet</span>}
               <div className="grid grid-cols-3 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"Herre"}
@@ -156,6 +158,7 @@ const BikeRegistration = () => {
             {/* Electic */}
             <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Er det en El-cykel?</h2>
+              {errors.is_electric && <span className="text-red-300">Drivkraft er påkrævet</span>}
               <div className="grid grid-cols-2 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"El-cykel"}
@@ -179,6 +182,7 @@ const BikeRegistration = () => {
             {/* Bike type */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg cykel type:</h2>
+              {errors.kind && <span className="text-red-300">Typen er påkrævet</span>}
               <div className="grid grid-cols-2 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"City"}
@@ -218,6 +222,7 @@ const BikeRegistration = () => {
             {/* Brand */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h1 className="mb-2">Brand:</h1>
+              {errors.brand && <span className="text-red-300">Mærke er påkrævet</span>}
               <input
                 type="text"
                 id="brand"
@@ -234,6 +239,7 @@ const BikeRegistration = () => {
             {/* Color */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg en farve:</h2>
+              {errors.color && <span className="text-red-300">Farve er påkrævet</span>}
 
               <div className="grid grid-cols-2 place-items-center ">
                 <RadioButton
@@ -324,6 +330,7 @@ const BikeRegistration = () => {
           <h1 className="p-4">Billede af cykel:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
+          {errors.image && <span className="text-red-300">Model er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
@@ -336,6 +343,7 @@ const BikeRegistration = () => {
           <h1 className="p-4">Billede af kvittering:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
+          {errors.receipt && <span className="text-red-300">Model er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
@@ -344,12 +352,6 @@ const BikeRegistration = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center rounded-lg bg-blue-600 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 "
-          >
-            Registrer Cykel
-          </button>
           {responseSuccess && (
             <div className="p-4 rounded-lg bg-green-500 text-white mt-8">
               {responseSuccess}
@@ -360,6 +362,12 @@ const BikeRegistration = () => {
               {responseError}
             </div>
           )}
+          <button
+            type="submit"
+            className="flex w-full items-center justify-center rounded-lg bg-blue-600 mt-2 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 "
+          >
+            Registrer Cykel
+          </button>
         </form>
       </div>
     </div>
