@@ -26,17 +26,21 @@ export const BikeLookup = () => {
         },
       });
 
-      if (response.ok) {
+      if (response.status == 200) {
         const result = await response.json();
         setBikeFound(true);
         setBikeData(result);
         setIsStolen(result.reported_stolen);
         setError(null);
-      } else {
+      } else if (response.status == 404) {
+        const result = await response.json();
         setBikeFound(false);
         setBikeData(null);
-        setError("Cykel ikke fundet");
-        console.error(response.statusText);
+        setError(result.detail);
+      } else if (response.status == 204) {
+        setBikeFound(false);
+        setBikeData(null);
+        setError("Cyklen er ikke meldt stjålet");
       }
     } catch (e) {
       console.error(e);
