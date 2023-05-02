@@ -29,8 +29,8 @@ export const BikeComponent = ({ data, mutate }) => {
   };
 
   return (
-    <div className="mx-auto mb-4 flex max-w-[425px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-      <div className="m-0 flex flex-col justify-center px-4 ">
+    <div className="mx-auto mb-4 flex max-w-[385px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+      <div className="m-0 flex flex-col justify-center">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
           layout="position"
@@ -41,11 +41,11 @@ export const BikeComponent = ({ data, mutate }) => {
             src={data ? data.image.obj_url : "no url"}
             alt="Bike"
             className={`${data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-              } "mx-auto h-[425px]" mt-8 mb-2 w-[425px] object-scale-down `}
+              } "mx-auto h-[425px]" mt-8 mb-2 object-scale-down px-8   `}
           />
         </motion.div>
 
-        <div className="mt-2 mb-1 flex flex-col items-center justify-center text-sm">
+        <div className="mt-2 mb-2 flex flex-col items-center justify-center text-sm">
           <p className="font-semibold text-white">
             Mærke: <span className="font-light text-white">{data.brand}</span>
           </p>
@@ -71,7 +71,7 @@ export const BikeComponent = ({ data, mutate }) => {
                 </div>
               </div>
 
-              <div className=" flex flex-col items-center justify-center py-1 text-sm">
+              <div className=" flex flex-col items-center justify-center mt-1 text-sm">
                 <div className="flex w-full justify-center">
                   <p className="font-semibold text-white">Model:</p>
                   <span className="ml-1 text-gray-300">
@@ -80,7 +80,7 @@ export const BikeComponent = ({ data, mutate }) => {
                   </span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center py-1 text-sm">
+                <div className="flex flex-col items-center justify-center mt-1 text-sm">
                   <p className="font-semibold text-white">
                     Elektrisk:
                     <span className="ml-1 font-light text-gray-300">
@@ -89,7 +89,7 @@ export const BikeComponent = ({ data, mutate }) => {
                   </p>
                 </div>
 
-                <div className="mb-1 flex w-full justify-evenly">
+                <div className="m-1 flex w-full justify-evenly">
                   <p className="font-semibold text-white">
                     Slags:
                     <span className="font-light text-gray-300">
@@ -106,6 +106,7 @@ export const BikeComponent = ({ data, mutate }) => {
                   </p>
                 </div>
               </div>
+              <p className="text-white font-semibold p-2">Hent kvittering:</p>
               <button
                 onClick={() => (window.location.href = data.receipt.obj_url)}
               >
@@ -139,7 +140,7 @@ export const BikeComponent = ({ data, mutate }) => {
                 ) : (
                   <button
                     onClick={reportStolen}
-                    className={`btn w-full max-w-[147px] ml-3 bg-yellow-500 text-black hover:bg-yellow-300 ${isSubmitting && 'loading'}`}
+                    className={`btn w-full max-w-[148px] ml-3 bg-yellow-500 text-black hover:bg-yellow-300 ${isSubmitting && 'loading'}`}
                   >
                     {!isSubmitting &&
                       <>

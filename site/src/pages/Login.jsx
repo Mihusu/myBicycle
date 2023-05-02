@@ -132,7 +132,7 @@ export const LoginPage = () => {
     }
 
     return (
-        <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
+        <div className="grid h-screen place-items-center p-4 max-w-[385px] mx-auto">
             <div className="bg-white rounded-lg shadow dark:bg-gray-800">
                 {/* Use a form element to wrap the inputs and button */}
                 <form

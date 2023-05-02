@@ -105,9 +105,9 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="grid h-screen place-items-center justify-center max-w-[425px] mx-auto">
+    <div className="grid h-screen place-items-center justify-center max-w-[385px] mx-auto">
       <form
-        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[425px]"
+        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[385px]"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="rounded-lg bg-white px-10 py-8 shadow dark:bg-gray-800">

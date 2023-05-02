@@ -35,7 +35,7 @@ const ViewTransferDetail = () => {
     
     return (
         <LayoutWithBack title="Overførsel" isLoading={isLoading}>
-            {data && <div className="flex flex-col mx-auto space-y-4 items-center p-4 border bg-gray-800 hover:shadow-xl dark:bg-gray-800 rounded-lg max-w-[425px]">
+            {data && <div className="flex flex-col mx-auto space-y-4 items-center p-4 border bg-gray-800 hover:shadow-xl dark:bg-gray-800 rounded-lg max-w-[385px]">
                 <h2 className="text-lg">
                     {user_id === data.sender.id && data.state === "pending"    && "Du er ved at overføre ejerskab"}
                     {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}
@@ -43,7 +43,7 @@ const ViewTransferDetail = () => {
                     {user_id === data.receiver.id && data.state === "declined" && "Du afviste en anmodning"}
                     {user_id === data.receiver.id && data.state === "accepted" && "Du modtog en cykel"}
                 </h2>
-                <img src={data.bike.image.obj_url} width="360px" height="360px"/>
+                <img className="px-4" src={data.bike.image.obj_url} width="360px" height="360px"/>
                 <p className="text-md">Modtager: {data.receiver.phone_number}</p>
                 <div className="flex justify-center">
                     {/* Outgoing */}

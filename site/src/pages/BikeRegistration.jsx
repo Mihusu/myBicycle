@@ -83,7 +83,7 @@ const BikeRegistration = () => {
   };
 
   return (
-    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[425px]">
+    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[385px]">
       <div className=" rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-10">
         <div className="flex items-center justify-center text-xl font-light text-gray-800 dark:text-white sm:text-2xl mt-2">
           Cykel registering

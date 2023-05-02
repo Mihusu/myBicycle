@@ -6,7 +6,7 @@ export const TransferCompleted = ({ data, user_id }) => {
 
     return (
         <Link to={`/transfers/detail/${data.transfer_id}`}>
-            <div className="flex mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow dark:text-whites">
+            <div className="flex mx-auto max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow dark:text-whites">
                 {/* Old bike requests */}
                 <div className="flex justify-evenly w-full">
 

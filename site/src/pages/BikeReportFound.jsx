@@ -117,7 +117,7 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
           {/* Find my location button */}
           <button className={`btn-info btn mt-8`} onClick={() => findLocation()}>
 
@@ -126,7 +126,7 @@ export const BikeReportFound = () => {
 
           {/* Address form */}
           <div className="p-6">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-6 flex flex-col">
                 <div className="relative">
                   <h1 className="text-white mb-2">
