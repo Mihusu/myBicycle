@@ -21,8 +21,8 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
 
     return (
         <>
-            <div id='layout-back' className=''>
-                <div className='p-4 pb-20'>
+            <div id='layout-back'>
+                <div className='p-4 pb-20' onClick={() => setShowSidebar(false)}>
                     {/* Header */}
                     <div className='flex justify-around items-center mb-4 border-b-gray-400'>
                         <button onClick={() => navigate(-1)}>

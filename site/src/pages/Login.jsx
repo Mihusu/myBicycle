@@ -167,7 +167,7 @@ export const LoginPage = () => {
                         <span className="required-dot text-red-500"> *</span>
                     </div>
 
-                    <div className="flex flex-col space-y-2">
+                    <div className="flex flex-col space-y-2 max-w-xs">
                         <PhoneNumber
                             name="phone_number"
                             control={control}
@@ -181,7 +181,7 @@ export const LoginPage = () => {
                             </label>
                             <input
                                 type="password"
-                                className="rounded-lg border-transparent flex-1 border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent action-password"
+                                className="rounded-lg border-transparent flex-1 border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                 placeholder="Adgangskode"
                                 {...register('password')}
                             />

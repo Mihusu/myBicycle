@@ -52,10 +52,7 @@ export const SmsVerification = () => {
   const onAuthOkay = async (data) => {
     secureLocalStorage.setItem("accesstoken", data.access_token);
 
-    /* 
-      possibly set refresh token also
-      Response was okay. Redirect back to login page
-    */
+    setResponseError(null); // Clear any previous error message
     setSuccess("Din konto er nu oprettet. Omdiregere dig til hjem...");
     setTimeout(() => navigate("/mybikes"), 3000);
   };

@@ -16,8 +16,8 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
   return (
     <>
-      <div id="layout" onClick={() => setShowSidebar(false)}>
-        <div className="p-4 pb-20">
+      <div id="layout">
+        <div className="p-4 pb-20" onClick={() => setShowSidebar(false)}>
           {/* Header */}
           <div className="mb-4 flex justify-center border-b-gray-400">
             <h1 className="text-3xl text-white">{title}</h1>

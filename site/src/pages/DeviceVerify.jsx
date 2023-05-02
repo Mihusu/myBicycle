@@ -49,6 +49,8 @@ const DeviceVerify = () => {
                 return;
             }
 
+            setResponseError(null); // Clear any previous error message
+            
             // Response was okay. Redirect back to login page
             setSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregere dig til login...");
             setTimeout(() => navigate("/login"), 3000);

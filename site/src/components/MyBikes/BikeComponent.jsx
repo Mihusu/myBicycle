@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { StolenBike } from "./StolenBike";
 import secureLocalStorage from "react-secure-storage";
 import { IoReceiptOutline } from "react-icons/io5";
+import { translateString } from "../../Helpers/TranslateStringEngToDk";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -44,10 +45,13 @@ export const BikeComponent = ({ data, mutate }) => {
         </motion.div>
 
         <div className="mt-2 mb-1 flex flex-col items-center justify-center text-sm">
-          <p className="font-semibold text-white">Model: </p>
-          <p className="text-gray-300">{data.brand}</p>
-          <p className="font-semibold text-white">Stelnummer:</p>
-          <p className="text-gray-300">{data.frame_number}</p>
+          <p className="font-semibold text-white">
+            Mærke: <span className="font-light text-white">{data.brand}</span>
+          </p>
+          <p className="font-semibold text-white">
+            Stelnummer:{" "}
+            <span className="font-light text-white">{data.frame_number}</span>
+          </p>
         </div>
 
         {isOpen && (
@@ -68,8 +72,11 @@ export const BikeComponent = ({ data, mutate }) => {
 
               <div className=" flex flex-col items-center justify-center py-1 text-sm">
                 <div className="flex w-full justify-center">
-                  <p className="font-semibold text-white">Køn:</p>
-                  <span className="ml-1 text-gray-300"> {data.gender}</span>
+                  <p className="font-semibold text-white">Model:</p>
+                  <span className="ml-1 text-gray-300">
+                    {" "}
+                    {translateString(data.gender)}
+                  </span>
                 </div>
 
                 <div className="flex flex-col items-center justify-center py-1 text-sm">
@@ -86,19 +93,16 @@ export const BikeComponent = ({ data, mutate }) => {
                     Slags:
                     <span className="font-light text-gray-300">
                       {" "}
-                      {data.kind}
+                      {translateString(data.kind)}
                     </span>
                   </p>
                 </div>
 
                 <div className="mb-1 flex w-full justify-center">
                   <p className="mr-1 font-semibold text-white">Farve:</p>
-                  <p className="font-light text-gray-300">{data.color}</p>
-                </div>
-
-                <div className="mb-1 flex w-full justify-evenly">
-                  <p className="mr-1 font-semibold text-white">Mærke: </p>
-                  <p className="text-gray-300"> {data.brand}</p>
+                  <p className="font-light text-gray-300">
+                    {translateString(data.color)}
+                  </p>
                 </div>
               </div>
               <button
