@@ -1,21 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { translateString } from "../../Helpers/TranslateStringEngToDk";
 
 // Basic bike info component without actionable buttons, used for bike lookup page
 export const BikeInfo = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // Prototype translate text function
-  // Could be expanded to handle all text coming from backend
-  function translateString(string) {
-    const dict = { male: "Herre", female: "Dame", child: "Barn" };
-    if (dict[string]) {
-      return dict[string];
-    } else {
-      return "Unknown";
-    }
-  }
 
   return (
     <div className="flex w-full mx-auto max-w-[425px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 md:w-1/2">
@@ -82,14 +72,14 @@ export const BikeInfo = ({ data }) => {
                 <div className="flex w-full justify-evenly py-1">
                   <p className="font-semibold text-white">
                     Slags:
-                    <span className="font-light text-white"> {data.kind}</span>
+                    <span className="font-light text-white"> {translateString(data.kind)}</span>
                   </p>
                 </div>
 
                 <div className="flex w-full justify-evenly py-1">
                   <p className="font-semibold text-white">
                     Farve:
-                    <span className="font-light text-white"> {data.color}</span>
+                    <span className="font-light text-white"> {translateString(data.color)}</span>
                   </p>
                 </div>
               </div>
