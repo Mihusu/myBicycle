@@ -15,8 +15,9 @@ const get_bike_request = async (url, token) => {
       Authorization: "Bearer " + token,
     },
   });
+
   const result = await response.json();
-//   console.log("status", response.status)
+
   if (!response.ok) {
     throw new Error(response.status)
   }
@@ -31,7 +32,8 @@ const ViewTransferAccept = () => {
 
   const { data, error, isLoading } = useSWR(
     [API_URL + `/transfers/${transfer_id}`, token],
-    ([url, token]) => get_bike_request(url, token)
+    ([url, token]) => get_bike_request(url, token),
+    { refreshInterval: 5000 }
   );
 
   if (error && error.message === "404") {
@@ -53,7 +55,7 @@ const ViewTransferAccept = () => {
     });
 
     const res = await response.json();
-    // console.log(res);
+
   }
 
   return (
@@ -61,7 +63,7 @@ const ViewTransferAccept = () => {
       {data && data.bike && (
         <>
           <BikeInfo data={data.bike} />
-          <div className="dark:text-whites mx-auto mt-8 flex max-w-[425px] rounded-lg bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
+          <div className="dark:text-whites mx-auto mt-8 flex max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
             <div className="mt-2 flex w-full justify-evenly">
               <div className="flex items-center justify-center">
                 <img

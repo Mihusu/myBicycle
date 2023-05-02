@@ -44,13 +44,13 @@ export const BikeLookup = () => {
   };
 
   useEffect(() => {
-    // console.log("hello from useEffect()");
+    
   }, [bikeFound, bikeData]);
 
   return (
     <Layout title="Søg efter cykel">
       {error && (
-        <div className="mx-auto mb-2 max-w-[425px] rounded-lg bg-red-500 px-2 py-2 text-black">
+        <div className="mx-auto mb-2 max-w-[385px] rounded-lg bg-red-500 px-2 py-2 text-black">
           {error}
         </div>
       )}
@@ -61,7 +61,7 @@ export const BikeLookup = () => {
       >
         <label
           htmlFor="default-search"
-          className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="sr-only mb-2 text-sm font-medium border bg-gray-800 hover:shadow-xl dark:bg-gray-800 dark:text-white"
         >
           Søg på stelnummer om cykel er meldt stjålet
         </label>

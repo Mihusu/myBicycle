@@ -24,15 +24,18 @@ const ViewTransferDetail = () => {
 
     const token = secureLocalStorage.getItem('accesstoken');
     const user_id = secureLocalStorage.getItem('user_id');
-    console.log(user_id);
 
-    const { data, error, isLoading } = useSWR([API_URL + `/transfers/${transfer_id}`, token], ([url, token]) => get_bike_request_detail(url, token))
+    const { data, error, isLoading } = useSWR(
+        [API_URL + `/transfers/${transfer_id}`, token], 
+        ([url, token]) => get_bike_request_detail(url, token),
+        { refreshInterval: 5000 }
+        );
 
     if (error) return <div>failed to load, due to error {error}</div>
     
     return (
         <LayoutWithBack title="Overførsel" isLoading={isLoading}>
-            {data && <div className="flex flex-col mx-auto space-y-4 items-center p-4 bg-gray-800 rounded-lg max-w-[425px]">
+            {data && <div className="flex flex-col mx-auto space-y-4 items-center p-4 border bg-gray-800 hover:shadow-xl dark:bg-gray-800 rounded-lg max-w-[425px]">
                 <h2 className="text-lg">
                     {user_id === data.sender.id && data.state === "pending"    && "Du er ved at overføre ejerskab"}
                     {user_id === data.sender.id && data.state === "declined"   && "Din anmodning blev afvist"}

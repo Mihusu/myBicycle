@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -8,6 +9,8 @@ const ChoosePassword = () => {
   const [verify, setVerify] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [success, setSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // checks whether password matches verification
   function matchPassword(password, verify) {
@@ -21,19 +24,24 @@ const ChoosePassword = () => {
   }
 
   const submitPassword = async () => {
+    setIsSubmitting(true);
+
+    const URI = API_URL + `/auth/reset-password/confirm`;
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: location.state.session_id,
+        password: password,
+      }),
+    };
+
     try {
-      const response = await fetch(API_URL + "/auth/reset-password/confirm", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          session_id: location.state.sessionId,
-          password: password,
-        }),
-      });
+      const response = await fetch(URI, requestOptions);
 
       if (response.ok) {
-        console.log(`server said: ${response.statusText}`);
-        navigate("/login");
+        setSuccess("Din adgangskode er nu ændret. Omdiregere dig til login...");
+        setTimeout(() => navigate("/login"), 3000);
       }
     } catch (error) {
       console.error(error);
@@ -41,46 +49,68 @@ const ChoosePassword = () => {
   };
 
   return (
-    <div className="flex h-full flex-col justify-around items-center py-2 ">
-      <h1>Vælg adgangskode</h1>
-      {/* password */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Vælg kode</span>
-        </label>
-        <input
-          type="text"
-          pattern="\d*"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          maxLength={32}
-          placeholder="max 32 tegn"
-          className="input-bordered input w-full max-w-xs"
-        />
+    <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
+      <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-12">
+        {/* Response success */}
+        {success && <p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>}
+        <div className="text-center text-2xl text-white mb-4">
+          Nulstil adgangskode
+        </div>
+        {/* password */}
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Vælg kode</span>
+          </label>
+          <input
+            type="password"
+            pattern="\d*"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            maxLength={32}
+            placeholder="max 32 tegn"
+            className="input-bordered input w-full max-w-xs"
+          />
+        </div>
+        {/* verify */}
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Indtast kode igen</span>
+          </label>
+          <input
+            type="password"
+            onChange={(e) => setVerify(e.target.value)}
+            required
+            maxLength={32}
+            placeholder="max 32 tegn"
+            className="input-bordered input w-full max-w-xs"
+          />
+        </div>
+        {/* submit */}
+        <button type="submit" className={`btn my-6 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} 
+          onClick={() => submitPassword()}
+          disabled={!matchPassword(password, verify)}>
+              {!isSubmitting &&
+                <>
+                  Bekræft
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-10 login-button"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
+            </button>
+        <p>Vil du gerne vende tilbage til login siden? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
       </div>
-      {/* verify */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Indtast kode igen</span>
-        </label>
-        <input
-          type="text"
-          onChange={(e) => setVerify(e.target.value)}
-          required
-          maxLength={32}
-          placeholder="max 32 tegn"
-          className="input-bordered input w-full max-w-xs"
-        />
-      </div>
-      {/* submit */}
-      <button
-        type="submit"
-        disabled={!matchPassword(password, verify)}
-        className={`btn my-2 w-full max-w-xs bg-green-500 text-green-300`}
-        onClick={() => submitPassword()}
-      >
-        Submit
-      </button>
     </div>
   );
 };

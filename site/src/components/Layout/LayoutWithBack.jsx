@@ -67,7 +67,8 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                             Søg efter stelnummer
                         </li>
                     </Link>
-
+                </ul>
+                <div className="flex flex-col items-center fixed inset-x-0 bottom-24 space-y-2 p-4 text-lg text-white">
                     <Link to="/login">
                         <button
                             className="rounded-sm px-16 hover:bg-orange-400"
@@ -76,7 +77,7 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                             Log af
                         </button>
                     </Link>
-                </ul>
+                </div>
             </div>
             <Footer toggleSidebar={toggleSidebar} />
         </>

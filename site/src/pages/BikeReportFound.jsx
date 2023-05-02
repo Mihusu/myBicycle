@@ -39,7 +39,7 @@ export const BikeReportFound = () => {
 
   const onSubmit = async (data) => {
     try {
-      // console.log("submitting data: ", data);
+      
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -64,11 +64,12 @@ export const BikeReportFound = () => {
       const body = await response.json();
       if (response.ok) {
         navigate("/mybikes");
-        // console.log(body.detail);
+
       }
       if (!response.ok) {
         console.log(body.detail);
         return;
+        
       }
     } catch (error) {
       console.error(error);
@@ -110,7 +111,7 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
           {/* Find my location button */}
           <button className="btn-info btn mt-8" onClick={() => findLocation()}>
             Find min lokation
@@ -146,7 +147,7 @@ export const BikeReportFound = () => {
               </div>
 
               <label className="text-white">
-                Eventuel kommentar
+                Eventuel kommentar:
               </label>
               <textarea
                 className="w-full flex-1 mt-2 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
@@ -175,9 +176,23 @@ export const BikeReportFound = () => {
               <div className="my-4 flex justify-center w-full">
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-purple-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 "
+                  className="flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600"
                 >
-                  Send
+                  <span className="mr-4">Send</span> 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
                 </button>
               </div>
             </form>

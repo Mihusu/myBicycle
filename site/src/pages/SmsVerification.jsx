@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
-import { HiArrowLeft } from "react-icons/hi"
+import { HiArrowLeft } from "react-icons/hi";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const SmsVerification = () => {
   const { register, handleSubmit } = useForm({
@@ -11,13 +13,14 @@ export const SmsVerification = () => {
     },
   });
 
+  const location = useLocation();
   const navigate = useNavigate();
   const { session_id } = useParams();
   const [error, setError] = useState("");
   const [cdSeconds, setCdSeconds] = useState(0);
   const [timeRemainStarted, setTimeRemainStarted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const location = useLocation();
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (cdSeconds > 0 && timeRemainStarted) {
@@ -39,7 +42,6 @@ export const SmsVerification = () => {
 
     const timeDeltaSeconds = Math.floor((new Date(otp_expires_at).getTime() - Date.now()) / 1000);
 
-    //console.log("time delta seconds ", timeDeltaSeconds);
     if (!timeRemainStarted) {
       setCdSeconds(timeDeltaSeconds);
       setTimeRemainStarted(true);
@@ -47,25 +49,29 @@ export const SmsVerification = () => {
     return timeDeltaSeconds
   }
 
-  const onAuthOkay = async (body) => {
-    const { user_id, phone_number } = await get_user_details(API_URL + `/register/me`, body.access_token);
+  const onAuthOkay = async (data) => {
+    secureLocalStorage.setItem("accesstoken", data.access_token);
 
-    secureLocalStorage.setItem('accesstoken', body.access_token);
-    secureLocalStorage.setItem('user_id', user_id);
-    secureLocalStorage.setItem('phone_number', phone_number);
-
-    navigate(`/mybikes`, { replace: true });
+    /* 
+      possibly set refresh token also
+      Response was okay. Redirect back to login page
+    */
+    setSuccess("Din konto er nu oprettet. Omdiregere dig til hjem...");
+    setTimeout(() => navigate("/mybikes"), 3000);
   };
 
   const onInvalidCredentials = (error) => {
-
     setError(`Ugyldigt engangskode. Prøv igen.`);
+  };
+
+  const onOtpIsNoLongerValid = (error) => {
+    setError("Engangskoden er udløbet. Prøv at registrere dig igen.");
   };
 
   const onSubmit = async ({ otp }) => {
     setIsSubmitting(true);
 
-    const URI = `http://127.0.0.1:8000/auth/register/me/check-otp`;
+    const URI = API_URL + `/auth/register/me/check-otp`;
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -74,14 +80,20 @@ export const SmsVerification = () => {
 
     try {
       const response = await fetch(URI, requestOptions);
-      const result = await response.json()
 
-      switch (response.status) {
-        case 200: await onAuthOkay(result); break;
-        case 401: onInvalidCredentials(result); break;
+      if (response.ok) {
+        const data = await response.json();
+        onAuthOkay(data);
+
+      } else if (response.status == 410) {
+        onOtpIsNoLongerValid();
+        setIsSubmitting(false);
+
+      } else {
+        const error = await response.json();
+        onInvalidCredentials(error)
+        setIsSubmitting(false);
       }
-
-      setIsSubmitting(false);
 
     } catch (error) {
       setError(error.detail);
@@ -95,17 +107,19 @@ export const SmsVerification = () => {
   return (
     <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
       <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-8">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-4">
           <button onClick={() => navigate(-1)}>
             <HiArrowLeft size={24} />
           </button>
-          <p className="ml-14 text-2xl text-white">SMS verfikation</p>
+          <p className="ml-14 text-2xl text-white">SMS verifikation</p>
         </div>
         <form className="w-full"
           onSubmit={handleSubmit(onSubmit, onError)}
         >
+          {/* Response success */}
+          {success && (<p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>)}
           {/* Errors */}
-          {error && <div className="p-4 rounded-lg bg-error text-white">{error}</div>}
+          {error && (<div className="p-4 my-4 rounded-lg bg-error text-white">{error}</div>)}
 
           <p>Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
 
@@ -123,7 +137,7 @@ export const SmsVerification = () => {
                         : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
               </span>
             )}
-            {cdSeconds < 0 && (
+            {cdSeconds <= 0 && (
               <span className="text-gray-400">Udløbet</span>
             )}
           </p>

@@ -62,7 +62,7 @@ export const ClaimBikeForm = () => {
     <div className="flex h-screen justify-center">
       <div className="w-full max-w-md p-4">
         <form
-          className="flex flex-col items-center justify-center rounded-lg bg-gray-800 px-10 py-8"
+          className="flex flex-col items-center justify-center rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 px-10 py-8"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="space-y-2">
