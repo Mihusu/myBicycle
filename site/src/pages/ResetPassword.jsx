@@ -12,6 +12,7 @@ const ResetPassword = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cdSeconds, setCdSeconds] = useState(0);
   const [cooldownStarted, setCooldownStarted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (cdSeconds > 0 && cooldownStarted) {
@@ -50,6 +51,8 @@ const ResetPassword = () => {
   };
 
   const submitPhoneNumber = async (e) => {
+    setIsSubmitting(true);
+
     e.preventDefault(); // prevent form from refreshing page on submit
 
     try {
@@ -73,6 +76,8 @@ const ResetPassword = () => {
       else {
         onInvalidCredentials();
       }
+
+      setIsSubmitting(false);
       
     } catch (error) {
       console.error(error);
@@ -119,24 +124,28 @@ const ResetPassword = () => {
             onChange={setPhoneNumber}
             defaultCountry="DK"
           />
-          <button className="btn my-2 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+          <button className={`btn my-2 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
             type="submit"
             onClick={(e) => submitPhoneNumber(e)}>
-            Indsend
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-8 w-8"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
+            {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Indsend</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
           </button>
         </div>
       </div>

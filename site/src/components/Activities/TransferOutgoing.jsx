@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,8 +7,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const TransferOutgoing = ({ data }) => {
 
     const navigate = useNavigate();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     async function retractBikeRequest() {
+        setIsSubmitting(true);
+
         try {
             const retract_bike_request =
                 API_URL + `/transfers/${data.transfer_id}/retract`;
@@ -31,7 +34,9 @@ export const TransferOutgoing = ({ data }) => {
 
             setTimeout(() => {
                 navigate(`/mybikes`);
+                setIsSubmitting(false);
             }, 1500);
+
 
         } catch (error) {
             console.error(error);
@@ -67,12 +72,15 @@ export const TransferOutgoing = ({ data }) => {
             {/* Actions */}
             <div className="mt-4" style={{ display: "flex", justifyContent: "center" }}>
                 <button
-                    className="btn bg-red-600 w-40 max-w-xs text-white"
+                    className={`btn bg-red-600 w-40 max-w-xs text-white ${isSubmitting && 'loading'}`}
                     type="submit"
                     onClick={() => retractBikeRequest()}
-                    style={{ marginRight: "6px" }}
-                    reloadDocument="true">
-                    Fortryd
+                    style={{ marginRight: "6px" }}>
+                    {!isSubmitting &&
+                        <>
+                            Fortryd
+                        </>
+                    }
                 </button>
                 <Link to={`/transfers/detail/${data.transfer_id}`}>
                     <button

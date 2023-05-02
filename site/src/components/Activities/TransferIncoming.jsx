@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { Link, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const TransferIncoming = ({ data }) => {
-    
+
     const navigate = useNavigate()
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     async function declineBikeRequest() {
+        setIsSubmitting(true);
+
         const decline_bike_request =
             API_URL + `/transfers/${data.transfer_id}/reject`;
 
@@ -22,6 +26,7 @@ export const TransferIncoming = ({ data }) => {
 
         const res = await response.json();
         navigate(0)
+        setIsSubmitting(false);
     }
 
     return (
@@ -52,11 +57,14 @@ export const TransferIncoming = ({ data }) => {
             {/* Actions */}
             <div className="flex justify-center mt-4">
                 <button
-                    className="btn bg-red-600 w-40 max-w-xs text-white mr-2"
+                    className={`btn bg-red-600 w-40 max-w-xs text-white mr-2 ${isSubmitting && 'loading'}`}
                     type="submit"
-                    onClick={() => declineBikeRequest()}
-                    reloadDocument="true">
-                    Afvis
+                    onClick={() => declineBikeRequest()}>
+                    {!isSubmitting &&
+                        <>
+                            Avis
+                        </>
+                    }
                 </button>
                 <Link to={`/transfers/accept/${data.transfer_id}`}>
                     <button

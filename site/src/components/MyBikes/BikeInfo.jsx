@@ -8,7 +8,7 @@ export const BikeInfo = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex w-full mx-auto max-w-[425px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 md:w-1/2">
+    <div className="flex w-full mx-auto max-w-[410px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 md:w-1/2">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
           layout="position"

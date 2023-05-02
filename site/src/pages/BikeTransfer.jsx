@@ -76,7 +76,12 @@ const BikeTransfer = () => {
         />
 
         <button onClick={onSendTransferRequest} className={`btn btn-info ${isLoading && 'loading'}`}>
-          Send anmodning
+
+          {!isLoading &&
+            <>
+              Send anmodning
+            </>
+          }
         </button>
       </div>
     </LayoutWithBack>

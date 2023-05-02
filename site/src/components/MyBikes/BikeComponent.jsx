@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { StolenBike } from "./StolenBike";
+import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { IoReceiptOutline } from "react-icons/io5";
 import { translateString } from "../../Helpers/TranslateStringEngToDk";
@@ -13,8 +11,11 @@ export const BikeComponent = ({ data, mutate }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const reportStolen = async () => {
+    setIsSubmitting(true);
+
     await fetch(`${API_URL}/bikes/${data._id}/reportstolen`, {
       method: "PUT",
       headers: {
@@ -22,6 +23,7 @@ export const BikeComponent = ({ data, mutate }) => {
       },
     });
 
+    setIsSubmitting(false);
     // Trigger a mutate to refresh screen
     mutate(data);
   };
@@ -38,9 +40,8 @@ export const BikeComponent = ({ data, mutate }) => {
           <img
             src={data ? data.image.obj_url : "no url"}
             alt="Bike"
-            className={`${
-              data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-            } "mx-auto h-[425px]" mt-8 mb-2 w-[425px] object-scale-down `}
+            className={`${data.state === "in_transfer" ? "opacity-30" : "opacity-100"
+              } "mx-auto h-[425px]" mt-8 mb-2 w-[425px] object-scale-down `}
           />
         </motion.div>
 
@@ -127,16 +128,24 @@ export const BikeComponent = ({ data, mutate }) => {
                 {data.reported_stolen ? (
                   <button
                     onClick={reportStolen}
-                    className="btn ml-3 bg-orange-500 text-black hover:bg-orange-300"
+                    className={`btn w-full max-w-[168px] ml-3 bg-orange-500 text-black hover:bg-orange-300 ${isSubmitting && 'loading'}`}
                   >
-                    Rapporter fundet
+                    {!isSubmitting &&
+                      <>
+                        Rapporter fundet
+                      </>
+                    }
                   </button>
                 ) : (
                   <button
                     onClick={reportStolen}
-                    className="btn-warning btn ml-3 hover:bg-yellow-300"
+                    className={`btn w-full max-w-[147px] ml-3 bg-yellow-500 text-black hover:bg-yellow-300 ${isSubmitting && 'loading'}`}
                   >
-                    Anmeld stjålet
+                    {!isSubmitting &&
+                      <>
+                        Anmeld stjålet
+                      </>
+                    }
                   </button>
                 )}
               </div>

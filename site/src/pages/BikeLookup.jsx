@@ -11,11 +11,13 @@ export const BikeLookup = () => {
   const [error, setError] = useState(null);
   const [bikeData, setBikeData] = useState(null);
   const [isStolen, setIsStolen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = secureLocalStorage.getItem("accesstoken");
   const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
@@ -42,6 +44,9 @@ export const BikeLookup = () => {
         setBikeData(null);
         setError("Cyklen er ikke meldt stjålet");
       }
+
+      setIsSubmitting(false);
+
     } catch (e) {
       console.error(e);
     }
@@ -124,24 +129,28 @@ export const BikeLookup = () => {
                 state: { userId: bikeData.owner },
               })
             }
-            className="mx-2 my-2 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200  disabled:opacity-25"
+            className={`btn mx-2 my-2 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 disabled:opacity-25 ${isSubmitting && 'loading'}`}
             disabled={!isStolen}
           >
-            Indrapporter
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
+            {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Indrapporter</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
           </button>
         </div>
       )}

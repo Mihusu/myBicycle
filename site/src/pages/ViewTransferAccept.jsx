@@ -1,9 +1,8 @@
-import React from "react";
-import secureLocalStorage from "react-secure-storage";
+import React, { useState } from "react";
 import useSWR from "swr";
+import secureLocalStorage from "react-secure-storage";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
-import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import { BikeInfo } from "../components/MyBikes/BikeInfo";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -27,6 +26,7 @@ const get_bike_request = async (url, token) => {
 const ViewTransferAccept = () => {
   const navigate = useNavigate();
   const { transfer_id } = useParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = secureLocalStorage.getItem("accesstoken");
 
@@ -44,6 +44,8 @@ const ViewTransferAccept = () => {
   if (error) return <div>failed to load, due to error </div>;
 
   async function approveBikeRequest() {
+    setIsSubmitting(true);
+
     const approve_bike_request =
       API_URL + `/transfers/${data.transfer_id}/accept`;
 
@@ -56,6 +58,7 @@ const ViewTransferAccept = () => {
 
     const res = await response.json();
 
+    setIsSubmitting(false);
   }
 
   return (
@@ -92,26 +95,30 @@ const ViewTransferAccept = () => {
           <Link to={`/mybikes`}>
             <div className="flex justify-center">
               <button
-                className="btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+                className={`btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 onClick={() => approveBikeRequest()}
                 style={{ maxWidth: "425px" }}
               >
-                Godkend
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-8 w-8"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+                {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Godkend</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
               </button>
             </div>
           </Link>
