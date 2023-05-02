@@ -36,7 +36,6 @@ const BikeRegistration = () => {
   const onSubmit = async (data) => {
 
     try {
-
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -50,6 +49,7 @@ const BikeRegistration = () => {
 
       const response = await fetch(API_URL + "/bikes", {
         method: "POST",
+        mode: "cors",
         body: formData,
       });
 

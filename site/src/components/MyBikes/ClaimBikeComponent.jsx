@@ -70,7 +70,7 @@ export const ClaimBikeComponent = () => {
                 onClick={() => setIsOpen(!isOpen)}>
                 <button>
                     <img
-                        src="../src/assets/bicycle-svgrepo.svg"
+                        src="/assets/bicycle-svgrepo.svg"
                         alt="Bike"
                         className="mx-auto mb-4"
                         width="300px"

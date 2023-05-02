@@ -13,7 +13,8 @@ const get_bike_requests = async (url, token) => {
   const response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + token,
+      "Authorization": "Bearer " + token,
+      "Content-Type" : "application/json"
     },
   });
   return await response.json();

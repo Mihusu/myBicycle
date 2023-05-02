@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  client.prod:
+    image: jsaad20/production:client
+    container_name: client.prod
+    ports:
+      - 80:80
+      - 443:443
+      - 4173:4173
