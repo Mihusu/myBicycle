@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const PhoneRegistration = () => {
 
-  const [resError, setResError] = useState("");
+  const [error, setError] = useState("");
+  const [cdSeconds, setCdSeconds] = useState(0);
+  const [cooldownStarted, setCooldownStarted] = useState(false);
 
   const {
     register,
@@ -28,26 +30,49 @@ const PhoneRegistration = () => {
   const watchPassword = watch(["password", "verify"]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (cdSeconds > 0 && cooldownStarted) {
+        setTimeout(() => setCdSeconds(cdSeconds - 1), 1000);
+    }
+    else {
+        setCooldownStarted(false)
+    }
+
+}, [cdSeconds])
+
   const onSubmit = async (data) => {
-    
+
     try {
       const response = await fetch(API_URL + '/auth/register/me', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          'phone_number' : data.phoneNumber,
-          'password' : data.password
+          'phone_number': data.phoneNumber,
+          'password': data.password
         }),
       });
-      
+
       const body = await response.json();
 
-      if (!response.ok) {
-        setResError(`Der findes allerede en cykelejer med det opgivet telefonnummer: ${data.phoneNumber}`);
+      if (response.status == 400) {
+        setError(`Der findes allerede en cykelejer med det opgivet telefonnummer: ${data.phoneNumber}`);
+        return;
+      } else if (response.status == 406) {
+        const { cooldown_expires_at } = body.detail;
+          
+        setError(`Der er fornyeligt forsøgt at oprette en bruger med dette telefonnummer: ${data.phoneNumber}`)
+
+        const timeDeltaSeconds = Math.floor((new Date(cooldown_expires_at).getTime() - Date.now()) / 1000);
+
+        if (!cooldownStarted) {
+            setCdSeconds(timeDeltaSeconds);
+            setCooldownStarted(true);
+        }
+
         return;
       }
 
-      navigate(`/smsverification/${body.session_id}`, { state: { otp_expires_at: body.expires_at }});
+      navigate(`/smsverification/${body.session_id}`, { state: { otp_expires_at: body.expires_at } });
 
     } catch (error) {
       console.log(error);
@@ -74,16 +99,29 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="grid h-screen place-items-center max-w-[425px] mx-auto">
+    <div className="grid h-screen place-items-center justify-center max-w-[425px] mx-auto">
       <form
-        className="rounded-lg bg-white shadow dark:bg-gray-800"
+        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[425px]"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <div className="rounded-lg bg-white px-12 py-8 shadow dark:bg-gray-800">
+        <div className="rounded-lg bg-white px-10 py-8 shadow dark:bg-gray-800">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
 
           {/* Errors */}
-          {resError && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{resError}</div>}
+          {error && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{error}
+            <p>Prøv igen om:{" "}
+              {cdSeconds === 1
+                ? `${cdSeconds} sekund`
+                : cdSeconds < 60
+                  ? `${cdSeconds} sekunder`
+                  : cdSeconds === 61
+                    ? `1 minut og 1 sekund`
+                    : cdSeconds < 120
+                      ? `1 minut og ${cdSeconds % 60} sekunder`
+                      : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+            </p>
+          </div>
+          }
 
           <div className="self-center text-xl font-light text-gray-800 dark:text-white">
             Tlf nr.
@@ -98,7 +136,7 @@ const PhoneRegistration = () => {
             />
             <div />
 
-            {/* password */}
+            {/* Choose password */}
             <div className="pt-4 pb-2 font-light text-gray-400 dark:text-white">
               Vælg adgangskode
               <span className="required-dot text-red-500"> *</span>
