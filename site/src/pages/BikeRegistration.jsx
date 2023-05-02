@@ -62,9 +62,9 @@ const BikeRegistration = () => {
 
       }
       else {
-        setResponseError(null); // Clear any previous success message
+        setResponseError(null); // Clear any previous error message
         // Response was okay
-        setResponseSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregere dig til login...");
+        setResponseSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregerer dig til login...");
         setTimeout(() => navigate("/login"), 3000);
         
       }
