@@ -9,7 +9,7 @@ export const DiscoveryReport = ({ }) => {
 
   return (
     <LayoutWithBack title="Rapportering">
-      <div className="h-50 mx-auto mb-4 flex max-w-[385px] py-4 rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+      <div className="h-50 mx-auto mb-4 flex max-w-[385px] py-4 px-4 rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
         <div className="text-center font-semibold ">
           <h1 className="text-white">Rapport af fundet cykel:</h1>
           <span className="text-gray-400 text-sm">{state.info.frame_number}</span>
