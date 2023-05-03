@@ -2,7 +2,7 @@ import React from "react";
 import useSWR from "swr";
 import secureLocalStorage from "react-secure-storage";
 import { Layout } from "../components/Layout/Layout";
-import { TransferIncomming } from "../components/Activities/TransferIncomming";
+import { TransferIncoming } from "../components/Activities/TransferIncoming";
 import { TransferOutgoing } from "../components/Activities/TransferOutgoing";
 import { TransferCompleted } from "../components/Activities/TransferCompleted";
 import { BikeDiscovery } from "../components/Activities/BikeDiscovery";
@@ -13,7 +13,8 @@ const get_bike_requests = async (url, token) => {
   const response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + token,
+      "Authorization": "Bearer " + token,
+      "Content-Type" : "application/json"
     },
   });
   return await response.json();
@@ -25,7 +26,8 @@ const ActivityPage = () => {
 
   const { data, error, isLoading } = useSWR(
     [API_URL + "/activities", token],
-    ([url, token]) => get_bike_requests(url, token)
+    ([url, token]) => get_bike_requests(url, token), 
+    { refreshInterval: 5000 }
   );
 
   if (error) return <div>failed to load, due to error {error}</div>;
@@ -42,7 +44,7 @@ const ActivityPage = () => {
       <div className="mt-4">
         {data &&
           data.incoming_transfer_requests.map((transfer_info, key) => (
-            <TransferIncomming data={transfer_info} key={key} />
+            <TransferIncoming data={transfer_info} key={key} />
           ))}
       </div>
       <div className="">

@@ -33,7 +33,7 @@ const ViewTransferDetail = () => {
   return (
     <LayoutWithBack title="Overførsel" isLoading={isLoading}>
       {data && (
-        <div className="mx-auto flex max-w-[425px] flex-col items-center space-y-4 rounded-lg bg-gray-800 p-4">
+        <div className="mx-auto flex max-w-[385px] flex-col items-center space-y-4 rounded-lg bg-gray-800 p-4">
           <h2 className="mr-1 text-lg font-semibold text-white">
             {user_id === data.sender.id &&
               data.state === "pending" &&
@@ -51,7 +51,12 @@ const ViewTransferDetail = () => {
               data.state === "accepted" &&
               "Du modtog en cykel"}
           </h2>
-          <img src={data.bike.image.obj_url} width="360px" height="360px" />
+          <img
+            className="px-4"
+            src={data.bike.image.obj_url}
+            width="360px"
+            height="360px"
+          />
           <p className="mr-1 font-semibold text-white">Modtager: </p>
           <p className="font-light text-gray-300">
             {data.receiver.phone_number}

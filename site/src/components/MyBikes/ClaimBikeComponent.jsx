@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
@@ -10,6 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const ClaimBikeComponent = () => {
 
     const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const token = secureLocalStorage.getItem('accesstoken');
 
@@ -27,9 +27,11 @@ export const ClaimBikeComponent = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
+        setIsSubmitting(true);
+
         const requestOptions = {
             method: "POST",
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
@@ -39,13 +41,16 @@ export const ClaimBikeComponent = () => {
 
             const body = await response.json();
 
-            if (!(response.ok)) { 
+            if (!(response.ok)) {
                 setError(body.detail);
+                setIsSubmitting(false);
                 return;
             }
-            
+
             //Trigger a page refresh
             navigate(0);
+            setIsSubmitting(false);
+
         } catch (error) {
             // Something failed miserably
             console.log(error);
@@ -63,14 +68,14 @@ export const ClaimBikeComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="flex flex-col mx-auto max-w-[425px] items-center rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4">
+        <div className="flex flex-col mx-auto max-w-[385px] items-center rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 mb-4">
             <motion.div
                 transition={{ layout: { duration: 1, type: "spring" } }}
                 layout="position"
                 onClick={() => setIsOpen(!isOpen)}>
                 <button>
                     <img
-                        src="../src/assets/bicycle-svgrepo.svg"
+                        src="/assets/bicycle-svgrepo.svg"
                         alt="Bike"
                         className="mx-auto mb-4"
                         width="300px"
@@ -114,42 +119,52 @@ export const ClaimBikeComponent = () => {
                             {error && <span className="flex justify-center text-red-500">{error}</span>}
                         </div>
                         {matchLength(watchClaimBikeCode[0]) ? (
-                            <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
-                                Indløs
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="h-8 w-8"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                                    />
-                                </svg>
+                            <button className={`btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
+                                type="submit"
+                            >
+                                {!isSubmitting &&
+                                    <>
+                                        Indløs
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="h-8 w-10 login-button"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                            />
+                                        </svg>
+                                    </>
+                                }
                             </button>
                         ) : (
-                            <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+                            <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}"
                                 type="submit"
                                 disabled>
-                                Indløs
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="h-8 w-8"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                                    />
-                                </svg>
+                                {!isSubmitting &&
+                                    <>
+                                        Indløs
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="h-8 w-8"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                            />
+                                        </svg>
+                                    </>
+                                }
                             </button>
                         )}
                     </form>

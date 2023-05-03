@@ -32,11 +32,12 @@ const BikeRegistration = () => {
 
   const [responseError, setResponseError] = useState("")
   const [responseSuccess, setResponseSuccess] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
 
     try {
-
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -50,23 +51,26 @@ const BikeRegistration = () => {
 
       const response = await fetch(API_URL + "/bikes", {
         method: "POST",
+        mode: "cors",
         body: formData,
       });
 
       const body = await response.json();
 
       if (!response.ok) {
-        console.log(body.detail);
         setResponseError(body.detail);
         // navigate(`/bikeregistration`, { replace: true });
         return;
+
       }
       else {
-        setResponseError(null); // Clear any previous success message
+        setResponseError(null); // Clear any previous error message
         // Response was okay
-        setResponseSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregere dig til login...");
-        setTimeout(() => navigate("/login"), 3000);
+        setResponseSuccess("Den nye cykel er registreret i systemet. Omdirigerer dig til login...");
+        setTimeout(() => navigate("/login"), 5000);
       }
+
+      setIsSubmitting(false);
 
     } catch (error) {
       console.error(error);
@@ -79,7 +83,7 @@ const BikeRegistration = () => {
   };
 
   return (
-    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[425px]">
+    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[385px]">
       <div className=" rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-10">
         <div className="flex items-center justify-center text-xl font-light text-gray-800 dark:text-white sm:text-2xl mt-2">
           Cykel registering
@@ -103,7 +107,7 @@ const BikeRegistration = () => {
                   { min: 8, max: 32 }
                 )}
               />
-              {errors.frame_number && <span>This field is required</span>}
+              {errors.frame_number && <span className="text-red-300">Stelnummer er påkrævet</span>}
             </div>
 
             {/* Phonenumber */}
@@ -118,12 +122,14 @@ const BikeRegistration = () => {
                   control={control}
                   rules={{ required: true }}
                 />
+                {errors.phone_number && <span className="text-red-300">Telefon nr. er påkrævet</span>}
               </div>
             </div>
 
             {/* Bike model */}
             <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg model:</h2>
+                {errors.gender && <span className="text-red-300">Model er påkrævet</span>}
               <div className="grid grid-cols-3 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"Herre"}
@@ -155,6 +161,7 @@ const BikeRegistration = () => {
             {/* Electic */}
             <div className=" rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Er det en El-cykel?</h2>
+              {errors.is_electric && <span className="text-red-300">Drivkraft er påkrævet</span>}
               <div className="grid grid-cols-2 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"El-cykel"}
@@ -178,6 +185,7 @@ const BikeRegistration = () => {
             {/* Bike type */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg cykel type:</h2>
+              {errors.kind && <span className="text-red-300">Typen er påkrævet</span>}
               <div className="grid grid-cols-2 place-items-center px-4 py-2">
                 <RadioButton
                   labelName={"City"}
@@ -217,6 +225,7 @@ const BikeRegistration = () => {
             {/* Brand */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h1 className="mb-2">Brand:</h1>
+              {errors.brand && <span className="text-red-300">Mærke er påkrævet</span>}
               <input
                 type="text"
                 id="brand"
@@ -233,6 +242,7 @@ const BikeRegistration = () => {
             {/* Color */}
             <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800">
               <h2 className="mb-2">Vælg en farve:</h2>
+              {errors.color && <span className="text-red-300">Farve er påkrævet</span>}
 
               <div className="grid grid-cols-2 place-items-center ">
                 <RadioButton
@@ -323,6 +333,7 @@ const BikeRegistration = () => {
           <h1 className="p-4">Billede af cykel:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
+          {errors.image && <span className="text-red-300">Model er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
@@ -335,6 +346,7 @@ const BikeRegistration = () => {
           <h1 className="p-4">Billede af kvittering:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
+          {errors.receipt && <span className="text-red-300">Model er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
@@ -343,12 +355,6 @@ const BikeRegistration = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center rounded-lg bg-blue-600 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 "
-          >
-            Registrer Cykel
-          </button>
           {responseSuccess && (
             <div className="p-4 rounded-lg bg-green-500 text-white mt-8">
               {responseSuccess}
@@ -359,6 +365,30 @@ const BikeRegistration = () => {
               {responseError}
             </div>
           )}
+          <button
+            type="submit"
+            className={`btn flex w-full items-center justify-center rounded-lg bg-blue-600 mt-2 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 ${isSubmitting && 'loading'}`}
+          >
+            {!isSubmitting &&
+                <>
+                  <span className="text-center mb-0.5 mr-2">Registrer Cykel</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
+          </button>
         </form>
       </div>
     </div>

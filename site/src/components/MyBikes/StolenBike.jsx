@@ -20,8 +20,9 @@ export const StolenBike = ({ id }) => {
 
   const { data, mutate, error } = useSWR(
     [API_URL + `/bikes/${id}`, token],
-    ([url, token]) => get_one_bike(url, token)
-    )
+    ([url, token]) => get_one_bike(url, token),
+    { refreshInterval: 5000 }
+    );
     
   
 

@@ -17,7 +17,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
   return (
     <>
       <div id="layout">
-        <div className="p-4 pb-20">
+        <div className="p-4 pb-20" onClick={() => setShowSidebar(false)}>
           {/* Header */}
           <div className="mb-4 flex justify-center border-b-gray-400">
             <h1 className="text-3xl text-white">{title}</h1>
@@ -34,9 +34,8 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
         {/* Sidebar */}
         <div
-          className={`fixed top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${
-            showSidebar ? "-translate-x-64" : "translate-x-0"
-          } `}
+          className={`fixed top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${showSidebar ? "-translate-x-64" : "translate-x-0"
+            } `}
         >
           <ul className="flex flex-col items-center justify-center space-y-4 p-2 text-white">
             <li
@@ -45,8 +44,6 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
             >
               X
             </li>
-
-            <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
 
             <Link to="/claimbike">
               <li className="rounded-sm px-16 hover:bg-orange-400">
@@ -59,7 +56,8 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
                 Søg efter stelnummer
               </li>
             </Link>
-
+          </ul>
+          <div className="flex flex-col items-center fixed inset-x-0 bottom-24 space-y-2 p-4 text-lg text-white">
             <Link to="/login">
               <button
                 className="rounded-sm px-16 hover:bg-orange-400"
@@ -68,7 +66,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
                 Log af
               </button>
             </Link>
-          </ul>
+          </div>
         </div>
       </div>
 

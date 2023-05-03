@@ -11,11 +11,13 @@ export const BikeLookup = () => {
   const [error, setError] = useState(null);
   const [bikeData, setBikeData] = useState(null);
   const [isStolen, setIsStolen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = secureLocalStorage.getItem("accesstoken");
   const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
@@ -26,42 +28,49 @@ export const BikeLookup = () => {
         },
       });
 
-      if (response.ok) {
+      if (response.status == 200) {
         const result = await response.json();
         setBikeFound(true);
         setBikeData(result);
         setIsStolen(result.reported_stolen);
         setError(null);
-      } else {
+      } else if (response.status == 404) {
+        const result = await response.json();
         setBikeFound(false);
         setBikeData(null);
-        setError("Cykel ikke fundet");
-        console.error(response.statusText);
+        setError(result.detail);
+      } else if (response.status == 204) {
+        setBikeFound(false);
+        setBikeData(null);
+        setError("Cyklen er ikke meldt stjålet");
       }
+
+      setIsSubmitting(false);
+
     } catch (e) {
       console.error(e);
     }
   };
 
   useEffect(() => {
-    // console.log("hello from useEffect()");
+    
   }, [bikeFound, bikeData]);
 
   return (
     <Layout title="Søg efter cykel">
       {error && (
-        <div className="mx-auto mb-2 max-w-[425px] rounded-lg bg-red-500 px-2 py-2 text-black">
+        <div className="mx-auto mb-2 max-w-[385px] rounded-lg bg-red-500 px-2 py-2 text-black">
           {error}
         </div>
       )}
       {/* Search for bike input field */}
       <form
         onSubmit={handleSubmit}
-        className="flex items-center justify-center p-2"
+        className="flex items-center justify-center mx-auto py-4"
       >
         <label
           htmlFor="default-search"
-          className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="sr-only mb-2 text-sm font-medium border bg-gray-800 hover:shadow-xl dark:bg-gray-800 dark:text-white"
         >
           Søg på stelnummer om cykel er meldt stjålet
         </label>
@@ -103,7 +112,7 @@ export const BikeLookup = () => {
 
       {/* Bike information */}
       {bikeData && (
-        <div className="mb-2 flex items-center justify-center">
+        <div className="mb-4 flex items-center justify-center">
           {" "}
           <BikeInfo data={bikeData} />{" "}
         </div>
@@ -120,24 +129,28 @@ export const BikeLookup = () => {
                 state: { userId: bikeData.owner },
               })
             }
-            className="mx-2 my-2 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200  disabled:opacity-25"
+            className={`btn mx-2 mb-6 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 disabled:opacity-25 ${isSubmitting && 'loading'}`}
             disabled={!isStolen}
           >
-            Indrapporter
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
+            {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Indrapporter</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
           </button>
         </div>
       )}

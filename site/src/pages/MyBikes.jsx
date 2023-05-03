@@ -25,7 +25,11 @@ const MyBikes = () => {
 
     const token = secureLocalStorage.getItem('accesstoken')
 
-    const { data, error, isLoading, mutate } = useSWR([API_URL + '/bikes/me', token], ([url, token]) => get_my_bikes(url, token))
+    const { data, error, isLoading, mutate } = useSWR(
+        [API_URL + '/bikes/me', token], 
+        ([url, token]) => get_my_bikes(url, token),
+        { refreshInterval: 5000 }
+        );
 
     if (error) return <div>failed to load, due to error {error}</div>
 

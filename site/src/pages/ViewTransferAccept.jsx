@@ -1,9 +1,8 @@
-import React from "react";
-import secureLocalStorage from "react-secure-storage";
+import React, { useState } from "react";
 import useSWR from "swr";
+import secureLocalStorage from "react-secure-storage";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
-import { BikeComponent } from "../components/MyBikes/BikeComponent";
 import { BikeInfo } from "../components/MyBikes/BikeInfo";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -15,8 +14,9 @@ const get_bike_request = async (url, token) => {
       Authorization: "Bearer " + token,
     },
   });
+
   const result = await response.json();
-//   console.log("status", response.status)
+
   if (!response.ok) {
     throw new Error(response.status)
   }
@@ -26,12 +26,14 @@ const get_bike_request = async (url, token) => {
 const ViewTransferAccept = () => {
   const navigate = useNavigate();
   const { transfer_id } = useParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = secureLocalStorage.getItem("accesstoken");
 
   const { data, error, isLoading } = useSWR(
     [API_URL + `/transfers/${transfer_id}`, token],
-    ([url, token]) => get_bike_request(url, token)
+    ([url, token]) => get_bike_request(url, token),
+    { refreshInterval: 5000 }
   );
 
   if (error && error.message === "404") {
@@ -42,6 +44,8 @@ const ViewTransferAccept = () => {
   if (error) return <div>failed to load, due to error </div>;
 
   async function approveBikeRequest() {
+    setIsSubmitting(true);
+
     const approve_bike_request =
       API_URL + `/transfers/${data.transfer_id}/accept`;
 
@@ -53,7 +57,8 @@ const ViewTransferAccept = () => {
     });
 
     const res = await response.json();
-    // console.log(res);
+
+    setIsSubmitting(false);
   }
 
   return (
@@ -61,13 +66,13 @@ const ViewTransferAccept = () => {
       {data && data.bike && (
         <>
           <BikeInfo data={data.bike} />
-          <div className="dark:text-whites mx-auto mt-8 flex max-w-[425px] rounded-lg bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
+          <div className="dark:text-whites mx-auto mt-8 flex max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
             <div className="mt-2 flex w-full justify-evenly">
               <div className="flex items-center justify-center">
                 <img
                   src={data.bike.image.obj_url}
                   alt="alt"
-                  className="h-[64px] w-[64px] rounded-lg text-sm"
+                  className="h-[64px] w-[64px] rounded-lg text-sm px-4"
                 />
               </div>
 
@@ -90,26 +95,30 @@ const ViewTransferAccept = () => {
           <Link to={`/mybikes`}>
             <div className="flex justify-center">
               <button
-                className="btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+                className={`btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 onClick={() => approveBikeRequest()}
                 style={{ maxWidth: "425px" }}
               >
-                Godkend
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-8 w-8"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+                {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Godkend</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
               </button>
             </div>
           </Link>

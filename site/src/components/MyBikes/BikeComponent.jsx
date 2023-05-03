@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { StolenBike } from "./StolenBike";
+import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import { IoReceiptOutline } from "react-icons/io5";
+import { translateString } from "../../Helpers/TranslateStringEngToDk";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -12,8 +11,11 @@ export const BikeComponent = ({ data, mutate }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const reportStolen = async () => {
+    setIsSubmitting(true);
+
     await fetch(`${API_URL}/bikes/${data._id}/reportstolen`, {
       method: "PUT",
       headers: {
@@ -21,13 +23,14 @@ export const BikeComponent = ({ data, mutate }) => {
       },
     });
 
+    setIsSubmitting(false);
     // Trigger a mutate to refresh screen
     mutate(data);
   };
 
   return (
-    <div className="mx-auto mb-4 flex max-w-[425px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-      <div className="m-0 flex flex-col justify-center px-4 ">
+    <div className="mx-auto mb-4 flex max-w-[385px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
+      <div className="m-0 flex flex-col justify-center">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
           layout="position"
@@ -37,17 +40,19 @@ export const BikeComponent = ({ data, mutate }) => {
           <img
             src={data ? data.image.obj_url : "no url"}
             alt="Bike"
-            className={`${
-              data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-            } "mx-auto h-[425px]" mt-8 mb-2 w-[425px] object-scale-down `}
+            className={`${data.state === "in_transfer" ? "opacity-30" : "opacity-100"
+              } "mx-auto h-[425px]" mt-8 mb-2 object-scale-down px-8   `}
           />
         </motion.div>
 
-        <div className="mt-2 mb-1 flex flex-col items-center justify-center text-sm">
-          <p className="font-semibold text-white">Model: </p>
-          <p className="text-gray-300">{data.brand}</p>
-          <p className="font-semibold text-white">Stelnummer:</p>
-          <p className="text-gray-300">{data.frame_number}</p>
+        <div className="mt-2 mb-2 flex flex-col items-center justify-center text-sm">
+          <p className="font-semibold text-white">
+            Mærke: <span className="font-light text-white">{data.brand}</span>
+          </p>
+          <p className="font-semibold text-white">
+            Stelnummer:{" "}
+            <span className="font-light text-white">{data.frame_number}</span>
+          </p>
         </div>
 
         {isOpen && (
@@ -66,13 +71,16 @@ export const BikeComponent = ({ data, mutate }) => {
                 </div>
               </div>
 
-              <div className=" flex flex-col items-center justify-center py-1 text-sm">
+              <div className=" flex flex-col items-center justify-center mt-1 text-sm">
                 <div className="flex w-full justify-center">
-                  <p className="font-semibold text-white">Køn:</p>
-                  <span className="ml-1 text-gray-300"> {data.gender}</span>
+                  <p className="font-semibold text-white">Model:</p>
+                  <span className="ml-1 text-gray-300">
+                    {" "}
+                    {translateString(data.gender)}
+                  </span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center py-1 text-sm">
+                <div className="flex flex-col items-center justify-center mt-1 text-sm">
                   <p className="font-semibold text-white">
                     Elektrisk:
                     <span className="ml-1 font-light text-gray-300">
@@ -81,26 +89,24 @@ export const BikeComponent = ({ data, mutate }) => {
                   </p>
                 </div>
 
-                <div className="mb-1 flex w-full justify-evenly">
+                <div className="m-1 flex w-full justify-evenly">
                   <p className="font-semibold text-white">
                     Slags:
                     <span className="font-light text-gray-300">
                       {" "}
-                      {data.kind}
+                      {translateString(data.kind)}
                     </span>
                   </p>
                 </div>
 
                 <div className="mb-1 flex w-full justify-center">
                   <p className="mr-1 font-semibold text-white">Farve:</p>
-                  <p className="font-light text-gray-300">{data.color}</p>
-                </div>
-
-                <div className="mb-1 flex w-full justify-evenly">
-                  <p className="mr-1 font-semibold text-white">Mærke: </p>
-                  <p className="text-gray-300"> {data.brand}</p>
+                  <p className="font-light text-gray-300">
+                    {translateString(data.color)}
+                  </p>
                 </div>
               </div>
+              <p className="text-white font-semibold p-2">Hent kvittering:</p>
               <button
                 onClick={() => (window.location.href = data.receipt.obj_url)}
               >
@@ -123,16 +129,24 @@ export const BikeComponent = ({ data, mutate }) => {
                 {data.reported_stolen ? (
                   <button
                     onClick={reportStolen}
-                    className="btn ml-3 bg-orange-500 text-black hover:bg-orange-300"
+                    className={`btn w-full max-w-[168px] ml-3 bg-orange-500 text-black hover:bg-orange-300 ${isSubmitting && 'loading'}`}
                   >
-                    Rapporter fundet
+                    {!isSubmitting &&
+                      <>
+                        Rapporter fundet
+                      </>
+                    }
                   </button>
                 ) : (
                   <button
                     onClick={reportStolen}
-                    className="btn-warning btn ml-3 hover:bg-yellow-300"
+                    className={`btn w-full max-w-[148px] ml-3 bg-yellow-500 text-black hover:bg-yellow-300 ${isSubmitting && 'loading'}`}
                   >
-                    Anmeld stjålet
+                    {!isSubmitting &&
+                      <>
+                        Anmeld stjålet
+                      </>
+                    }
                   </button>
                 )}
               </div>

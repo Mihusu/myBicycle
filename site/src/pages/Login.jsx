@@ -20,7 +20,6 @@ const get_user_details = async (url, token) => {
     return await response.json()
 }
 
-
 export const LoginPage = () => {
 
     const [error, setError] = useState("");
@@ -56,7 +55,7 @@ export const LoginPage = () => {
         navigate(`/mybikes`, { replace: true });
     };
 
-    const onUnkownDevice = (error) => {
+    const onUnknownDevice = (error) => {
         // Navigate to device verification page
         navigate('/deviceverify/' + error.detail.session_id);
     };
@@ -121,7 +120,7 @@ export const LoginPage = () => {
 
         switch (response.status) {
             case 200: await onAuthOkay(result); break;
-            case 307: onUnkownDevice(result); break;
+            case 307: onUnknownDevice(result); break;
             case 401: onInvalidCredentials(result); break;
             case 404: onUserNotFound(result); break;
             case 423: onBlacklisted(result); break;
@@ -133,65 +132,63 @@ export const LoginPage = () => {
     }
 
     return (
-        <div className="grid h-screen place-items-center p-4">
-            <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-4">
-                {/* Errors */}
-                {error &&
-                    <div className="p-4 rounded-lg bg-error text-white">
-                        {error}
-                        {/* Cooldown */}
-                        {cdSeconds > 0 && (
-                            <p>
-                                Prøv igen om:{" "}
-                                {cdSeconds === 1
-                                    ? `${cdSeconds} sekund`
-                                    : cdSeconds < 60
-                                        ? `${cdSeconds} sekunder`
-                                        : cdSeconds == 61
-                                            ? `1 minut og 1 sekund`
-                                            : cdSeconds < 120
-                                                ? `1 minut og ${cdSeconds % 60} sekunder`
-                                                : `${Number.parseInt(cdSeconds / 60)} minut${cdSeconds >= 120 && cdSeconds % 60 === 0 ? "ter" : "ter"} og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
-                            </p>
-                        )}
-                    </div>
-                }
-
+        <div className="grid h-screen place-items-center p-4 max-w-[385px] mx-auto">
+            <div className="bg-white rounded-lg shadow dark:bg-gray-800">
                 {/* Use a form element to wrap the inputs and button */}
                 <form
-                    className="rounded-lg bg-white p-2 shadow dark:bg-gray-800 sm:px-2 md:px-4 lg:px-10"
+                    className="rounded-lg bg-white py-6 px-10 dark:bg-gray-800"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* Use input elements for phoneNumber and password */}
                     <h1 className="flex justify-center text-3xl mb-4">Login</h1>
-                    <div className="pb-2 font-light text-gray-800 dark:text-white px-8" >
-                        Tlf nr:
+                    {/* Errors */}
+                    {error &&
+                        <div className="p-4 my-4 rounded-lg bg-error text-white">
+                            {error}
+                            {/* Cooldown */}
+                            {cdSeconds > 0 && (
+                                <p>
+                                    Prøv igen om:{" "}
+                                    {cdSeconds === 1
+                                        ? `${cdSeconds} sekund`
+                                        : cdSeconds < 60
+                                            ? `${cdSeconds} sekunder`
+                                            : cdSeconds === 61
+                                                ? `1 minut og 1 sekund`
+                                                : cdSeconds < 120
+                                                    ? `1 minut og ${cdSeconds % 60} sekunder`
+                                                    : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                                </p>
+                            )}
+                        </div>
+                    }
+                    <div className="pb-2 font-light text-xl text-gray-800 dark:text-white" >
+                        Tlf nr.
                         <span className="required-dot text-red-500"> *</span>
                     </div>
 
-                    <div className="flex flex-col space-y-2">
-                        <div className="px-8">
-                            <PhoneNumber
-                                name="phone_number"
-                                control={control}
-                                rules={{ required: true }}
-                            />
-                        </div>
-                        <div className='space-y-2 py-4 px-8'>
+                    <div className="flex flex-col space-y-2 max-w-xs">
+                        <PhoneNumber
+                            name="phone_number"
+                            control={control}
+                            rules={{ required: true }}
+                        />
+
+                        <div className='space-y-2 py-4'>
                             <label className="font-light text-gray-800 dark:text-white">
                                 Adgangskode:
                                 <span className="text-red-500 required-dot"> *</span>
                             </label>
                             <input
                                 type="password"
-                                className="rounded-lg border-transparent flex-1 border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent action-password"
+                                className="rounded-lg border-transparent flex-1 border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                 placeholder="Adgangskode"
                                 {...register('password')}
                             />
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-center items-center space-y-2 px-8">
+                    <div className="flex flex-col justify-center items-center space-y-2">
 
                         <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
                             {!isSubmitting &&
@@ -211,7 +208,8 @@ export const LoginPage = () => {
                                             d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                                         />
                                     </svg>
-                                </>}
+                                </>
+                            }
                         </button>
 
                         <p>Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>

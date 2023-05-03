@@ -21,8 +21,8 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
 
     return (
         <>
-            <div id='layout-back' className=''>
-                <div className='p-4 pb-20'>
+            <div id='layout-back'>
+                <div className='p-4 pb-20' onClick={() => setShowSidebar(false)}>
                     {/* Header */}
                     <div className='flex justify-around items-center mb-4 border-b-gray-400'>
                         <button onClick={() => navigate(-1)}>
@@ -54,8 +54,6 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                         X
                     </li>
 
-                    <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
-
                     <Link to="/claimbike">
                         <li className="rounded-sm px-16 hover:bg-orange-400">
                             Indløs cykel
@@ -67,7 +65,8 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                             Søg efter stelnummer
                         </li>
                     </Link>
-
+                </ul>
+                <div className="flex flex-col items-center fixed inset-x-0 bottom-24 space-y-2 p-4 text-lg text-white">
                     <Link to="/login">
                         <button
                             className="rounded-sm px-16 hover:bg-orange-400"
@@ -76,7 +75,7 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                             Log af
                         </button>
                     </Link>
-                </ul>
+                </div>
             </div>
             <Footer toggleSidebar={toggleSidebar} />
         </>

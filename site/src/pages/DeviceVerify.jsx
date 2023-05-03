@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiArrowLeft } from 'react-icons/hi';
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,6 +11,7 @@ const DeviceVerify = () => {
 
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const {
         register,
@@ -29,6 +29,8 @@ const DeviceVerify = () => {
     const { session_id } = useParams();
 
     const onSubmit = async (data) => {
+        setIsSubmitting(true);
+
         try {
             const response = await fetch(API_URL + `/auth/trust-device`, {
                 method: "PUT",
@@ -46,12 +48,16 @@ const DeviceVerify = () => {
 
             if (!(response.ok)) {
                 setError("Forkert engangskode eller sessionen er udløbet");
+                setIsSubmitting(false);
                 return;
             }
+
+            setError(null); // Clear any previous error message
 
             // Response was okay. Redirect back to login page
             setSuccess("Din enhed er blevet tilføjet til listen af godkendte enheder. Omdiregere dig til login...");
             setTimeout(() => navigate("/login"), 3000);
+            setIsSubmitting(false);
 
         } catch (error) {
             // Something failed miserably
@@ -127,24 +133,28 @@ const DeviceVerify = () => {
                         />
                     </div>
 
-                    <button className="btn my-4 mt-8 flex w-full max-w-[320px] justify-center gap-2 bg-green-500 py-2 px-8 text-green-100"
+                    <button className={`btn my-4 mt-8 flex w-full max-w-[320px] justify-center gap-2 bg-green-500 py-2 px-8 text-green-100 ${isSubmitting && 'loading'}`}
                         type="submit"
                         disabled={!matchLength(watchOtp[0])}>
-                        Bekræft
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="h-8 w-8"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                            />
-                        </svg>
+                        {!isSubmitting &&
+                            <>
+                                <span className="text-center mt-0.5 mr-2">Bekræft</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="h-8 w-8"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </>
+                        }
                     </button>
                 </form>
             </div>
