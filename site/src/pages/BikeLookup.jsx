@@ -129,7 +129,7 @@ export const BikeLookup = () => {
                 state: { userId: bikeData.owner },
               })
             }
-            className={`btn mx-2 mb-6 flex w-fit rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 disabled:opacity-25 ${isSubmitting && 'loading'}`}
+            className={`btn mx-2 mb-6 flex w-fit rounded-lg bg-blue-600 hover:to-blue-300 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 disabled:opacity-25 ${isSubmitting && 'loading'}`}
             disabled={!isStolen}
           >
             {!isSubmitting &&

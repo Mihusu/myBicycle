@@ -92,8 +92,8 @@ const DeviceVerify = () => {
                     className="flex flex-col items-center justify-center bg-gray-800 rounded-lg px-10 py-8"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2'>
-                        <p className='py-2 mb-1'>
+                    <div className='rounded-lg bg-gray-800 shadow space-y-2'>
+                        <p className='text-white py-2 mb-1'>
                             Hej, det lader til at du logger ind fra en ny enhed. Som en ekstra sikkerhed beder vi dig
                             bekræfte enheden ved at indtaste sms-koden vi har sendt til dig.
                         </p>
@@ -115,7 +115,7 @@ const DeviceVerify = () => {
                         />
                     </div>
 
-                    <div className='rounded-lg bg-white shadow dark:bg-gray-800 space-y-2 my-4'>
+                    <div className='rounded-lg bg-gray-800 space-y-2 my-4'>
                         <p className='py-2 mb-1'>
                             For nemt at genkende din enhed blandt listen over enheder,
                             bedes du give din enhed et kaldenavn

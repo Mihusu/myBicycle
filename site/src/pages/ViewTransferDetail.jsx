@@ -56,9 +56,11 @@ const ViewTransferDetail = () => {
             width="360px"
             height="360px"
           />
-          <p className="mr-1 font-semibold text-white">Modtager: </p>
-          <p className="font-light text-gray-300">
-            {data.receiver.phone_number}
+          <p className="font-semibold text-white">
+            Modtager:
+            <span className="font-light text-white px-1">
+              {data.receiver.phone_number}
+            </span>
           </p>
 
           <div className="flex justify-center">

@@ -67,11 +67,11 @@ export const ClaimBikeForm = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="space-y-2">
-            <p className="mb-4 mr-1 py-2 font-semibold text-white">
+            <p className="mb-4 mr-1 py-2 text-white">
               Skriv din indløsningskode du har modtaget på sms nedenfor for at
               indløse din cykel.
             </p>
-            <label className="mr-1 font-semibold  text-white">
+            <label className="mr-1 text-white">
               Engangskode:
               <span className="required-dot text-red-500"> *</span>
             </label>

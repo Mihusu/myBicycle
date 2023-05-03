@@ -107,10 +107,10 @@ const PhoneRegistration = () => {
   return (
     <div className="grid h-screen place-items-center justify-center max-w-[385px] mx-auto">
       <form
-        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[385px]"
+        className="rounded-lg bg-gray-800 max-w-[385px]"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
-        <div className="rounded-lg bg-white px-10 py-8 shadow dark:bg-gray-800">
+        <div className="rounded-lg bg-gray-800 px-10 py-8">
           <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
 
           {/* Errors */}
@@ -232,7 +232,7 @@ const PhoneRegistration = () => {
               </button>
             )}
 
-            <p>Er du allerede oprettet som bruger? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
+            <p className="text-gray-400">Er du allerede oprettet som bruger? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
           </div>
         </div>
       </form>

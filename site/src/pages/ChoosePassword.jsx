@@ -50,16 +50,18 @@ const ChoosePassword = () => {
 
   return (
     <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
-      <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-12">
+      <div className="rounded-lg shadow bg-gray-800 p-12">
         {/* Response success */}
         {success && <p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>}
         <div className="text-center text-2xl text-white mb-4">
           Nulstil adgangskode
         </div>
         {/* password */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
-            <span className="label-text">Vælg kode</span>
+            <span className="label-text text-gray-800 dark:text-white">Vælg kode
+              <span className="text-red-500 required-dot"> *</span>
+            </span>
           </label>
           <input
             type="password"
@@ -68,13 +70,15 @@ const ChoosePassword = () => {
             required
             maxLength={32}
             placeholder="max 32 tegn"
-            className="input-bordered input w-full max-w-xs"
+            className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
         </div>
         {/* verify */}
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Indtast kode igen</span>
+            <span className="label-text text-gray-800 dark:text-white">Indtast kode igen
+              <span className="text-red-500 required-dot"> *</span>
+            </span>
           </label>
           <input
             type="password"
@@ -82,34 +86,34 @@ const ChoosePassword = () => {
             required
             maxLength={32}
             placeholder="max 32 tegn"
-            className="input-bordered input w-full max-w-xs"
+            className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
         </div>
         {/* submit */}
-        <button type="submit" className={`btn my-6 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} 
+        <button type="submit" className={`btn my-6 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`}
           onClick={() => submitPassword()}
           disabled={!matchPassword(password, verify)}>
-              {!isSubmitting &&
-                <>
-                  Bekræft
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-8 w-10 login-button"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                    />
-                  </svg>
-                </>
-              }
-            </button>
-        <p>Vil du gerne vende tilbage til login siden? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
+          {!isSubmitting &&
+            <>
+              Bekræft
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-8 w-10 login-button"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
+            </>
+          }
+        </button>
+        <p className="text-gray-400">Vil du gerne vende tilbage til login siden? <Link to='/login'><span className="text-blue-500">Login her</span></Link></p>
       </div>
     </div>
   );

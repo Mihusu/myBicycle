@@ -41,11 +41,8 @@ export const TransferIncoming = ({ data }) => {
         </div>
 
         <div className="mr-2 flex flex-col space-y-1">
-          <h1 className="mr-1 text-lg font-semibold text-white">Afsender:</h1>
-          <h2 className="font-light text-gray-300">
-            {" "}
-            {data.sender.phone_number}
-          </h2>
+          <h1 className="mr-1 text-lg font-semibold text-white">Afsender: {data.sender.phone_number}</h1>
+
 
           <p className="flex-wrap items-start break-words text-sm font-semibold text-white">
             Du har modtaget et tilbud om at overtage ejerskab

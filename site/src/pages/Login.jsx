@@ -133,14 +133,14 @@ export const LoginPage = () => {
 
     return (
         <div className="grid h-screen place-items-center p-4 max-w-[385px] mx-auto">
-            <div className="bg-white rounded-lg shadow dark:bg-gray-800">
+            <div className="rounded-lg shadow bg-gray-800">
                 {/* Use a form element to wrap the inputs and button */}
                 <form
-                    className="rounded-lg bg-white py-6 px-10 dark:bg-gray-800"
+                    className="rounded-lg bg-gray-800 py-6 px-10 "
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* Use input elements for phoneNumber and password */}
-                    <h1 className="flex justify-center text-3xl mb-4">Login</h1>
+                    <h1 className="flex justify-center text-white text-3xl mb-4">Login</h1>
                     {/* Errors */}
                     {error &&
                         <div className="p-4 my-4 rounded-lg bg-error text-white">
@@ -212,8 +212,8 @@ export const LoginPage = () => {
                             }
                         </button>
 
-                        <p>Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>
-                        <p>
+                        <p className="text-gray-400">Har du ikke registreret dig som bruger? <Link to='/registration'><span className="text-blue-500">Registrer her</span></Link></p>
+                        <p className="text-gray-400">
                             Har du glemt dit kodeord?{" "}
                             <Link to="/resetpassword">
                                 <span className="text-blue-500">Nulstil dit kodeord her</span>

@@ -108,17 +108,14 @@ export const PasswordResetVerification = () => {
             </div>
           )}
 
-          <p
-            className=" text-white
-          "
-          >
+          <p className=" text-white">
             Vi har lige sendt dig en SMS med en bekræftelseskode.
           </p>
 
-          <p className="mt-4 text-gray-400">
+          <p className="mt-4 text-white">
             Du bedes bekræfte inden:{" "}
             {cdSeconds > 0 && (
-              <span className="text-gray-400">
+              <span className="text-white">
                 {cdSeconds === 1
                   ? `${cdSeconds} sekund`
                   : cdSeconds < 60

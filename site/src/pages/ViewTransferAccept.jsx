@@ -76,7 +76,10 @@ const ViewTransferAccept = () => {
 
               <div className="mr-2 flex flex-col">
                 <h1 className="text-lg text-white">
-                  Afsender: {data.sender.phone_number}
+                  Afsender:
+                  <span className="font-light text-white px-1">
+                    {data.sender.phone_number}
+                  </span>
                 </h1>
 
                 <span className="flex-wrap items-start text-sm">
@@ -99,24 +102,24 @@ const ViewTransferAccept = () => {
                 style={{ maxWidth: "425px" }}
               >
                 {!isSubmitting &&
-                <>
-                  <span className="text-center mt-0.5 mr-2">Godkend</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-8 w-8"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                    />
-                  </svg>
-                </>
-              }
+                  <>
+                    <span className="text-center mt-0.5 mr-2">Godkend</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-8 w-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </>
+                }
               </button>
             </div>
           </Link>

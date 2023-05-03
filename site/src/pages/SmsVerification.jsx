@@ -103,7 +103,7 @@ export const SmsVerification = () => {
 
   return (
     <div className="grid h-screen place-items-center p-4 max-w-[425px] mx-auto">
-      <div className="bg-white rounded-lg shadow dark:bg-gray-800 p-8">
+      <div className="bg-gray-800 rounded-lg shadow p-8">
         <div className="flex items-center mb-4">
           <button onClick={() => navigate(-1)}>
             <HiArrowLeft size={24} />
@@ -118,7 +118,7 @@ export const SmsVerification = () => {
           {/* Errors */}
           {error && (<div className="p-4 my-4 rounded-lg bg-error text-white">{error}</div>)}
 
-          <p>Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
+          <p className="text-gray-400">Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
 
           <p className="mt-4 text-gray-400">Du bedes bekræfte inden:{" "}
             {cdSeconds > 0 && (

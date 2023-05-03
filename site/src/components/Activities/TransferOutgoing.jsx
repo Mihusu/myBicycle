@@ -45,15 +45,12 @@ export const TransferOutgoing = ({ data }) => {
           <img
             src={data.bike.image.obj_url}
             alt="alt"
-            className="mt-3 h-[56px] w-[56px] rounded-lg text-sm"
+            className="mt-3 h-[56px] w-[56px] rounded-lg text-sm mr-2"
           />
         </div>
 
         <div className="mr-2 flex flex-col space-y-1">
-          <h1 className="mr-1 text-lg font-semibold text-white">Modtager:</h1>
-          <h2 className="font-light text-gray-300">
-            {data.receiver.phone_number}
-          </h2>
+          <h1 className="mr-1 text-lg font-semibold text-white">Modtager: {data.receiver.phone_number}</h1>
           <p className="flex-wrap items-start break-words text-sm">
             Du er ved at afgive ejerskab af cyklen
           </p>
