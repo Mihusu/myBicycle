@@ -46,7 +46,6 @@ export const ClaimBikeForm = () => {
       //Trigger a page refresh and go to main page
       navigate("/mybikes");
       setIsSubmitting(false);
-
     } catch (error) {
       // Something failed miserably
       console.log(error);
@@ -64,15 +63,15 @@ export const ClaimBikeForm = () => {
     <div className="flex h-screen justify-center">
       <div className="w-full max-w-md p-4">
         <form
-          className="flex flex-col items-center justify-center rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 px-10 py-8"
+          className="flex flex-col items-center justify-center rounded-lg border bg-gray-800 px-10 py-8 hover:shadow-xl dark:bg-gray-800"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="space-y-2">
-            <p className="mb-4 py-2">
+            <p className="mb-4 mr-1 py-2 font-semibold text-white">
               Skriv din indløsningskode du har modtaget på sms nedenfor for at
               indløse din cykel.
             </p>
-            <label className="font-light text-gray-800 dark:text-white">
+            <label className="mr-1 font-semibold  text-white">
               Engangskode:
               <span className="required-dot text-red-500"> *</span>
             </label>
@@ -97,29 +96,31 @@ export const ClaimBikeForm = () => {
           </div>
 
           <button
-            className={`btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`}
+            className={`btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 text-green-100 ${
+              isSubmitting && "loading"
+            }`}
             type="submit"
             disabled={!matchLength(watchClaimBikeCode[0])}
           >
-            {!isSubmitting &&
-                <>
-                  Indløs
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-8 w-8"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                    />
-                  </svg>
-                </>
-              }
+            {!isSubmitting && (
+              <>
+                Indløs
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-8 w-8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                  />
+                </svg>
+              </>
+            )}
           </button>
         </form>
       </div>
