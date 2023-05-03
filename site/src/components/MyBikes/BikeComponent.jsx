@@ -41,7 +41,7 @@ export const BikeComponent = ({ data, mutate }) => {
             src={data ? data.image.obj_url : "no url"}
             alt="Bike"
             className={`${data.state === "in_transfer" ? "opacity-30" : "opacity-100"
-              } "mx-auto h-[425px]" mt-8 mb-2 object-scale-down px-8   `}
+              } "mx-auto h-[425px]" mt-8 mb-2 object-scale-down px-8`}
           />
         </motion.div>
 

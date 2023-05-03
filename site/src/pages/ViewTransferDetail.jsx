@@ -67,7 +67,7 @@ const ViewTransferDetail = () => {
             {/* Outgoing */}
             {!data.closed_at && (
               <h4 className="font-light text-gray-300">
-                {new Date(data.created_at).toLocaleDateString()} •{" "}
+                {new Date(data.created_at).toLocaleDateString('en-GB')} •{" "}
                 {new Date(data.created_at)
                   .toLocaleTimeString()
                   .replaceAll(".", ":")}
@@ -76,7 +76,7 @@ const ViewTransferDetail = () => {
             {/* Finished */}
             {data.closed_at && (
               <h4 className="font-light text-gray-300">
-                {new Date(data.closed_at).toLocaleDateString()} •{" "}
+                {new Date(data.closed_at).toLocaleDateString('en-GB')} •{" "}
                 {new Date(data.closed_at)
                   .toLocaleTimeString()
                   .replaceAll(".", ":")}

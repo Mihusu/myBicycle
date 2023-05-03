@@ -8,7 +8,7 @@ export const BikeInfo = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex mx-auto rounded-lg max-w-[384px] border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800">
+    <div className="flex mx-auto rounded-lg max-w-[385px] border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800">
       <motion.div
         transition={{ layout: { duration: 1, type: "spring" } }}
         layout="position"
@@ -19,8 +19,7 @@ export const BikeInfo = ({ data }) => {
           <img
             src={data.image.obj_url}
             alt="Bike"
-            className={
-              "mx-auto max-h-[425px] py-2 px-4"}
+            className={`"mx-auto h-[425px]" mt-4 mb-2 object-scale-down px-8`}
           />
 
 

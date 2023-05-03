@@ -64,13 +64,13 @@ const ViewTransferAccept = () => {
       {data && data.bike && (
         <>
           <BikeInfo data={data.bike} />
-          <div className="dark:text-whites mx-auto mt-8 flex max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow sm:px-3 md:px-8 lg:px-10">
+          <div className="dark:text-whites mx-auto mt-8 flex max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow">
             <div className="mt-2 flex w-full justify-evenly">
               <div className="flex items-center justify-center">
                 <img
                   src={data.bike.image.obj_url}
                   alt="alt"
-                  className="h-[64px] w-[64px] rounded-lg text-sm px-4"
+                  className="h-[60px] w-[60px] rounded-lg text-sm"
                 />
               </div>
 
@@ -99,11 +99,11 @@ const ViewTransferAccept = () => {
                 className={`btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 onClick={() => approveBikeRequest()}
-                style={{ maxWidth: "425px" }}
+                style={{ maxWidth: "385px" }}
               >
                 {!isSubmitting &&
                   <>
-                    <span className="text-center mt-0.5 mr-2">Godkend</span>
+                    <span className="text-center mb-0.5">Godkend</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

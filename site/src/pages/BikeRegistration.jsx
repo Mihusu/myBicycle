@@ -356,12 +356,12 @@ const BikeRegistration = () => {
           </div>
 
           {responseSuccess && (
-            <div className="p-4 rounded-lg bg-green-500 text-white mt-8">
+            <div className="p-4 rounded-lg bg-green-500 text-white mt-8 mb-4">
               {responseSuccess}
             </div>
           )}
           {responseError && (
-            <div className="p-4 rounded-lg bg-error text-white mt-8">
+            <div className="p-4 rounded-lg bg-error text-white mt-8 mb-4">
               {responseError}
             </div>
           )}

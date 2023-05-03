@@ -36,7 +36,7 @@ export const TransferIncoming = ({ data }) => {
           <img
             src={data.bike.image.obj_url}
             alt="alt"
-            className="mt-3 h-[56px] w-[56px] rounded-lg text-sm"
+            className="mt-3 h-[60px] w-[60px] rounded-lg text-sm"
           />
         </div>
 
@@ -44,10 +44,10 @@ export const TransferIncoming = ({ data }) => {
           <h1 className="mr-1 text-lg font-semibold text-white">Afsender: {data.sender.phone_number}</h1>
 
 
-          <p className="flex-wrap items-start break-words text-sm font-semibold text-white">
+          <div className="flex-wrap items-start break-words text-sm font-semibold text-white">
             Du har modtaget et tilbud om at
             <p className="text-white">overtage ejerskab</p>
-          </p>
+          </div>
 
           <h4 className="text-xs font-light text-gray-300">
             Dato: {new Date(data.created_at).toLocaleDateString()}

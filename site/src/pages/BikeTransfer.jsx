@@ -20,6 +20,26 @@ const BikeTransfer = () => {
   // TODO: Use useEffect to check if user
   // with given phonenumber exists on every type hit
 
+  const onAuthOkay = async (data) => {
+    navigate("/mybikes");
+  };
+
+  const onTransferringSameBikeOwner = (error) => {
+    setError("Du kan ikke overføre din egen cykel.");
+  };
+
+  const onStolenBike = (error) => {
+    setError(`Cyklen er meldt stjålet. Overførsel er ikke tilladt.`);
+  };
+
+  const onUserNotFound = (error) => {
+    setError("Bruger med givent telefonummer er ikke registreret");
+  };
+
+  const onAlreadyInTransfer = (error) => {
+    setError("Engangskoden er udløbet. Prøv at registrere dig igen.");
+  };
+
   const onSendTransferRequest = async () => {
     try {
       setIsLoading(true);
@@ -36,14 +56,16 @@ const BikeTransfer = () => {
         }),
       });
 
-      const body = await response.json();
+      const result = await response.json();
 
-      if (!response.ok) {
-        setError(body.detail);
-        return;
+      switch (response.status) {
+        case 201: await onAuthOkay(result); return;
+        case 400: onTransferringSameBikeOwner(result); return;
+        case 403: onStolenBike(result); return;
+        case 404: onUserNotFound(result); return;
+        case 405: onAlreadyInTransfer(result); return;
       }
 
-      navigate("/mybikes");
     } catch (error) {
       console.error(error);
     } finally {

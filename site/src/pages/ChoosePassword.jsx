@@ -69,7 +69,7 @@ const ChoosePassword = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
             maxLength={32}
-            placeholder="max 32 tegn"
+            placeholder="Vælg adgangskode"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
         </div>
@@ -85,7 +85,7 @@ const ChoosePassword = () => {
             onChange={(e) => setVerify(e.target.value)}
             required
             maxLength={32}
-            placeholder="max 32 tegn"
+            placeholder="Bekræft adgangskode"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
         </div>
