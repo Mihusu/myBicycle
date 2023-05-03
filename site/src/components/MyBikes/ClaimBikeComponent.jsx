@@ -89,7 +89,7 @@ export const ClaimBikeComponent = () => {
                 Vi kan se at du ikke har en cykel endnu
             </div>
             <div className="self-center justify-center mb-4 text-l font-light text-gray-800 sm:text-lg dark:text-white">
-                Indløs din første cykel ved at trykke på cyklen
+                Tryk på cyklen for at indløse din første cykel
             </div>
 
             {/* After clicking on the bike, this will appear */}

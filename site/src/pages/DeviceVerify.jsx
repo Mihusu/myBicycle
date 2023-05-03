@@ -115,7 +115,7 @@ const DeviceVerify = () => {
                         />
                     </div>
 
-                    <div className='rounded-lg bg-gray-800 space-y-2 my-4'>
+                    <div className='rounded-lg bg-gray-800 text-white space-y-2 my-4'>
                         <p className='py-2 mb-1'>
                             For nemt at genkende din enhed blandt listen over enheder,
                             bedes du give din enhed et kaldenavn

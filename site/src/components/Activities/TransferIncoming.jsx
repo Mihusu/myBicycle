@@ -45,7 +45,8 @@ export const TransferIncoming = ({ data }) => {
 
 
           <p className="flex-wrap items-start break-words text-sm font-semibold text-white">
-            Du har modtaget et tilbud om at overtage ejerskab
+            Du har modtaget et tilbud om at
+            <p className="text-white">overtage ejerskab</p>
           </p>
 
           <h4 className="text-xs font-light text-gray-300">
@@ -63,7 +64,7 @@ export const TransferIncoming = ({ data }) => {
           type="submit"
           onClick={() => declineBikeRequest()}
         >
-          {!isSubmitting && <>Avis</>}
+          {!isSubmitting && <>Afvis</>}
         </button>
         <Link to={`/transfers/accept/${data.transfer_id}`}>
           <button

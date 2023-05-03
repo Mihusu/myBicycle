@@ -19,7 +19,7 @@ $ docker build -t jsaad20/production:client .
 
 ### Step 2. Push to production
 ```console
-$ docker build -t jsaad20/production:client .
+$ docker push jsaad20/production:client
 ```
 
 ### Step 3 (Optional). Test the production server locally
