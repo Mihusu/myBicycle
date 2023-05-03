@@ -40,7 +40,7 @@ const ChoosePassword = () => {
       const response = await fetch(URI, requestOptions);
 
       if (response.ok) {
-        setSuccess("Din adgangskode er nu ændret. Omdiregere dig til login...");
+        setSuccess("Din adgangskode er nu ændret. Omdirigerer dig til login...");
         setTimeout(() => navigate("/login"), 3000);
       }
     } catch (error) {

@@ -53,7 +53,7 @@ export const SmsVerification = () => {
     secureLocalStorage.setItem("accesstoken", data.access_token);
 
     setResponseError(null); // Clear any previous error message
-    setSuccess("Din konto er nu oprettet. Omdiregere dig til hjem...");
+    setSuccess("Din konto er nu oprettet. Omdirigerer dig til hjem...");
     setTimeout(() => navigate("/mybikes"), 3000);
   };
 
