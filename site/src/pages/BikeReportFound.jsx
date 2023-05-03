@@ -126,7 +126,7 @@ export const BikeReportFound = () => {
 
           {/* Address form */}
           <div className="p-6">
-            <form className="items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col justify-centerr" onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-6 flex flex-col">
                 <div className="relative">
                   <h1 className="text-white mb-2">
