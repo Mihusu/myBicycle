@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { PhoneNumber } from "../components/register/PhoneNumber";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const PhoneRegistration = () => {
   const [error, setError] = useState("");
   const [cdSeconds, setCdSeconds] = useState(0);
   const [cooldownStarted, setCooldownStarted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -32,15 +33,16 @@ const PhoneRegistration = () => {
 
   useEffect(() => {
     if (cdSeconds > 0 && cooldownStarted) {
-        setTimeout(() => setCdSeconds(cdSeconds - 1), 1000);
+      setTimeout(() => setCdSeconds(cdSeconds - 1), 1000);
     }
     else {
-        setCooldownStarted(false)
+      setCooldownStarted(false)
     }
 
-}, [cdSeconds])
+  }, [cdSeconds])
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(API_URL + '/auth/register/me', {
@@ -56,23 +58,27 @@ const PhoneRegistration = () => {
 
       if (response.status == 400) {
         setError(`Der findes allerede en cykelejer med det opgivet telefonnummer: ${data.phoneNumber}`);
+        setIsSubmitting(false);
         return;
+
       } else if (response.status == 406) {
         const { cooldown_expires_at } = body.detail;
-          
+
         setError(`Der er fornyeligt forsøgt at oprette en bruger med dette telefonnummer: ${data.phoneNumber}`)
+        setIsSubmitting(false);
 
         const timeDeltaSeconds = Math.floor((new Date(cooldown_expires_at).getTime() - Date.now()) / 1000);
 
         if (!cooldownStarted) {
-            setCdSeconds(timeDeltaSeconds);
-            setCooldownStarted(true);
+          setCdSeconds(timeDeltaSeconds);
+          setCooldownStarted(true);
         }
 
         return;
       }
 
       navigate(`/smsverification/${body.session_id}`, { state: { otp_expires_at: body.expires_at } });
+      setIsSubmitting(false);
 
     } catch (error) {
       console.log(error);
@@ -99,9 +105,9 @@ const PhoneRegistration = () => {
   }
 
   return (
-    <div className="grid h-screen place-items-center justify-center max-w-[425px] mx-auto">
+    <div className="grid h-screen place-items-center justify-center max-w-[385px] mx-auto">
       <form
-        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[425px]"
+        className="rounded-lg bg-white shadow dark:bg-gray-800 max-w-[385px]"
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="rounded-lg bg-white px-10 py-8 shadow dark:bg-gray-800">
@@ -177,42 +183,52 @@ const PhoneRegistration = () => {
             </div>
 
             {matchPassword(watchPassword[0], watchPassword[1]) ? (
-              <button className="btn my-2 mt-6 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100" type="submit">
-                Registrer
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-8 w-8"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+              <button className={`btn my-2 mt-6 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
+                type="submit"
+              >
+                {!isSubmitting &&
+                  <>
+                    <span className="text-center mt-0.5 mr-2">Registrer</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-8 w-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </>
+                }
               </button>
             ) : (
-              <button className="btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100"
+              <button className={`btn my-2 mt-8 flex w-full max-w-xs justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 disabled>
-                Registrer
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-8 w-8"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+                {!isSubmitting &&
+                  <>
+                    <span className="text-center mt-0.5 mr-2">Registrer</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-8 w-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </>
+                }
               </button>
             )}
 

@@ -32,8 +32,10 @@ const BikeRegistration = () => {
 
   const [responseError, setResponseError] = useState("")
   const [responseSuccess, setResponseSuccess] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
 
     try {
       const formData = new FormData();
@@ -66,8 +68,9 @@ const BikeRegistration = () => {
         // Response was okay
         setResponseSuccess("Den nye cykel er registreret i systemet. Omdirigerer dig til login...");
         setTimeout(() => navigate("/login"), 5000);
-        
       }
+
+      setIsSubmitting(false);
 
     } catch (error) {
       console.error(error);
@@ -80,7 +83,7 @@ const BikeRegistration = () => {
   };
 
   return (
-    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[425px]">
+    <div className="my-8 flex flex-col items-center justify-center mx-auto max-w-[385px]">
       <div className=" rounded-lg bg-white px-4 py-8 shadow dark:bg-gray-800 sm:px-6 md:w-auto md:px-8 lg:px-10">
         <div className="flex items-center justify-center text-xl font-light text-gray-800 dark:text-white sm:text-2xl mt-2">
           Cykel registering
@@ -364,9 +367,27 @@ const BikeRegistration = () => {
           )}
           <button
             type="submit"
-            className="flex w-full items-center justify-center rounded-lg bg-blue-600 mt-2 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 "
+            className={`btn flex w-full items-center justify-center rounded-lg bg-blue-600 mt-2 py-2 px-8 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 ${isSubmitting && 'loading'}`}
           >
-            Registrer Cykel
+            {!isSubmitting &&
+                <>
+                  <span className="text-center mb-0.5 mr-2">Registrer Cykel</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
           </button>
         </form>
       </div>

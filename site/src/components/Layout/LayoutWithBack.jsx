@@ -54,8 +54,6 @@ export const LayoutWithBack = ({ title = "Ukendt", isLoading = false, children }
                         X
                     </li>
 
-                    <li className="rounded-sm px-16 hover:bg-orange-400">Profil</li>
-
                     <Link to="/claimbike">
                         <li className="rounded-sm px-16 hover:bg-orange-400">
                             Indløs cykel

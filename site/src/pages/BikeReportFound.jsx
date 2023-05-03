@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ export const BikeReportFound = () => {
   const { frame_number: frameNumber } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   let userId = "";
 
@@ -38,8 +39,10 @@ export const BikeReportFound = () => {
   });
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
+
     try {
-      
+
       const formData = new FormData();
       for (const key in data) {
         if (key === "image") {
@@ -69,8 +72,11 @@ export const BikeReportFound = () => {
       if (!response.ok) {
         console.log(body.detail);
         return;
-        
+
       }
+
+      setIsSubmitting(false);
+
     } catch (error) {
       console.error(error);
     }
@@ -111,15 +117,16 @@ export const BikeReportFound = () => {
   return (
     <div>
       <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[425px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
+        <div className="flex flex-col items-center justify-center mx-auto max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
           {/* Find my location button */}
-          <button className="btn-info btn mt-8" onClick={() => findLocation()}>
-            Find min lokation
+          <button className={`btn-info btn mt-8`} onClick={() => findLocation()}>
+
+                Find min lokation
           </button>
 
           {/* Address form */}
           <div className="p-6">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-6 flex flex-col">
                 <div className="relative">
                   <h1 className="text-white mb-2">
@@ -162,7 +169,6 @@ export const BikeReportFound = () => {
 
               {/* Images */}
               <div className="py-4">
-                {/* <DropZoneComponent></DropZoneComponent> */}
                 <h1 className="text-white mb-2">Upload billede af lokation:
                   <span className="required-dot text-red-500"> *</span>
                 </h1>
@@ -176,23 +182,27 @@ export const BikeReportFound = () => {
               <div className="my-4 flex justify-center w-full">
                 <button
                   type="submit"
-                  className="flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600"
+                  className={`btn flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600 ${isSubmitting && 'loading'}`}
                 >
-                  <span className="mr-4">Send</span> 
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                    />
-                  </svg>
+                  {!isSubmitting &&
+                    <>
+                      <span className="text-center mt-0.5 mr-2">Send</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="h-8 w-8"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                        />
+                      </svg>
+                    </>
+                  }
                 </button>
               </div>
             </form>

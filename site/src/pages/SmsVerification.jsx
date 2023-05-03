@@ -84,13 +84,13 @@ export const SmsVerification = () => {
 
       } else if (response.status == 410) {
         onOtpIsNoLongerValid();
-        setIsSubmitting(false);
 
       } else {
         const error = await response.json();
         onInvalidCredentials(error)
-        setIsSubmitting(false);
       }
+
+      setIsSubmitting(false);
 
     } catch (error) {
       setError(error.detail);
@@ -151,14 +151,14 @@ export const SmsVerification = () => {
             <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
               {!isSubmitting &&
                 <>
-                  Valider
+                  <span className="text-center mt-0.5 mr-2">Valider</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="h-8 w-10 login-button"
+                    className="h-8 w-10"
                   >
                     <path
                       strokeLinecap="round"
