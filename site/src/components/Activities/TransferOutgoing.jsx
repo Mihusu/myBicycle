@@ -25,10 +25,7 @@ export const TransferOutgoing = ({ data }) => {
                 },
             });
 
-            const res = await response.json();
-
             if (!response.ok) {
-                setResError(body.detail);
                 return;
             }
 
