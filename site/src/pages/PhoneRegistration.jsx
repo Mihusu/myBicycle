@@ -81,13 +81,13 @@ const PhoneRegistration = () => {
       setIsSubmitting(false);
 
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
   };
 
   const onError = (err) => {
-    console.log(err);
+    console.error(err);
   };
 
   // Required by OWASP requirement 2.1.1. See https://owasp.org/www-pdf-archive/OWASP_Application_Security_Verification_Standard_4.0-en.pdf 

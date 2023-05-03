@@ -53,7 +53,7 @@ export const ClaimBikeComponent = () => {
 
         } catch (error) {
             // Something failed miserably
-            console.log(error);
+            console.error(error);
         }
 
     };

@@ -33,7 +33,6 @@ const ResetPassword = () => {
 
   const tooEarlySmsRequest = (error) => {
 
-    console.log(error.detail);
     const { cooldown_expires_at } = error.detail;
 
     setError("Du har for nyligt anmodet om at nulstille din adgangskode.");

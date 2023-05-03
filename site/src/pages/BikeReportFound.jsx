@@ -54,8 +54,6 @@ export const BikeReportFound = () => {
       formData.append("frame_number", frameNumber);
       formData.append("bike_owner", userId);
 
-      // console.log(`formData object: `, Object.fromEntries(formData.entries()));
-
       const response = await fetch(API_URL + "/bikes/discoveries", {
         method: "POST",
         headers: {
@@ -64,21 +62,23 @@ export const BikeReportFound = () => {
         body: formData,
       });
 
+      
       const body = await response.json();
       if (response.ok) {
         navigate("/mybikes");
-
+        
       }
       if (!response.ok) {
-        console.log(body.detail);
+        console.error(body.detail)
         return;
-
+        
       }
-
-      setIsSubmitting(false);
-
+      
     } catch (error) {
       console.error(error);
+    }
+    finally {
+      setIsSubmitting(false);
     }
   };
 

@@ -6,13 +6,11 @@ function DropZoneComponent({}) {
   const [File, SetFile] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
     SetFile(acceptedFiles[0]);
     setTimeout(() => handleFileUpload(acceptedFiles[0]), 300);
   }, []);
 
   const handleFileUpload = async (file) => {
-    console.log(file);
     if (!file) {
       alert("Please select a file");
       return;

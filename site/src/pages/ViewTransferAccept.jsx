@@ -37,11 +37,9 @@ const ViewTransferAccept = () => {
   );
 
   if (error && error.message === "404") {
-    console.log(error);
+    console.error(error);
     return navigate("/mybikes");
-  }
-
-  if (error) return <div>failed to load, due to error </div>;
+  } else if (error) return <div>failed to load, due to error </div>;
 
   async function approveBikeRequest() {
     setIsSubmitting(true);

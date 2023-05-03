@@ -21,7 +21,6 @@ const ViewTransferDetail = () => {
 
   const token = secureLocalStorage.getItem("accesstoken");
   const user_id = secureLocalStorage.getItem("user_id");
-  console.log(user_id);
 
   const { data, error, isLoading } = useSWR(
     [API_URL + `/transfers/${transfer_id}`, token],
