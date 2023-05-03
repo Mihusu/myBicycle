@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Footer } from "./Footer";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 
 export const LayoutWithBack = ({
   title = "Ukendt",
