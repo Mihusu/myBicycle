@@ -29,10 +29,10 @@ export const TransferIncoming = ({ data }) => {
   }
 
   return (
-    <div className="dark:text-whites mx-auto flex max-w-[385px] flex-col rounded-lg border bg-gray-800 py-4 shadow hover:shadow-xl dark:bg-gray-800">
+    <div className="flex flex-col max-w-[385px] mb-4 rounded-lg border dark:text-whites mx-auto bg-gray-800 py-4 shadow hover:shadow-xl dark:bg-gray-800">
       <div className="flex justify-center text-xl text-white">Anmodning</div>
-      <div className="mt-2 flex w-full justify-evenly">
-        <div className="ml-2 flex items-start justify-center">
+      <div className="flex w-full justify-evenly mt-2">
+        <div className="flex items-start justify-center">
           <img
             src={data.bike.image.obj_url}
             alt="alt"
@@ -40,17 +40,17 @@ export const TransferIncoming = ({ data }) => {
           />
         </div>
 
-        <div className="mr-2 flex flex-col space-y-1">
+        <div className="mr-8 flex flex-col space-y-1">
           <h1 className="mr-1 text-lg font-semibold text-white">Afsender: {data.sender.phone_number}</h1>
 
 
-          <div className="flex-wrap items-start break-words text-sm font-semibold text-white">
+          <div className="flex-wrap items-start text-sm text-gray-300">
             Du har modtaget et tilbud om at
-            <p className="text-white">overtage ejerskab</p>
+            <p className="text-gray-300">overtage ejerskab</p>
           </div>
 
-          <h4 className="text-xs font-light text-gray-300">
-            Dato: {new Date(data.created_at).toLocaleDateString()}
+          <h4 className="text-xs text-gray-300">
+            Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}
           </h4>
         </div>
       </div>
