@@ -57,7 +57,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
               </li>
             </Link>
           </ul>
-          <div className="flex flex-col items-center fixed inset-x-0 bottom-28 space-y-2 p-4 text-lg text-white">
+          <div className="flex flex-col items-center fixed inset-x-0 bottom-32 space-y-2 p-4 text-lg text-white">
             <Link to="/login">
               <button
                 className="rounded-sm px-16 hover:bg-orange-400"
