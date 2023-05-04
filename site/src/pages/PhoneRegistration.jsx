@@ -39,7 +39,7 @@ const PhoneRegistration = () => {
       setCooldownStarted(false)
     }
 
-  })
+  }, [cdSeconds])
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -55,6 +55,8 @@ const PhoneRegistration = () => {
       });
 
       const body = await response.json();
+
+      console.log("r", response.status);
 
       if (response.status == 400) {
         setError(`Der findes allerede en cykelejer med dette telefonnummer: ${data.phoneNumber}`);

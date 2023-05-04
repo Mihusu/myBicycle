@@ -113,99 +113,97 @@ export const BikeReportFound = () => {
   };
 
   return (
-    <div>
-      <LayoutWithBack title="Indrapporter cykel">
-        <div className="flex flex-col items-center justify-center mx-auto max-w-[357px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
-          {/* Find my location button */}
-          <button className={`btn-info btn mt-8`} onClick={() => findLocation()}>
+    <LayoutWithBack title="Indrapporter cykel">
+      <div className="flex flex-col items-center justify-center mx-auto max-w-[365px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 m-4">
+        {/* Find my location button */}
+        <button className={`btn-info btn mt-8`} onClick={() => findLocation()}>
 
-            Find min lokation
-          </button>
+          Find min lokation
+        </button>
 
-          {/* Address form */}
-          <form className="flex flex-col justify-center p-6" onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-6 flex flex-col">
-              <div className="relative">
-                <h1 className="text-white mb-2">
-                  Angiv adressen hvor cyklen er fundet
-                  <p className="text-white">eller tryk på "Find min okation":
-                    <span className="required-dot text-red-500"> *</span>
-                  </p>
-                </h1>
-                <input
-                  className="w-full flex-1 appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-                  type="text"
-                  placeholder="Vejnavn Nummer, Postnummer By"
-                  {...register("address", { required: true })}
-                />
-                {errors.address && (
-                  <span className="text-red-400">This field is required</span>
-                )}
-                {/* <input
+        {/* Address form */}
+        <form className="flex flex-col justify-center max-w-sm p-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-6 flex flex-col">
+            <div className="relative">
+              <h1 className="text-white mb-2">
+                Angiv adressen hvor cyklen er fundet
+                <p className="text-white">eller tryk på "Find min okation":
+                  <span className="required-dot text-red-500"> *</span>
+                </p>
+              </h1>
+              <input
+                className="w-full appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+                type="text"
+                placeholder="Vejnavn Nummer, Postnummer By"
+                {...register("address", { required: true })}
+              />
+              {errors.address && (
+                <span className="text-red-400">This field is required</span>
+              )}
+              {/* <input
                   type="text"
                   id="create-account-pseudo"
                   className="w-full flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
                   name="pseudo"
                   placeholder="Gadenavn"
                 /> */}
-              </div>
             </div>
+          </div>
 
-            <label className="text-white">
-              Eventuel kommentar:
-            </label>
-            <textarea
-              className="w-full flex-1 mt-2 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-              id="comment"
-              placeholder="Fx dine kontaktoplysninger eller andre noter angående cykelfundet"
-              name="comment"
-              rows="5"
-              cols="40"
-              type="text"
-              {...register("comment")}
-            ></textarea>
+          <label className="text-white">
+            Eventuel kommentar:
+          </label>
+          <textarea
+            className="w-full mt-2 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
+            id="comment"
+            placeholder="Fx dine kontaktoplysninger eller andre noter angående cykelfundet"
+            name="comment"
+            rows="5"
+            cols="40"
+            type="text"
+            {...register("comment")}
+          ></textarea>
 
-            {/* Images */}
-            <div className="py-4">
-              <h1 className="text-white mb-2">Upload billede af lokation:
-                <span className="required-dot text-red-500"> *</span>
-              </h1>
-              <input
-                type="file"
-                id="file-image"
-                {...register("image", { required: true })}
-              />
-            </div>
+          {/* Images */}
+          <div className="py-4">
+            <h1 className="text-white mb-2">Upload billede af lokation:
+              <span className="required-dot text-red-500"> *</span>
+            </h1>
+            <input
+              type="file"
+              id="file-image"
+              {...register("image", { required: true })}
+            />
+          </div>
 
-            <div className="my-4 flex justify-center w-full">
-              <button
-                type="submit"
-                className={`btn flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600 ${isSubmitting && 'loading'}`}
-              >
-                {!isSubmitting &&
-                  <>
-                    <span className="text-center mt-0.5 mr-2">Send</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-8 w-8"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                      />
-                    </svg>
-                  </>
-                }
-              </button>
-            </div>
-          </form>
-        </div>
-      </LayoutWithBack>
-    </div>
+          <div className="my-4 flex justify-center w-full">
+            <button
+              type="submit"
+              className={`btn flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600 ${isSubmitting && 'loading'}`}
+            >
+              {!isSubmitting &&
+                <>
+                  <span className="text-center mt-0.5 mr-2">Send</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-8 w-8"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </>
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </LayoutWithBack>
   );
 };
