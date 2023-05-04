@@ -47,7 +47,7 @@ export const Footer = ({ toggleSidebar }) => {
                             <TbActivityHeartbeat className="mx-auto" color="white" size={40} />
                             <p className="text-sky-400/100">Aktiviteter</p>
                             {/* Alert badge */}
-                            {data?.alerts && <div className="absolute bottom-12 left-14 badge badge-md bg-sky-400/100 border-sky-400/100 text-white">{data.alerts}</div>}
+                            {data?.alerts > 0 && <div className="absolute bottom-12 left-14 badge badge-md bg-sky-400/100 border-sky-400/100 text-white">{data.alerts}</div>}
                         </div>
 
                     </button>
