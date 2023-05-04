@@ -71,7 +71,7 @@ export const LayoutWithBack = ({
             </li>
           </Link>
         </ul>
-        <div className="fixed inset-x-0 bottom-24 flex flex-col items-center space-y-2 p-4 text-lg text-white">
+        <div className="fixed inset-x-0 bottom-32 flex flex-col items-center space-y-2 p-4 text-lg text-white">
           <Link to="/login">
             <button
               className="rounded-sm px-16 hover:bg-orange-400"

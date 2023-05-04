@@ -19,7 +19,6 @@ export const BikeReportFound = () => {
     userId = location.state.userId;
   }
 
-  // const [location, setLocation] = useState(null);
   const {
     register,
     handleSubmit,
@@ -61,7 +60,6 @@ export const BikeReportFound = () => {
         },
         body: formData,
       });
-
 
       const body = await response.json();
       if (response.ok) {
@@ -129,9 +127,10 @@ export const BikeReportFound = () => {
             <div className="mb-6 flex flex-col">
               <div className="relative">
                 <h1 className="text-white mb-2">
-                  Angiv adressen hvor cyklen er fundet eller tryk på "Find min
-                  lokation":
-                  <span className="required-dot text-red-500"> *</span>
+                  Angiv adressen hvor cyklen er fundet
+                  <p className="text-white">eller tryk på "Find min okation":
+                    <span className="required-dot text-red-500"> *</span>
+                  </p>
                 </h1>
                 <input
                   className="w-full flex-1 appearance-none rounded-lg border border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"

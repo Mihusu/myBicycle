@@ -88,7 +88,7 @@ const BikeTransferAccept = () => {
                 </span>
 
                 <h4 className="text-xs">
-                  Dato: {new Date(data.created_at).toLocaleDateString()}
+                  Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}
                 </h4>
               </div>
             </div>

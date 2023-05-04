@@ -44,7 +44,7 @@ export const BikeInfo = ({ data }) => {
                       Oprettelses dato:{" "}
                     </p>
                     <span className="font-light text-gray-300">
-                      {new Date(data.created_at).toLocaleDateString()}
+                      {new Date(data.created_at).toLocaleDateString('en-GB')}
                     </span>
                   </div>
                 </div>

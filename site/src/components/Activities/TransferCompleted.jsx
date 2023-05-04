@@ -14,7 +14,7 @@ export const TransferCompleted = ({ data, user_id }) => {
             <img
               src={data.bike.image.obj_url}
               alt="alt"
-              className="h-[64px] w-[64px] rounded-lg text-sm"
+              className="h-[60px] w-[60px] rounded-lg text-sm mt-1"
             />
           </div>
 
@@ -25,7 +25,7 @@ export const TransferCompleted = ({ data, user_id }) => {
                 : `Afsender: ${formatPhonenumber(data.sender.phone_number)}`}
             </h1>
 
-            <span className="flex-wrap items-start break-words text-sm font-light  text-gray-300">
+            <span className="flex-wrap items-start break-words text-sm text-gray-300">
               {user_id === data.sender.id &&
                 data.state === "declined" &&
                 "Din anmodning blev afvist"}
@@ -40,8 +40,8 @@ export const TransferCompleted = ({ data, user_id }) => {
                 "Du modtog en cykel"}
             </span>
 
-            <h4 className="text-xs font-light text-gray-300">
-              Dato: {new Date(data.closed_at).toLocaleDateString()}
+            <h4 className="text-xs text-gray-300">
+              Dato: {new Date(data.closed_at).toLocaleDateString('en-GB')}
             </h4>
 
           </div>

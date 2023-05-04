@@ -39,7 +39,7 @@ const PhoneRegistration = () => {
       setCooldownStarted(false)
     }
 
-  }, [cdSeconds])
+  })
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -57,7 +57,7 @@ const PhoneRegistration = () => {
       const body = await response.json();
 
       if (response.status == 400) {
-        setError(`Der findes allerede en cykelejer med det opgivet telefonnummer: ${data.phoneNumber}`);
+        setError(`Der findes allerede en cykelejer med dette telefonnummer: ${data.phoneNumber}`);
         setIsSubmitting(false);
         return;
 
@@ -65,7 +65,6 @@ const PhoneRegistration = () => {
         const { cooldown_expires_at } = body.detail;
 
         setError(`Der er fornyeligt forsøgt at oprette en bruger med dette telefonnummer: ${data.phoneNumber}`)
-        setIsSubmitting(false);
 
         const timeDeltaSeconds = Math.floor((new Date(cooldown_expires_at).getTime() - Date.now()) / 1000);
 
@@ -74,6 +73,7 @@ const PhoneRegistration = () => {
           setCooldownStarted(true);
         }
 
+        setIsSubmitting(false);
         return;
       }
 
@@ -111,22 +111,28 @@ const PhoneRegistration = () => {
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="rounded-lg bg-gray-800 px-10 py-8">
-          <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
+          <h1 className="flex justify-center text-3xl mb-4 text-white">Registrér</h1>
 
           {/* Errors */}
-          {error && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{error}
-            <p>Prøv igen om:{" "}
-              {cdSeconds === 1
-                ? `${cdSeconds} sekund`
-                : cdSeconds < 60
-                  ? `${cdSeconds} sekunder`
-                  : cdSeconds === 61
-                    ? `1 minut og 1 sekund`
-                    : cdSeconds < 120
-                      ? `1 minut og ${cdSeconds % 60} sekunder`
-                      : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
-            </p>
-          </div>
+          {error &&
+            <div className="p-4 my-4 rounded-lg bg-error text-white">
+              {error}
+              {/* Cooldown */}
+              {cdSeconds > 0 && (
+                <p>
+                  Prøv igen om:{" "}
+                  {cdSeconds === 1
+                    ? `${cdSeconds} sekund`
+                    : cdSeconds < 60
+                      ? `${cdSeconds} sekunder`
+                      : cdSeconds === 61
+                        ? `1 minut og 1 sekund`
+                        : cdSeconds < 120
+                          ? `1 minut og ${cdSeconds % 60} sekunder`
+                          : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                </p>
+              )}
+            </div>
           }
 
           <div className="self-center text-xl font-light text-gray-800 dark:text-white">
@@ -144,7 +150,7 @@ const PhoneRegistration = () => {
 
             {/* Choose password */}
             <div className="pt-4 pb-2 font-light text-gray-400 dark:text-white">
-              Vælg adgangskode
+              Vælg adgangskode (Mindst 12 tegn)
               <span className="required-dot text-red-500"> *</span>
             </div>
 
