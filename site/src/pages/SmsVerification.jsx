@@ -120,24 +120,26 @@ export const SmsVerification = () => {
 
           <p className="text-gray-400">Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
 
-          <p className="mt-4 text-gray-400">Du bedes bekræfte inden:{" "}
-            {cdSeconds > 0 && (
-              <span className="text-gray-400">
-                {cdSeconds === 1
-                  ? `${cdSeconds} sekund`
-                  : cdSeconds < 60
-                    ? `${cdSeconds} sekunder`
-                    : cdSeconds == 61
-                      ? `1 minut og 1 sekund`
-                      : cdSeconds < 120
-                        ? `1 minut og ${cdSeconds % 60} sekunder`
-                        : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
-              </span>
-            )}
-            {cdSeconds <= 0 && (
-              <span className="text-gray-400">Udløbet</span>
-            )}
-          </p>
+          {error &&
+            <p className="p-4 my-4 rounded-lg bg-error text-white">
+              {error}
+              {/* Cooldown */}
+              {cdSeconds > 0 && (
+                <span>
+                  Du bedes bekræfte inden:{" "}
+                  {cdSeconds === 1
+                    ? `${cdSeconds} sekund`
+                    : cdSeconds < 60
+                      ? `${cdSeconds} sekunder`
+                      : cdSeconds === 61
+                        ? `1 minut og 1 sekund`
+                        : cdSeconds < 120
+                          ? `1 minut og ${cdSeconds % 60} sekunder`
+                          : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                </span>
+              )}
+            </p>
+          }
 
           <div className="w-full mt-4">
             <input
