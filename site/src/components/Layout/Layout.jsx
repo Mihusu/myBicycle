@@ -20,7 +20,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
         <div className="p-4 pb-20" onClick={() => setShowSidebar(false)}>
           {/* Header */}
           <div className="mb-4 flex justify-center border-b-gray-400">
-            <h1 className="text-3xl text-white">{title}</h1>
+            <h1 className="font-semibold text-3xl text-white">{title}</h1>
           </div>
           {/* Content */}
           {isLoading ? (

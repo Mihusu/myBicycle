@@ -2,9 +2,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import useSWR from "swr";
+
+import formatPhonenumber from "../Helpers/phone";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 
 const API_URL = import.meta.env.VITE_API_URL;
+
 
 const get_bike_request_detail = async (url, token) => {
   const response = await fetch(url, {
@@ -16,7 +19,7 @@ const get_bike_request_detail = async (url, token) => {
   return await response.json();
 };
 
-const ViewTransferDetail = () => {
+const BikeTransferDetail = () => {
   const { transfer_id } = useParams();
 
   const token = secureLocalStorage.getItem("accesstoken");
@@ -59,11 +62,11 @@ const ViewTransferDetail = () => {
           <p className="font-semibold text-white">
             Modtager:
             <span className="font-light text-white px-1">
-              {data.receiver.phone_number}
+              {formatPhonenumber(data.receiver.phone_number)}
             </span>
           </p>
 
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center text-center space-y-2">
             {/* Outgoing */}
             {!data.closed_at && (
               <h4 className="font-light text-gray-300">
@@ -76,12 +79,17 @@ const ViewTransferDetail = () => {
             {/* Finished */}
             {data.closed_at && (
               <h4 className="font-light text-gray-300">
-                {new Date(data.closed_at).toLocaleDateString('en-GB')} •{" "}
+                {new Date(data.closed_at).toLocaleDateString()} • {" "}
                 {new Date(data.closed_at)
                   .toLocaleTimeString()
                   .replaceAll(".", ":")}
               </h4>
             )}
+
+            <h4 className="font-light text-gray-300 text-xs">
+              Txn: {data.transfer_id}
+            </h4>
+
           </div>
         </div>
       )}
@@ -89,4 +97,4 @@ const ViewTransferDetail = () => {
   );
 };
 
-export default ViewTransferDetail;
+export default BikeTransferDetail;

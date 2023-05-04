@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { Link, useNavigate } from "react-router-dom";
+import formatPhonenumber from "../../Helpers/phone";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -50,7 +51,7 @@ export const TransferOutgoing = ({ data }) => {
         </div>
 
         <div className="mr-2 flex flex-col space-y-1">
-          <h1 className="mr-1 text-lg font-semibold text-white">Modtager: {data.receiver.phone_number}</h1>
+          <h1 className="mr-1 text-lg font-semibold text-white">Modtager: {formatPhonenumber(data.receiver.phone_number)}</h1>
           <p className="flex-wrap items-start break-words text-sm">
             Du er ved at afgive ejerskab af cyklen
           </p>

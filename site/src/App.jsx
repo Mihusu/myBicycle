@@ -19,8 +19,9 @@ import DeviceVerify from "./pages/DeviceVerify";
 // Auth pages
 import MyBikes from "./pages/MyBikes";
 import BikeTransfer from "./pages/BikeTransfer";
-import ViewTransferAccept from "./pages/ViewTransferAccept";
-import ViewTransferDetail from "./pages/ViewTransferDetail";
+
+import BikeTransferAccept from "./pages/BikeTransferAccept";
+import BikeTransferDetail from "./pages/BikeTransferDetail";
 import ActivityPage from "./pages/Activity";
 import { ClaimBikePage } from "./pages/ClaimBikePage";
 import { BikeLookup } from "./pages/BikeLookup";
@@ -53,11 +54,11 @@ function App() {
           <Route path="/activities" element={<ActivityPage />} />
           <Route
             path="/transfers/accept/:transfer_id"
-            element={<ViewTransferAccept />}
+            element={<BikeTransferAccept />}
           />
           <Route
             path="/transfers/detail/:transfer_id"
-            element={<ViewTransferDetail />}
+            element={<BikeTransferDetail />}
           />
           <Route path="/claimbike" element={<ClaimBikePage />} />
           <Route path="/bikelookup" element={<BikeLookup />} />

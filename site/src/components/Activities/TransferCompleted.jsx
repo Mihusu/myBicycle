@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import formatPhonenumber from "../../Helpers/phone";
+
 
 export const TransferCompleted = ({ data, user_id }) => {
   return (
@@ -19,8 +21,8 @@ export const TransferCompleted = ({ data, user_id }) => {
           <div className="flex flex-col">
             <h1 className="text-lg text-white">
               {user_id === data.sender.id
-                ? `Modtager: ${data.receiver.phone_number}`
-                : `Afsender: ${data.sender.phone_number}`}
+                ? `Modtager: ${formatPhonenumber(data.receiver.phone_number)}`
+                : `Afsender: ${formatPhonenumber(data.sender.phone_number)}`}
             </h1>
 
             <span className="flex-wrap items-start break-words text-sm font-light  text-gray-300">
@@ -41,6 +43,7 @@ export const TransferCompleted = ({ data, user_id }) => {
             <h4 className="text-xs font-light text-gray-300">
               Dato: {new Date(data.closed_at).toLocaleDateString()}
             </h4>
+
           </div>
 
           <div className="flex items-center">

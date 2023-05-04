@@ -4,6 +4,7 @@ import secureLocalStorage from "react-secure-storage";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 import { BikeInfo } from "../components/MyBikes/BikeInfo";
+import formatPhonenumber from "../Helpers/phone";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,7 +24,7 @@ const get_bike_request = async (url, token) => {
   return result;
 };
 
-const ViewTransferAccept = () => {
+const BikeTransferAccept = () => {
   const navigate = useNavigate();
   const { transfer_id } = useParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,7 +79,7 @@ const ViewTransferAccept = () => {
                 <h1 className="text-lg text-white">
                   Afsender:
                   <span className="font-light text-white px-1">
-                    {data.sender.phone_number}
+                    {formatPhonenumber(data.sender.phone_number)}
                   </span>
                 </h1>
 
@@ -129,4 +130,4 @@ const ViewTransferAccept = () => {
   );
 };
 
-export default ViewTransferAccept;
+export default BikeTransferAccept;

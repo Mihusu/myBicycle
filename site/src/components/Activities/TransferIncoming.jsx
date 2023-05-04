@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { Link, useNavigate } from "react-router-dom";
+import formatPhonenumber from "../../Helpers/phone";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -41,8 +42,7 @@ export const TransferIncoming = ({ data }) => {
         </div>
 
         <div className="mr-2 flex flex-col space-y-1">
-          <h1 className="mr-1 text-lg font-semibold text-white">Afsender: {data.sender.phone_number}</h1>
-
+          <h1 className="mr-1 text-lg font-semibold text-white">Afsender: {formatPhonenumber(data.sender.phone_number)}</h1>
 
           <div className="flex-wrap items-start break-words text-sm font-semibold text-white">
             Du har modtaget et tilbud om at

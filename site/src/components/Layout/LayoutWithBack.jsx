@@ -30,7 +30,7 @@ export const LayoutWithBack = ({
             <button onClick={() => navigate(-1)}>
               <HiArrowLeft color="white" size={24} />
             </button>
-            <h1 className="mr-4 flex-grow text-center text-3xl text-white">
+            <h1 className="mr-4 flex-grow font-semibold text-center text-3xl text-white">
               {title}
             </h1>
           </div>
