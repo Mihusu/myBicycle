@@ -111,10 +111,10 @@ const PhoneRegistration = () => {
         onSubmit={handleSubmit(onSubmit, onError)}
       >
         <div className="rounded-lg bg-gray-800 px-10 py-8">
-          <h1 className="flex justify-center text-3xl mb-4">Registrér</h1>
+          <h1 className="flex justify-center text-3xl mb-4 text-white">Registrér</h1>
 
           {/* Errors */}
-          {error && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{error}
+          {error && cdSeconds > 0 && <div className="p-4 my-4 rounded-lg bg-error text-white max-w-xs">{error}
             <p>Prøv igen om:{" "}
               {cdSeconds === 1
                 ? `${cdSeconds} sekund`
@@ -126,6 +126,9 @@ const PhoneRegistration = () => {
                       ? `1 minut og ${cdSeconds % 60} sekunder`
                       : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
             </p>
+            {cdSeconds <= 0 && (
+              <span className="text-gray-400"></span>
+            )}
           </div>
           }
 
@@ -144,7 +147,7 @@ const PhoneRegistration = () => {
 
             {/* Choose password */}
             <div className="pt-4 pb-2 font-light text-gray-400 dark:text-white">
-              Vælg adgangskode
+              Vælg adgangskode (Mindst 12 tegn)
               <span className="required-dot text-red-500"> *</span>
             </div>
 
