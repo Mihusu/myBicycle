@@ -49,7 +49,7 @@ export const TransferIncoming = ({ data }) => {
             <p className="text-gray-300">overtage ejerskab</p>
           </div>
 
-          <h4 className="text-xs text-gray-300">
+          <h4 className="text-xs text-gray-400">
             Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}
           </h4>
         </div>

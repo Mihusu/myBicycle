@@ -65,13 +65,13 @@ const BikeTransferAccept = () => {
       {data && data.bike && (
         <>
           <BikeInfo data={data.bike} />
-          <div className="dark:text-whites mx-auto mt-8 flex max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow">
-            <div className="mt-2 flex w-full justify-evenly">
+          <div className="dark:text-whites mx-auto mt-4 flex max-w-[385px] rounded-lg border bg-gray-800 hover:shadow-xl dark:bg-gray-800 py-4 shadow">
+            <div className="flex w-full justify-evenly">
               <div className="flex items-center justify-center">
                 <img
                   src={data.bike.image.obj_url}
                   alt="alt"
-                  className="h-[60px] w-[60px] rounded-lg text-sm"
+                  className="h-[60px] w-[60px] rounded-lg text-sm mt-1.5"
                 />
               </div>
 
@@ -83,11 +83,11 @@ const BikeTransferAccept = () => {
                   </span>
                 </h1>
 
-                <span className="flex-wrap items-start text-sm">
+                <span className="flex-wrap items-start text-sm text-gray-300">
                   Du har modtaget en cykel overførsel
                 </span>
 
-                <h4 className="text-xs">
+                <h4 className="text-xs text-gray-400">
                   Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}
                 </h4>
               </div>
@@ -97,7 +97,7 @@ const BikeTransferAccept = () => {
           <Link to={`/mybikes`}>
             <div className="flex justify-center">
               <button
-                className={`btn my-4 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
+                className={`btn my-4 mt-4 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 onClick={() => approveBikeRequest()}
                 style={{ maxWidth: "385px" }}

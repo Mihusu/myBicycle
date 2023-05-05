@@ -87,7 +87,7 @@ const BikeTransferDetail = () => {
             )}
 
             <h4 className="font-light text-gray-300 text-xs">
-              Txn: {data.transfer_id}
+              TXID: {data.transfer_id}
             </h4>
 
           </div>

@@ -30,7 +30,7 @@ export const BikeComponent = ({ data, mutate }) => {
 
   return (
     <div className="mx-auto mb-4 flex max-w-[385px] rounded-lg border bg-gray-800 shadow-lg hover:shadow-xl dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-      <div className="m-0 flex flex-col justify-center">
+      <div className="flex flex-col justify-center">
         <motion.div
           transition={{ layout: { duration: 1, type: "spring" } }}
           layout="position"

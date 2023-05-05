@@ -8,11 +8,11 @@ export const BikeDiscovery = ({ data }) => {
         {/* Old bike requests */}
         <div className="flex justify-center text-white text-xl">Rapportering</div>
         <div className="flex justify-evenly my-2 w-full">
-          <div className="flex items-start justify-center ml-2">
+          <div className="flex items-start justify-center mr-1">
             <img
               src={data.image.obj_url}
               alt="alt"
-              className="rounded-lg w-[60px] h-[60px] text-sm mt-1.5 mr-2"
+              className="rounded-lg w-[60px] h-[60px] text-sm mt-1.5"
             />
           </div>
 

@@ -40,7 +40,7 @@ export const TransferCompleted = ({ data, user_id }) => {
                 "Du modtog en cykel"}
             </span>
 
-            <h4 className="text-xs text-gray-300">
+            <h4 className="text-xs text-gray-400">
               Dato: {new Date(data.closed_at).toLocaleDateString('en-GB')}
             </h4>
 
