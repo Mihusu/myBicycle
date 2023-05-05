@@ -95,9 +95,9 @@ const BikeTransferAccept = () => {
           </div>
 
           <Link to={`/mybikes`}>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4 mb-12">
               <button
-                className={`btn my-4 mt-4 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
+                className={`btn flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${isSubmitting && 'loading'}`}
                 type="submit"
                 onClick={() => approveBikeRequest()}
                 style={{ maxWidth: "385px" }}
