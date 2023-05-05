@@ -54,11 +54,12 @@ export const Footer = ({ toggleSidebar }) => {
                 </Link>
 
                 {/* Toggle sidebar */}
-                <button onClick={toggleSidebar} className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
-                    <IoIosMenu className="mx-auto" color="white" size={40} />
-                    <p className="text-sky-400/100">Menu</p>
-                </button>
-
+                <div>
+                    <button onClick={toggleSidebar} className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
+                        <IoIosMenu className="mx-auto" color="white" size={40} />
+                        <p className="text-sky-400/100">Menu</p>
+                    </button>
+                </div>
             </div>
         </div>
 

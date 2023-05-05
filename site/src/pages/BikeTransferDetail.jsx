@@ -35,7 +35,7 @@ const BikeTransferDetail = () => {
   return (
     <LayoutWithBack title="Overførsel" isLoading={isLoading}>
       {data && (
-        <div className="mx-auto flex max-w-[385px] flex-col items-center space-y-4 rounded-lg bg-gray-800 p-4">
+        <div className="mx-auto flex max-w-[385px] flex-col items-center space-y-4 rounded-lg bg-gray-800 p-4 mb-12">
           <h2 className="mr-1 text-lg font-semibold text-white">
             {user_id === data.sender.id &&
               data.state === "pending" &&
