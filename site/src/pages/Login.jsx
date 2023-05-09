@@ -162,7 +162,7 @@ export const LoginPage = () => {
                             )}
                         </div>
                     }
-                    <div className="pb-2 font-light text-xl text-gray-800 dark:text-white" >
+                    <div className="pb-2 font-light text-xl text-white" >
                         Tlf nr.
                         <span className="required-dot text-red-500"> *</span>
                     </div>
@@ -175,7 +175,7 @@ export const LoginPage = () => {
                         />
 
                         <div className='space-y-2 py-4'>
-                            <label className="font-light text-gray-800 dark:text-white">
+                            <label className="font-light text-white">
                                 Adgangskode:
                                 <span className="text-red-500 required-dot"> *</span>
                             </label>
