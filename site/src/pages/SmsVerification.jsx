@@ -118,9 +118,8 @@ export const SmsVerification = () => {
           {/* Errors */}
           {error && (<div className="p-4 my-4 rounded-lg bg-error text-white">{error}</div>)}
 
-          <p className="text-gray-400">Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
-
-          <p className="mt-4 text-gray-400">Du bedes bekræfte inden:{" "}
+          <p className="text-white">Vi har lige sendt dig en SMS med en bekræftelseskode.</p>
+          <p className="mt-4 text-white">Du bedes bekræfte inden:{" "}
             {cdSeconds > 0 && (
               <span className="text-gray-400">
                 {cdSeconds === 1
@@ -138,6 +137,13 @@ export const SmsVerification = () => {
               <span className="text-gray-400">Udløbet</span>
             )}
           </p>
+
+          {error &&
+            <p className="p-4 my-4 rounded-lg bg-error text-white">
+              {error}
+            </p>
+          }
+          
 
           <div className="w-full mt-4">
             <input

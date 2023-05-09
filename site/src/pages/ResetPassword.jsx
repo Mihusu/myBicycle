@@ -85,12 +85,12 @@ const ResetPassword = () => {
             <button onClick={() => navigate(-1)}>
               <HiArrowLeft size={24} />
             </button>
-            <p className="ml-20 flex items-center justify-center text-2xl text-white">
+            <p className="flex items-center justify-evenly ml-16 text-2xl text-white">
               Nulstil kode
             </p>
           </div>
-          {error && (
-            <div className="mb-4 rounded-lg bg-error p-4 text-white">
+          {error &&
+            <div className="p-4 mb-4 rounded-lg bg-error text-white">
               {error}
               {/* Cooldown */}
               {cdSeconds > 0 && (
@@ -99,18 +99,16 @@ const ResetPassword = () => {
                   {cdSeconds === 1
                     ? `${cdSeconds} sekund`
                     : cdSeconds < 60
-                    ? `${cdSeconds} sekunder`
-                    : cdSeconds == 61
-                    ? `1 minut og 1 sekund`
-                    : cdSeconds < 120
-                    ? `1 minut og ${cdSeconds % 60} sekunder`
-                    : `${Number.parseInt(cdSeconds / 60)} minutter og ${
-                        cdSeconds % 60
-                      } sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
+                      ? `${cdSeconds} sekunder`
+                      : cdSeconds == 61
+                        ? `1 minut og 1 sekund`
+                        : cdSeconds < 120
+                          ? `1 minut og ${cdSeconds % 60} sekunder`
+                          : `${Number.parseInt(cdSeconds / 60)} minutter og ${cdSeconds % 60} sekund${cdSeconds % 60 === 1 ? "" : "er"}`}
                 </p>
               )}
             </div>
-          )}
+          }
           <h1 className="mb-4 text-white">
             Indtast det telefonnummer, du vil nulstille kodeord for
           </h1>

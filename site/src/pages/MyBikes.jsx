@@ -37,7 +37,7 @@ const MyBikes = () => {
     return (
 
         <Layout title="Mine cykler" isLoading={isLoading}>
-            <div className="flex-col">
+            <div className="flex-col mb-24">
 
                 {/* Conditionally render the ClaimBikeComponent or BikeComponent component */}
                 {data && data.length > 0 ?

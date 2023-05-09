@@ -33,7 +33,7 @@ export const Footer = ({ toggleSidebar }) => {
     );
 
     return (
-        <div className="fixed bottom-0 left-0 flex flex-row justify-around w-full items-center sm:px-6 md:px-8 lg:px-10 bg-gray-800 border-t border-white rounded-t-md">
+        <div className="fixed bottom-0 left-0 flex flex-row justify-around w-full items-center sm:px-6 md:px-8 lg:px-10 bg-gray-800 border-t border-white rounded-t-md pb-7">
             <div className="flex btm-nav-lg py-1 mt-auto sm:px-6 md:px-8 lg:px-10">
                 <Link to="/mybikes">
                     <button className="flex flex-col space-y-1 rounded hover:bg-orange-500 dropdown-active px-8 py-1">
@@ -47,7 +47,7 @@ export const Footer = ({ toggleSidebar }) => {
                             <TbActivityHeartbeat className="mx-auto" color="white" size={40} />
                             <p className="text-sky-400/100">Aktiviteter</p>
                             {/* Alert badge */}
-                            {data?.alerts && <div className="absolute bottom-12 left-14 badge badge-md bg-sky-400/100 border-sky-400/100 text-white">{data.alerts}</div>}
+                            {data?.alerts > 0 && <div className="absolute bottom-12 left-14 badge badge-md bg-sky-400/100 border-sky-400/100 text-white">{data.alerts}</div>}
                         </div>
 
                     </button>
@@ -58,7 +58,6 @@ export const Footer = ({ toggleSidebar }) => {
                     <IoIosMenu className="mx-auto" color="white" size={40} />
                     <p className="text-sky-400/100">Menu</p>
                 </button>
-
             </div>
         </div>
 

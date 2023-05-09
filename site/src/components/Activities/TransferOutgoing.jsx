@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { Link, useNavigate } from "react-router-dom";
+import formatPhonenumber from "../../Helpers/phone";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -38,7 +39,7 @@ export const TransferOutgoing = ({ data }) => {
   }
 
   return (
-    <div className="dark:text-whites mx-auto flex max-w-[385px] flex-col rounded-lg border bg-gray-800 py-4 shadow hover:shadow-xl dark:bg-gray-800">
+    <div className="flex flex-col max-w-[385px] mb-4 rounded-lg border dark:text-whites mx-auto bg-gray-800 py-4 shadow hover:shadow-xl dark:bg-gray-800">
       <div className="flex justify-center text-xl text-white">Anmodning</div>
       <div className="mt-2 flex w-full justify-evenly">
         <div className="ml-2 flex items-start justify-center">
@@ -50,13 +51,13 @@ export const TransferOutgoing = ({ data }) => {
         </div>
 
         <div className="mr-2 flex flex-col space-y-1">
-          <h1 className="mr-1 text-lg font-semibold text-white">Modtager: {data.receiver.phone_number}</h1>
-          <p className="flex-wrap items-start break-words text-sm">
+          <h1 className="mr-1 text-lg font-semibold text-white">Modtager: {formatPhonenumber(data.receiver.phone_number)}</h1>
+          <p className="flex-wrap items-start break-words text-sm text-gray-300">
             Du er ved at afgive ejerskab af cyklen
           </p>
 
-          <h4 className="text-xs">
-            Dato: {new Date(data.created_at).toLocaleDateString()}
+          <h4 className="text-xs text-gray-400">
+            Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}
           </h4>
         </div>
       </div>

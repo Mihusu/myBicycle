@@ -9,7 +9,28 @@ export default defineConfig({
   },
   plugins: [
     react(), 
-    VitePWA({ registerType: 'autoUpdate' }),
+    VitePWA({ 
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+      manifest: {
+        name: 'Min Cykel App',
+        short_name: 'MinCykel',
+        description: 'An app to help danish citizens take ownership of their bikes',
+        theme_color: '#1F2937',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      }
+    }),
   ],
   define: {'process.env' : {}}
 })

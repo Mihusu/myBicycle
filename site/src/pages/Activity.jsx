@@ -54,10 +54,10 @@ const ActivityPage = () => {
           ))}
       </div>
 
-      <div className="mb-2 mt-8 flex justify-center text-2xl text-white">
+      <div className="mb-2 mt-6 flex justify-center text-2xl text-white">
         Gennemførte overførelser
       </div>
-      <div className="mb-4 flex flex-col space-y-2">
+      <div className="mb-24 flex flex-col space-y-3">
         {data &&
           data.completed_transfers.map((transfer_info, key) => (
             <TransferCompleted

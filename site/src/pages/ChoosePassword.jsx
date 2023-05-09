@@ -58,7 +58,7 @@ const ChoosePassword = () => {
         {/* password */}
         <div className="form-control w-full max-w-xs mb-4">
           <label className="label">
-            <span className="label-text text-gray-800 dark:text-white">Vælg kode
+            <span className="label-text text-white">Vælg kode
               <span className="text-red-500 required-dot"> *</span>
             </span>
           </label>
@@ -75,7 +75,7 @@ const ChoosePassword = () => {
         {/* verify */}
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-gray-800 dark:text-white">Indtast kode igen
+            <span className="label-text text-white">Indtast kode igen
               <span className="text-red-500 required-dot"> *</span>
             </span>
           </label>

@@ -30,7 +30,7 @@ export const LayoutWithBack = ({
             <button onClick={() => navigate(-1)}>
               <HiArrowLeft color="white" size={24} />
             </button>
-            <h1 className="mr-4 flex-grow text-center text-3xl text-white">
+            <h1 className="mr-4 flex-grow font-semibold text-center text-3xl text-white">
               {title}
             </h1>
           </div>
@@ -71,7 +71,7 @@ export const LayoutWithBack = ({
             </li>
           </Link>
         </ul>
-        <div className="fixed inset-x-0 bottom-24 flex flex-col items-center space-y-2 p-4 text-lg text-white">
+        <div className="fixed inset-x-0 bottom-32 flex flex-col items-center space-y-2 p-4 text-lg text-white">
           <Link to="/login">
             <button
               className="rounded-sm px-16 hover:bg-orange-400"

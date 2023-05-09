@@ -8,11 +8,11 @@ export const BikeDiscovery = ({ data }) => {
         {/* Old bike requests */}
         <div className="flex justify-center text-white text-xl">Rapportering</div>
         <div className="flex justify-evenly my-2 w-full">
-          <div className="flex items-start justify-center ml-2">
+          <div className="flex items-start justify-center mr-1">
             <img
               src={data.image.obj_url}
               alt="alt"
-              className="rounded-lg w-[56px] h-[56px] text-sm mt-2"
+              className="rounded-lg w-[60px] h-[60px] text-sm mt-1.5"
             />
           </div>
 
@@ -22,7 +22,7 @@ export const BikeDiscovery = ({ data }) => {
             </h1>
             <p className="text-md text-white">stelnummer: {data.frame_number}</p>
 
-            <h4 className="py-1 text-xs">Dato: {new Date(data.created_at).toLocaleDateString()}</h4>
+            <h4 className="py-1 text-xs">Dato: {new Date(data.created_at).toLocaleDateString('en-GB')}</h4>
           </div>
 
           <div className="flex items-center">
