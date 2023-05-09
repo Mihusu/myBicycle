@@ -190,7 +190,7 @@ export const LoginPage = () => {
 
                     <div className="flex flex-col justify-center items-center space-y-2">
 
-                        <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
+                        <button type="submit" className={`btn my-2 mt-8 w-full bg-green-600 hover:bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
                             {!isSubmitting &&
                                 <>
                                     Login

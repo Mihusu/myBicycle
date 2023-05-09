@@ -179,7 +179,7 @@ export const BikeReportFound = () => {
           <div className="my-4 flex justify-center w-full">
             <button
               type="submit"
-              className={`btn flex justify-center w-full rounded-lg bg-green-600 py-2 text-center text-base font-semibold text-white shadow-md hover:bg-red-600 ${isSubmitting && 'loading'}`}
+              className={`btn flex justify-center w-full rounded-lg py-2 text-center text-base font-semibold text-white shadow-md bg-green-600 hover:bg-green-500 ${isSubmitting && 'loading'}`}
             >
               {!isSubmitting &&
                 <>

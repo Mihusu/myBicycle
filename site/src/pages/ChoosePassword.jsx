@@ -53,7 +53,7 @@ const ChoosePassword = () => {
         {/* Response success */}
         {success && <p className="p-4 mb-4 rounded-lg bg-green-500 text-white">{success}</p>}
         <div className="text-center text-2xl text-white mb-4">
-          Nulstil adgangskode
+          Indtast ny adgangskode
         </div>
         {/* password */}
         <div className="form-control w-full max-w-xs mb-4">
@@ -89,7 +89,7 @@ const ChoosePassword = () => {
           />
         </div>
         {/* submit */}
-        <button type="submit" className={`btn my-6 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`}
+        <button type="submit" className={`btn my-6 mt-8 w-full bg-green-600 hover:bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`}
           onClick={() => submitPassword()}
           disabled={!matchPassword(password, verify)}>
           {!isSubmitting &&

@@ -131,7 +131,7 @@ export const BikeLookup = () => {
       {/* Report found button */}
       {/* Can also be redered conditionally on isStolen instead of bikeFound */}
       {bikeFound && (
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center mb-2">
           <button
             type="button"
             onClick={() =>

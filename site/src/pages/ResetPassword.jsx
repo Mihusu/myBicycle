@@ -120,7 +120,7 @@ const ResetPassword = () => {
             defaultCountry="DK"
           />
           <button
-            className={`btn my-2 mt-8 flex w-full justify-center gap-2 bg-green-500 py-2 px-4 text-green-100 ${
+            className={`btn my-2 mt-8 flex w-full justify-center gap-2 bg-green-600 hover:bg-green-500 py-2 px-4 text-green-100 ${
               isSubmitting && "loading"
             }`}
             type="submit"

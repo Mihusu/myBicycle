@@ -154,7 +154,7 @@ export const SmsVerification = () => {
             />
           </div>
           <div className="py-2">
-            <button type="submit" className={`btn my-2 mt-8 w-full bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
+            <button type="submit" className={`btn my-2 mt-8 w-full bg-green-600 hover:bg-green-500 py-2 text-green-100 ${isSubmitting && 'loading'}`} >
               {!isSubmitting &&
                 <>
                   <span className="text-center mt-0.5 mr-2">Valider</span>
