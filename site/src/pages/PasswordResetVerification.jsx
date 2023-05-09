@@ -55,7 +55,7 @@ export const PasswordResetVerification = () => {
   };
 
   const onOtpIsNoLongerValid = () => {
-    setError("Engangskoden er udløbet. Prøv at registrer dig igen.");
+    setError("Engangskoden er udløbet. Prøv at registrere dig igen."); // TODO: should this say try to reset your password again?
   };
 
   const onSubmit = async ({ otp }) => {
@@ -73,7 +73,7 @@ export const PasswordResetVerification = () => {
 
       if (response.ok) {
         const data = await response.json();
-        onAuthOkay(data);
+        onAuthOkay(data); // TODO: why is data being passed? the function does not use it and the back-end does not provide any json in its response, I think
       } else if (response.status == 410) {
         onOtpIsNoLongerValid();
         setIsSubmitting(false);

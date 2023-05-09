@@ -5,9 +5,9 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 const API_URL = import.meta.env.VITE_API_URL;
-const token = secureLocalStorage.getItem("accesstoken");
 
 export const BikeReportFound = () => {
+  const token = secureLocalStorage.getItem("accesstoken"); // move into component, hope fix the not send report bug on mobile
   const { frame_number: frameNumber } = useParams();
   const location = useLocation();
   const navigate = useNavigate();

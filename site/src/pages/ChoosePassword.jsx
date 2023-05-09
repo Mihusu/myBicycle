@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { HiArrowLeft } from "react-icons/hi";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -68,7 +67,7 @@ const ChoosePassword = () => {
             pattern="\d*"
             onChange={(e) => setPassword(e.target.value)}
             required
-            maxLength={32}
+            maxLength={64}
             placeholder="Vælg adgangskode"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
@@ -84,7 +83,7 @@ const ChoosePassword = () => {
             type="password"
             onChange={(e) => setVerify(e.target.value)}
             required
-            maxLength={32}
+            maxLength={64}
             placeholder="Bekræft adgangskode"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />

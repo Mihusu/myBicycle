@@ -30,18 +30,23 @@ export const BikeLookup = () => {
 
       if (response.status == 200) {
         const result = await response.json();
+        console.log("1");
         setBikeFound(true);
         setBikeData(result);
         setIsStolen(result.reported_stolen);
         setError(null);
       } else if (response.status == 404) {
         const result = await response.json();
+        console.log("2");
         setBikeFound(false);
         setBikeData(null);
+        setIsStolen(false);
         setError(result.detail);
       } else if (response.status == 204) {
+        console.log("3");
         setBikeFound(false);
         setBikeData(null);
+        setIsStolen(false);
         setError("Cyklen er ikke meldt stjålet");
       }
 
@@ -54,10 +59,10 @@ export const BikeLookup = () => {
 
   useEffect(() => {
     
-  }, [bikeFound, bikeData]);
+  }, [bikeFound, bikeData, isStolen]);
 
   return (
-    <Layout title="Søg efter cykel">
+    <Layout title="Søg efter cykel" className="flex">
       {error && (
         <div className="mx-auto mb-2 max-w-[385px] rounded-lg bg-red-500 px-2 py-2 text-black">
           {error}
@@ -68,13 +73,13 @@ export const BikeLookup = () => {
         onSubmit={handleSubmit}
         className="flex items-center justify-center mx-auto py-4"
       >
+        <div className="relative w-96">
         <label
           htmlFor="default-search"
           className="sr-only mb-2 text-sm font-medium border bg-gray-800 hover:shadow-xl dark:bg-gray-800 dark:text-white"
         >
           Søg på stelnummer om cykel er meldt stjålet
         </label>
-        <div className="relative w-96">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <svg
               aria-hidden="true"
@@ -117,7 +122,12 @@ export const BikeLookup = () => {
           <BikeInfo data={bikeData} />{" "}
         </div>
       )}
+      {/* Message to user */}
+      <div className="flex justify-center items-center my-2">
 
+      {isStolen && <div><p>Cyklen er meldt stjålet</p></div> }
+      </div>
+      
       {/* Report found button */}
       {/* Can also be redered conditionally on isStolen instead of bikeFound */}
       {bikeFound && (
@@ -134,7 +144,7 @@ export const BikeLookup = () => {
           >
             {!isSubmitting &&
                 <>
-                  <span className="text-center mt-0.5 mr-2">Indrapporter</span>
+                  <span className="text-center mt-0.5 mr-2">Indrapporter fund</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
