@@ -67,7 +67,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
 
           {/* <div className="flex flex-col items-center fixed inset-x-0 bottom-32 space-y-2 text-lg text-white"> */}
           <Link to="/login" className="w-full">
-            <div className="fixed inset-x-0 bottom-32 space-y-2 text-white">
+            <div className="fixed inset-x-0 bottom-32 space-y-2 mr-5 text-white">
               <div className="flex justify-center items-center space-x-4">
                 <ArrowLeftOnRectangleIcon width={26} />
                 <button className="rounded-sm hover:bg-orange-400 text-lg font-medium" onClick={logout}>
