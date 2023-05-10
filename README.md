@@ -22,11 +22,11 @@ $ docker build -t jsaad20/production:client .
 $ docker push jsaad20/production:client
 ```
 
-### Step 3 (Optional). Test the production server locally
-Inside /site run the following command to preview how the production server
-is going to behave.
+### Step 3 Test the production server locally
+Inside /site run the following commands to preview how the production server is going to behave.
 ```console
-$ docker compose up
+$ npm run build
+$ npm run preview
 ```
 
 Now go to http://localhost, you should see the site comming up.

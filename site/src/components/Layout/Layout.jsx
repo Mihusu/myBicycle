@@ -39,7 +39,7 @@ export const Layout = ({ title = "Ukendt", isLoading = false, children }) => {
           className={`fixed top-0 -right-64 h-full rounded-tl-lg border-l border-white bg-gray-800 transition ease-in-out ${showSidebar ? "-translate-x-64" : "translate-x-0"
             } `}
         >
-          <div className="flex flex-col items-center justify-center space-y-4 px-8 py-2 text-white">
+          <div className="flex flex-col items-center justify-center space-y-8 px-8 py-2 text-white">
             <div className="flex justify-center m-4 mb-8">
               <Link to="/mybikes">
                 <img src="/assets/bike_logo_64_64_transparent.png" alt="bike logo" />
