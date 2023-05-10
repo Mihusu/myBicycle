@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
 
-const PhoneRegistration = () => {
+const UserRegistration = () => {
 
   const [error, setError] = useState("");
   const [cdSeconds, setCdSeconds] = useState(0);
@@ -55,8 +55,6 @@ const PhoneRegistration = () => {
       });
 
       const body = await response.json();
-
-      console.log("r", response.status);
 
       if (response.status == 400) {
         setError(`Der findes allerede en cykelejer med dette telefonnummer: ${data.phoneNumber}`);
@@ -248,4 +246,4 @@ const PhoneRegistration = () => {
   );
 };
 
-export default PhoneRegistration;
+export default UserRegistration;

@@ -5,7 +5,7 @@ import { HiArrowLeft } from "react-icons/hi";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const PasswordResetVerification = () => {
+export const ResetPasswordVerify = () => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       otp: "",
@@ -174,4 +174,4 @@ export const PasswordResetVerification = () => {
   );
 };
 
-export default PasswordResetVerification;
+export default ResetPasswordVerify;

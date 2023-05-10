@@ -10,10 +10,10 @@ import Home from "./pages/Home";
 import { LoginPage } from "./pages/Login";
 import StoreLogin from "./BikeStore/pages/StoreLogin";
 import SmsVerification from "./pages/SmsVerification";
-import PhoneRegistration from "./pages/PhoneRegistration";
+import UserRegistration from "./pages/UserRegistration";
 import ResetPassword from "./pages/ResetPassword";
-import PasswordResetVerification from "./pages/PasswordResetVerification";
-import ChoosePassword from "./pages/ChoosePassword";
+import ResetPasswordVerify from "./pages/ResetPasswordVerify";
+import ResetPasswordConfirm from "./pages/ResetPasswordConfirm";
 import DeviceVerify from "./pages/DeviceVerify";
 
 // Auth pages
@@ -35,7 +35,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/bikeregistration" element={<BikeRegistration />} />
-        <Route path="/registration" element={<PhoneRegistration />} />
+        <Route path="/registration" element={<UserRegistration />} />
         <Route
           path="/smsverification/:session_id"
           element={<SmsVerification />}
@@ -43,9 +43,9 @@ function App() {
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route
           path="/passwordresetverification"
-          element={<PasswordResetVerification />}
+          element={<ResetPasswordVerify />}
         />
-        <Route path="/choosepassword" element={<ChoosePassword />} />
+        <Route path="/choosepassword" element={<ResetPasswordConfirm />} />
         <Route path="/deviceverify/:session_id" element={<DeviceVerify />} />
 
         <Route element={<PrivateRoutes />}>

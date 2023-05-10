@@ -3,7 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const ChoosePassword = () => {
+const MIN_PASSWORD_LENGTH = 12
+
+const ResetPasswordConfirm = () => {
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState("");
   const location = useLocation();
@@ -57,25 +59,25 @@ const ChoosePassword = () => {
         </div>
         {/* password */}
         <div className="form-control w-full max-w-xs mb-4">
-          <label className="label">
-            <span className="label-text text-white">Vælg kode
-              <span className="text-red-500 required-dot"> *</span>
-            </span>
-          </label>
+          <div className="pt-4 pb-2 font-light text-gray-400 dark:text-white">
+            Vælg adgangskode (Mindst 12 tegn)
+            <span className="required-dot text-red-500"> *</span>
+          </div>
           <input
             type="password"
             pattern="\d*"
             onChange={(e) => setPassword(e.target.value)}
             required
+            minLength={MIN_PASSWORD_LENGTH}
             maxLength={64}
-            placeholder="Vælg adgangskode"
+            placeholder="12 tegn eller derover"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
           />
         </div>
         {/* verify */}
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text text-white">Indtast kode igen
+            <span className="pb-2 font-light text-gray-400 dark:text-white">Indtast kode igen
               <span className="text-red-500 required-dot"> *</span>
             </span>
           </label>
@@ -83,6 +85,7 @@ const ChoosePassword = () => {
             type="password"
             onChange={(e) => setVerify(e.target.value)}
             required
+            minLength={MIN_PASSWORD_LENGTH}
             maxLength={64}
             placeholder="Bekræft adgangskode"
             className="input-bordered input w-full max-w-xs rounded-lg border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
@@ -118,4 +121,4 @@ const ChoosePassword = () => {
   );
 };
 
-export default ChoosePassword;
+export default ResetPasswordConfirm;
