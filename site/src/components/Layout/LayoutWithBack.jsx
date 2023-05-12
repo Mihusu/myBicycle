@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi";
 import { Footer } from "./Footer";
 import secureLocalStorage from "react-secure-storage";
 import { ArrowLeftOnRectangleIcon, MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline"
@@ -11,6 +12,7 @@ export const LayoutWithBack = ({
 }) => {
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -25,8 +27,13 @@ export const LayoutWithBack = ({
       <div id="layout-back">
       <div className="p-4 pb-20" onClick={() => setShowSidebar(false)}>
           {/* Header */}
-          <div className="mb-4 flex justify-center border-b-gray-400">
-            <h1 className="font-semibold text-3xl text-white">{title}</h1>
+          <div className="mb-4 flex items-center justify-around border-b-gray-400">
+            <button onClick={() => navigate(-1)}>
+              <HiArrowLeft color="white" size={24} />
+            </button>
+            <h1 className="mr-4 flex-grow font-semibold text-center text-3xl text-white">
+              {title}
+            </h1>
           </div>
           {/* Content */}
           {isLoading ? (
