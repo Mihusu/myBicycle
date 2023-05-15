@@ -72,15 +72,16 @@ export const ResetPasswordVerify = () => {
       const response = await fetch(URI, requestOptions);
 
       if (response.ok) {
-        const data = await response.json();
-        onAuthOkay(data); // TODO: why is data being passed? the function does not use it and the back-end does not provide any json in its response, I think
+        onAuthOkay();
+
       } else if (response.status == 410) {
         onOtpIsNoLongerValid();
         setIsSubmitting(false);
+
       } else {
-        const error = await response.json();
-        onInvalidCredentials(error);
+        onInvalidCredentials();
         setIsSubmitting(false);
+
       }
     } catch (error) {
       setError(error.detail);

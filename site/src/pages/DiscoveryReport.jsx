@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { LayoutWithBack } from "../components/Layout/LayoutWithBack";
 
 // This page will handle the info of a missing/stolen bike that has been found.
-export const DiscoveryReport = ({ }) => {
+export const DiscoveryReport = () => {
   //
   const { state } = useLocation();
 
