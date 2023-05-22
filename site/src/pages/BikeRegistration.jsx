@@ -36,6 +36,27 @@ const BikeRegistration = () => {
   const [responseSuccess, setResponseSuccess] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const onBikeCreated = async () => {
+    setResponseError(null); // Clear any previous error message
+    // Response was okay
+    setResponseSuccess("Den nye cykel er registreret i systemet. Omdirigerer dig til login...");
+    setTimeout(() => navigate("/login"), 5000);
+  };
+
+  const onInvalidCredentials = () => {
+    setResponseError(`Ugyldigt telefonnummer. I øjeblikket er kun danske telefonnumre gyldige`);
+  };
+
+  const onAlreadyRegisteredFrameNumber = (error) => {
+    const { frame_number } = error.detail
+
+    setResponseError(`Cykel med stelnummer ${frame_number} er allerede registreret`);
+  };
+
+  const onInvalidFrameNumber = () => {
+    setResponseError("Ugyldigt stelnummer. Se https://da.wikipedia.org/wiki/Det_danske_stelnummersystem_for_cykler for gyldige stelnumre");
+  };
+
   const onSubmit = async (data) => {
     setIsSubmitting(true);
 
@@ -59,17 +80,11 @@ const BikeRegistration = () => {
 
       const body = await response.json();
 
-      if (!response.ok) {
-        setResponseError(body.detail);
-        // navigate(`/bikeregistration`, { replace: true });
-        return;
-
-      }
-      else {
-        setResponseError(null); // Clear any previous error message
-        // Response was okay
-        setResponseSuccess("Den nye cykel er registreret i systemet. Omdirigerer dig til login...");
-        setTimeout(() => navigate("/login"), 5000);
+      switch (response.status) {
+        case 201: await onBikeCreated(); break;
+        case 400: onInvalidCredentials(); break;
+        case 405: onAlreadyRegisteredFrameNumber(body); break;
+        case 406: onInvalidFrameNumber(); break;
       }
 
       setIsSubmitting(false);
@@ -101,6 +116,7 @@ const BikeRegistration = () => {
                 Stelnummer:
                 <span className="required-dot text-red-500"> *</span>
               </h1>
+              {errors.frame_number && <span className="text-red-300">Stelnummer er påkrævet</span>}
               <input
                 type="text"
                 id="stelnummer"
@@ -112,7 +128,6 @@ const BikeRegistration = () => {
                   { min: 8, max: 32 }
                 )}
               />
-              {errors.frame_number && <span className="text-red-300">Stelnummer er påkrævet</span>}
             </div>
 
             {/* Phonenumber */}
@@ -122,12 +137,12 @@ const BikeRegistration = () => {
                 <span className="required-dot text-red-500"> *</span>
               </h2>
               <div>
+                {errors.phone_number && <span className="text-red-300">Telefon nr. er påkrævet</span>}
                 <PhoneNumber
                   name="phone_number"
                   control={control}
                   rules={{ required: true }}
                 />
-                {errors.phone_number && <span className="text-red-300">Telefon nr. er påkrævet</span>}
               </div>
             </div>
 
@@ -335,10 +350,10 @@ const BikeRegistration = () => {
           </div>
 
           {/* Bike image */}
-          <h1 className="p-4">Billede af cykel:
+          <h1 className="px-4 py-2">Billede af cykel:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
-          {errors.image && <span className="text-red-300">Model er påkrævet</span>}
+          {errors.image && <span className="text-red-300 ml-4">Billede af cyklen er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
@@ -348,10 +363,10 @@ const BikeRegistration = () => {
           </div>
 
           {/* Receipt image */}
-          <h1 className="p-4">Billede af kvittering:
+          <h1 className="px-4 py-2">Billede af kvittering:
             <span className="text-red-500 required-dot"> *</span>
           </h1>
-          {errors.receipt && <span className="text-red-300">Model er påkrævet</span>}
+          {errors.receipt && <span className="text-red-300 ml-4">Kvittering er påkrævet</span>}
           <div className="mb-6 ml-8 flex items-center justify-center">
             <input
               type="file"
